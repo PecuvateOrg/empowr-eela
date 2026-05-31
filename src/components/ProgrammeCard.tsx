@@ -1,11 +1,10 @@
-import type { LucideIcon } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 interface ProgrammeCardProps {
   tag: string;
   tagColor: string;
   title: string;
-  Icon: LucideIcon;
-  iconColor: string;
+  icon: ReactNode;
   bullets: string[];
   bookingUrl: string;
 }
@@ -14,16 +13,15 @@ export default function ProgrammeCard({
   tag,
   tagColor,
   title,
-  Icon,
-  iconColor,
+  icon,
   bullets,
   bookingUrl,
 }: ProgrammeCardProps) {
   return (
     <div className="bg-card rounded-[18px] border border-border p-5 sm:p-6 flex gap-4 sm:gap-5"
          style={{ boxShadow: 'var(--shadow-sm)' }}>
-      <div className={`shrink-0 mt-0.5 ${iconColor}`}>
-        <Icon size={36} strokeWidth={1.75} />
+      <div className="shrink-0 mt-0.5">
+        {icon}
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-3 mb-3">

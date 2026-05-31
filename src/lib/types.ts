@@ -1,11 +1,11 @@
-import type { LucideIcon } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 export interface Programme {
   id: string;
   tag: string;
   tagColor: string;
   title: string;
-  icon: LucideIcon;
+  icon: ReactNode;
   bullets: string[];
   bookingUrl: string;
 }

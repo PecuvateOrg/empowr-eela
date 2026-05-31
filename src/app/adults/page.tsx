@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Icon as Iconify } from '@iconify/react';
 import {
   GraduationCap,
   Music2,
-  Activity,
   Users,
   CalendarDays,
   ShieldCheck,
@@ -27,8 +27,7 @@ const programmes: Programme[] = [
     tag: 'Learn (15+)',
     tagColor: 'text-blue',
     title: 'Sk8 Skool',
-    icon: GraduationCap,
-    iconColor: 'text-blue',
+    icon: <GraduationCap size={36} strokeWidth={1.75} className="text-blue" />,
     bullets: ['Learn at your pace', 'Build skills & confidence', 'Fun, supportive coaching'],
     bookingUrl: LINKS.sk8Skool,
   },
@@ -37,8 +36,7 @@ const programmes: Programme[] = [
     tag: 'Dance (15+)',
     tagColor: 'text-blue-dark',
     title: 'Synkron8',
-    icon: Music2,
-    iconColor: 'text-blue-dark',
+    icon: <Music2 size={36} strokeWidth={1.75} className="text-blue-dark" />,
     bullets: ['Music & movement', 'Learn routines', 'Get fit & have fun'],
     bookingUrl: LINKS.synkron8,
   },
@@ -47,8 +45,7 @@ const programmes: Programme[] = [
     tag: 'Practise (15+)',
     tagColor: 'text-blue-light',
     title: 'Skate Jam',
-    icon: Activity,
-    iconColor: 'text-blue-light',
+    icon: <Iconify icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
     bullets: ['Open skate time', 'Improve your skills', 'Skate & connect'],
     bookingUrl: LINKS.skateJam,
   },
@@ -57,8 +54,7 @@ const programmes: Programme[] = [
     tag: 'All ages',
     tagColor: 'text-blue',
     title: 'Sk8 Skool & Roller Disco',
-    icon: Users,
-    iconColor: 'text-blue',
+    icon: <Users size={36} strokeWidth={1.75} className="text-blue" />,
     bullets: ['Family friendly', 'Fun for all ages', 'Roller Disco nights!'],
     bookingUrl: LINKS.allAges,
   },
@@ -67,17 +63,16 @@ const programmes: Programme[] = [
     tag: 'Connect (15+)',
     tagColor: 'text-blue-dark',
     title: 'Roller Skate Events',
-    icon: CalendarDays,
-    iconColor: 'text-blue-dark',
+    icon: <CalendarDays size={36} strokeWidth={1.75} className="text-blue-dark" />,
     bullets: ["SK8 DJ's", 'Hot food & refreshments', 'Meet skaters'],
     bookingUrl: LINKS.rollerSkateEvents,
   },
 ];
 
 const pillars = [
-  { icon: BookOpen,    label: 'Beginners to advanced' },
-  { icon: Users,       label: 'Community led' },
-  { icon: ShieldCheck, label: 'Trusted by thousands' },
+  { icon: <BookOpen size={16} className="text-blue shrink-0" />,    label: 'Beginners to advanced' },
+  { icon: <Users size={16} className="text-blue shrink-0" />,       label: 'Community led' },
+  { icon: <ShieldCheck size={16} className="text-blue shrink-0" />, label: 'Trusted by thousands' },
 ];
 
 const stats = [
@@ -142,9 +137,9 @@ export default function AdultsPage() {
         {/* PILLARS */}
         <div className="border-y border-border bg-blue-pale/60 py-4 px-5 mb-8">
           <div className="max-w-[880px] mx-auto grid grid-cols-3 gap-2 sm:gap-6 text-center">
-            {pillars.map(({ icon: Icon, label }) => (
+            {pillars.map(({ icon, label }) => (
               <div key={label} className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2">
-                <Icon size={16} className="text-blue shrink-0" />
+                {icon}
                 <span className="text-[10px] sm:text-xs font-[800] uppercase tracking-[0.1em] text-mid leading-tight">
                   {label}
                 </span>
@@ -165,7 +160,7 @@ export default function AdultsPage() {
 
           <div className="flex flex-col gap-4">
             {programmes.map((programme) => (
-              <ProgrammeCard key={programme.id} {...programme} Icon={programme.icon} />
+              <ProgrammeCard key={programme.id} {...programme} />
             ))}
           </div>
         </section>
