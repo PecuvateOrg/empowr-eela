@@ -18,9 +18,9 @@ export default function ProgrammeCard({
   bookingUrl,
 }: ProgrammeCardProps) {
   return (
-    <div className="bg-card rounded-[18px] border border-border p-5 sm:p-6 flex gap-4 sm:gap-5"
+    <div className="bg-card rounded-[18px] border border-border p-5 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-5"
          style={{ boxShadow: 'var(--shadow-sm)' }}>
-      <div className="shrink-0 mt-0.5">
+      <div className="shrink-0">
         {icon}
       </div>
       <div className="flex-1 min-w-0">
