@@ -43,7 +43,7 @@ export default function ProgrammeCard({
             Book &rsaquo;
           </a>
         </div>
-        <ul className="space-y-1.5 mb-4 sm:mb-0 flex flex-col items-center sm:items-start">
+        <ul className="space-y-1.5 mb-4 sm:mb-0 w-fit mx-auto sm:mx-0 sm:w-auto">
           {bullets.map((bullet) => (
             <li key={bullet} className="flex items-center gap-2 text-[13px] text-mid leading-snug">
               <span className="inline-flex items-center justify-center w-[15px] h-[15px] rounded-full bg-red text-warm-white text-[8px] font-[900] shrink-0">
