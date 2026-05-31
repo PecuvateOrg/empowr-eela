@@ -1,0 +1,24 @@
+# Next.js
+src/.next/
+src/out/
+
+# Dependencies
+src/node_modules/
+
+# Environment
+src/.env.local
+src/.env.*.local
+.env.local
+
+# Build outputs
+src/build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.user
