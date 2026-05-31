@@ -53,15 +53,17 @@ export default function ProgrammeCard({
             </li>
           ))}
         </ul>
-        <a
-          href={bookingUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="sm:hidden block w-3/4 mx-auto bg-blue text-warm-white text-[13px] font-[800] px-5 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
-          style={{ boxShadow: 'var(--shadow-blue)' }}
-        >
-          Book &rsaquo;
-        </a>
+        <div className="sm:hidden flex justify-center">
+          <a
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue text-warm-white text-[13px] font-[800] px-10 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
+            style={{ boxShadow: 'var(--shadow-blue)' }}
+          >
+            Book &rsaquo;
+          </a>
+        </div>
       </div>
     </div>
   );
