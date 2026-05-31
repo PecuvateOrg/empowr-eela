@@ -1,15 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Icon as Iconify } from '@iconify/react';
-import {
-  GraduationCap,
-  Music2,
-  Users,
-  CalendarDays,
-  ShieldCheck,
-  BookOpen,
-} from 'lucide-react';
+import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import { LINKS } from '@/lib/links';
@@ -27,7 +19,7 @@ const programmes: Programme[] = [
     tag: 'Learn (15+)',
     tagColor: 'text-blue',
     title: 'Sk8 Skool',
-    icon: <GraduationCap size={36} strokeWidth={1.75} className="text-blue" />,
+    icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue" />,
     bullets: ['Learn at your pace', 'Build skills & confidence', 'Fun, supportive coaching'],
     bookingUrl: LINKS.sk8Skool,
   },
@@ -36,7 +28,7 @@ const programmes: Programme[] = [
     tag: 'Dance (15+)',
     tagColor: 'text-blue-dark',
     title: 'Synkron8',
-    icon: <Music2 size={36} strokeWidth={1.75} className="text-blue-dark" />,
+    icon: <Icon icon="mdi:music-note" width={36} height={36} className="text-blue-dark" />,
     bullets: ['Music & movement', 'Learn routines', 'Get fit & have fun'],
     bookingUrl: LINKS.synkron8,
   },
@@ -45,7 +37,7 @@ const programmes: Programme[] = [
     tag: 'Practise (15+)',
     tagColor: 'text-blue-light',
     title: 'Skate Jam',
-    icon: <Iconify icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
+    icon: <Icon icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
     bullets: ['Open skate time', 'Improve your skills', 'Skate & connect'],
     bookingUrl: LINKS.skateJam,
   },
@@ -54,7 +46,7 @@ const programmes: Programme[] = [
     tag: 'All ages',
     tagColor: 'text-blue',
     title: 'Sk8 Skool & Roller Disco',
-    icon: <Users size={36} strokeWidth={1.75} className="text-blue" />,
+    icon: <Icon icon="mdi:human-male-female-child" width={36} height={36} className="text-blue" />,
     bullets: ['Family friendly', 'Fun for all ages', 'Roller Disco nights!'],
     bookingUrl: LINKS.allAges,
   },
@@ -63,16 +55,16 @@ const programmes: Programme[] = [
     tag: 'Connect (15+)',
     tagColor: 'text-blue-dark',
     title: 'Roller Skate Events',
-    icon: <CalendarDays size={36} strokeWidth={1.75} className="text-blue-dark" />,
+    icon: <Icon icon="mdi:calendar-star" width={36} height={36} className="text-blue-dark" />,
     bullets: ["SK8 DJ's", 'Hot food & refreshments', 'Meet skaters'],
     bookingUrl: LINKS.rollerSkateEvents,
   },
 ];
 
 const pillars = [
-  { icon: <BookOpen size={16} className="text-blue shrink-0" />,    label: 'Beginners to advanced' },
-  { icon: <Users size={16} className="text-blue shrink-0" />,       label: 'Community led' },
-  { icon: <ShieldCheck size={16} className="text-blue shrink-0" />, label: 'Trusted by thousands' },
+  { icon: <Icon icon="mdi:school" width={16} className="text-blue shrink-0" />,         label: 'Beginners to advanced' },
+  { icon: <Icon icon="mdi:account-group" width={16} className="text-blue shrink-0" />,  label: 'Community led' },
+  { icon: <Icon icon="mdi:shield-check" width={16} className="text-blue shrink-0" />,   label: 'Trusted by thousands' },
 ];
 
 const stats = [
