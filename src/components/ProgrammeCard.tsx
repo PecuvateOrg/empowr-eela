@@ -20,12 +20,12 @@ export default function ProgrammeCard({
   return (
     <div className="bg-card rounded-[18px] border border-border p-5 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-5"
          style={{ boxShadow: 'var(--shadow-sm)' }}>
-      <div className="shrink-0">
+      <div className="shrink-0 flex justify-center sm:justify-start">
         {icon}
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-3 mb-3">
-          <div>
+          <div className="w-full sm:w-auto text-center sm:text-left">
             <p className={`text-[10px] font-[800] uppercase tracking-[0.18em] leading-none mb-1 ${tagColor}`}>
               {tag}
             </p>
@@ -45,7 +45,7 @@ export default function ProgrammeCard({
         </div>
         <ul className="space-y-1.5 mb-4 sm:mb-0">
           {bullets.map((bullet) => (
-            <li key={bullet} className="flex items-center gap-2 text-[13px] text-mid leading-snug">
+            <li key={bullet} className="flex items-center justify-center sm:justify-start gap-2 text-[13px] text-mid leading-snug">
               <span className="inline-flex items-center justify-center w-[15px] h-[15px] rounded-full bg-red text-warm-white text-[8px] font-[900] shrink-0">
                 ✓
               </span>
