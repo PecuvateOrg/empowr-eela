@@ -37,13 +37,13 @@ export default function ProgrammeCard({
             href={bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 bg-blue text-warm-white text-[13px] font-[800] px-5 py-2.5 rounded-full no-underline transition-opacity hover:opacity-90 whitespace-nowrap"
+            className="hidden sm:inline-block shrink-0 bg-blue text-warm-white text-[13px] font-[800] px-5 py-2.5 rounded-full no-underline transition-opacity hover:opacity-90 whitespace-nowrap"
             style={{ boxShadow: 'var(--shadow-blue)' }}
           >
             Book &rsaquo;
           </a>
         </div>
-        <ul className="space-y-1.5">
+        <ul className="space-y-1.5 mb-4 sm:mb-0">
           {bullets.map((bullet) => (
             <li key={bullet} className="flex items-center gap-2 text-[13px] text-mid leading-snug">
               <span className="inline-flex items-center justify-center w-[15px] h-[15px] rounded-full bg-red text-warm-white text-[8px] font-[900] shrink-0">
@@ -53,6 +53,15 @@ export default function ProgrammeCard({
             </li>
           ))}
         </ul>
+        <a
+          href={bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sm:hidden block bg-blue text-warm-white text-[13px] font-[800] px-5 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
+          style={{ boxShadow: 'var(--shadow-blue)' }}
+        >
+          Book &rsaquo;
+        </a>
       </div>
     </div>
   );
