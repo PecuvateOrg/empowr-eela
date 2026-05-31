@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import ProgrammeCard from '@/components/ProgrammeCard';
+import FindSessionBanner from '@/components/FindSessionBanner';
 import { LINKS } from '@/lib/links';
 import type { Programme } from '@/lib/types';
 
@@ -150,7 +151,7 @@ export default function AdultsPage() {
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 max-w-[660px] mx-auto">
             {programmes.map((programme) => (
               <ProgrammeCard key={programme.id} {...programme} />
             ))}
@@ -173,29 +174,7 @@ export default function AdultsPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="max-w-[880px] mx-auto px-5 pb-14">
-          <div className="rounded-[20px] text-center px-6 py-10 sm:py-12 border border-border bg-card"
-               style={{ boxShadow: 'var(--shadow-sm)' }}>
-            <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-muted mb-3">
-              Not sure which session is right?
-            </p>
-            <h2 className="font-[900] text-black leading-[1.15] mb-3"
-                style={{ fontSize: 'clamp(1.3rem, 3vw, 1.75rem)' }}>
-              We&apos;ll help you find your fit.
-            </h2>
-            <p className="text-sm text-mid leading-[1.7] mb-6 max-w-[400px] mx-auto">
-              Drop us a message and we&apos;ll point you to the right programme for your level and goals.
-            </p>
-            <a
-              href={LINKS.enquiries}
-              className="inline-block bg-blue text-warm-white text-sm font-[800] px-8 py-3.5 rounded-full no-underline transition-opacity hover:opacity-90"
-              style={{ boxShadow: 'var(--shadow-blue)' }}
-            >
-              Get in touch
-            </a>
-          </div>
-        </section>
+        <FindSessionBanner />
       </main>
 
       <footer className="border-t border-border py-6 px-5 text-center">

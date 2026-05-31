@@ -9,6 +9,9 @@ export const LINKS = {
   // Children / family
   kidzSpace:         'https://www.empowrcic.org/kidzspace',
 
+  // Quiz — links to landing page quiz until a native quiz is built on this platform
+  quiz:              'https://start.empowrcic.org/quiz',
+
   // Community
   whatsapp:          'https://chat.whatsapp.com/EFSwGLtxaYLHCKcA2j4k6k',
   shop:              'https://www.empowrcic.org/shop',

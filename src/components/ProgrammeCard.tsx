@@ -37,7 +37,7 @@ export default function ProgrammeCard({
             href={bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 bg-blue text-warm-white text-[11px] font-[800] px-4 py-2 rounded-full no-underline transition-opacity hover:opacity-90 whitespace-nowrap"
+            className="shrink-0 bg-blue text-warm-white text-[13px] font-[800] px-5 py-2.5 rounded-full no-underline transition-opacity hover:opacity-90 whitespace-nowrap"
             style={{ boxShadow: 'var(--shadow-blue)' }}
           >
             Book &rsaquo;
