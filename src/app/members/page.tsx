@@ -7,8 +7,8 @@ import Navbar from '@/components/Navbar';
 const perks = [
   {
     icon: 'mdi:ticket-confirmation-outline',
-    title: 'Free session access',
-    body: 'Members get early access to book free community sessions before they open to the public.',
+    title: 'Early session access',
+    body: 'Members get early access to browse and book upcoming sessions before they open to the public.',
   },
   {
     icon: 'mdi:account-group-outline',
@@ -91,7 +91,7 @@ export default function MembersPage() {
             </div>
           )}
 
-          <p className="text-muted text-[12px] mt-4">Free forever. No payment details needed.</p>
+          <p className="text-muted text-[12px] mt-4">Membership is always free. No payment details needed.</p>
         </section>
 
         {/* PERKS */}
