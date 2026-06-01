@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 
 export const metadata: Metadata = {
-  title: 'Empowr Sessions — Roller Skating for Everyone',
+  title: 'EELA — Sessions for Everyone',
 };
 
 const stats = [

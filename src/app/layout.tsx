@@ -12,10 +12,10 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Empowr Sessions',
-    template: '%s | Empowr Sessions',
+    default: 'EELA by Empowr',
+    template: '%s | EELA',
   },
-  description: 'Roller skating sessions for everyone — kids, teens, and adults — with Empowr CIC in Lewisham.',
+  description: 'EELA — the home for all Empowr CIC sessions. Browse programmes for kids, teens and adults in Lewisham.',
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
