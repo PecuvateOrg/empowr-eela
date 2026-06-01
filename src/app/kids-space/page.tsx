@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const pillars = [
   { icon: <Icon icon="mdi:shield-check" width={16} className="text-blue shrink-0" />,  label: 'Safe environment' },
-  { icon: <Icon icon="mdi:account-group" width={16} className="text-blue shrink-0" />, label: 'Expert coaches' },
+  { icon: <Icon icon="mdi:account-group" width={16} className="text-blue shrink-0" />, label: 'ECCP Certified coaches' },
   { icon: <Icon icon="mdi:star-circle" width={16} className="text-blue shrink-0" />,   label: 'Fun guaranteed' },
 ];
 
@@ -41,7 +41,7 @@ export default function KidsSpacePage() {
               <h1 className="font-[900] text-black leading-[1.08] mb-4"
                   style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
                 Roller skating<br />
-                <span className="text-blue">for kids.</span>
+                <span className="text-blue">for kids & family.</span>
               </h1>
               <p className="text-mid leading-[1.8] mb-6"
                  style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1rem)' }}>
@@ -64,8 +64,8 @@ export default function KidsSpacePage() {
               />
               <div className="absolute top-3 right-3 bg-red text-warm-white font-[900] text-center px-3 py-2.5 rounded-xl leading-[1.3]"
                    style={{ fontSize: '10px' }}>
-                Kids<br />Space<br />
-                <span className="text-xl leading-[1.1] block">5–14</span>
+                Kidz Space<br />
+                <span className="text-xl leading-[1.1] block">5+</span>
               </div>
             </div>
           </div>

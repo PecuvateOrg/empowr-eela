@@ -159,7 +159,7 @@ export default function AdultsPage() {
         </section>
 
         {/* STATS */}
-        <section className="bg-blue-pale border-y border-border py-10 px-5 mb-10">
+        {/*<section className="bg-blue-pale border-y border-border py-10 px-5 mb-10">
           <div className="max-w-[880px] mx-auto grid grid-cols-3 gap-4 sm:gap-8 text-center">
             {stats.map(({ value, label }) => (
               <div key={label}>
@@ -172,7 +172,7 @@ export default function AdultsPage() {
               </div>
             ))}
           </div>
-        </section>
+        </section>*/}
 
         <FindSessionBanner />
       </main>
