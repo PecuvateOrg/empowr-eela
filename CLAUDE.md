@@ -1,6 +1,6 @@
-# Empowr Sessions
+# EELA by Empowr
 
-Empowr CIC's platform for managing all roller skating sessions — home, kids, and adults programmes, with members and booking features planned.
+Empowr CIC's central session discovery and membership platform — home, kids, and adults programmes, with members and booking features planned.
 
 This file is the map. All workspace detail lives in workspace CONTEXT.md files.
 
@@ -58,7 +58,7 @@ This file is the map. All workspace detail lives in workspace CONTEXT.md files.
 ## Deployment
 
 - Platform: Netlify
-- Domain: <!-- TBD — fill in before running /netlify-deploy -->
+- Domain: eela.empowrcic.org
 - Branch: main
 - Base directory: src/
 
