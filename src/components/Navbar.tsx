@@ -28,6 +28,13 @@ export default function Navbar() {
           >
             Adults
           </Link>
+          <Link
+            href="/members"
+            className="text-[13px] sm:text-sm font-[800] text-warm-white bg-blue hover:opacity-90 transition-opacity px-4 py-2 rounded-full ml-1"
+            style={{ boxShadow: 'var(--shadow-blue)' }}
+          >
+            Members
+          </Link>
         </div>
       </nav>
     </header>

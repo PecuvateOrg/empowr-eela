@@ -22,3 +22,23 @@
 
 - Phase 2 scoping: free membership sign-up flow, session browsing with availability, booking integration
 - Activate Kids Space programme cards when individual booking URLs are confirmed
+
+---
+
+## 2026-06-01 — Session 3: Members Coming Soon page
+
+### Done
+
+- **Members page** (`/members`) — Coming Soon page with hero, "Join the waitlist" email form (client component, fake success state — no backend), and 4 perk cards (Free session access, Workshops & events, Easy booking, Community membership)
+- **Navbar** — Members added as a filled blue pill button (stands out as CTA; Kids Space and Adults remain plain text links)
+- **Verified** — desktop (1280px) and mobile (375px) screenshots confirm clean layout on both breakpoints
+
+### Decisions
+
+- Form shows in-page success state on submit (`You're on the list!`) with no network call — ready to wire up when membership backend is built
+- Members link styled as a filled pill to act as a conversion point in the nav across all pages
+
+### Next
+
+- Phase 2: wire form to a real backend (Supabase or Resend) when membership is ready to launch
+- Activate Kids Space programme cards when individual booking URLs are confirmed
