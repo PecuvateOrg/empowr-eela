@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: 'EELA by Empowr',
     template: '%s | EELA',
   },
-  description: 'EELA — the home for all Empowr CIC sessions. Browse programmes for kids, teens and adults in Lewisham.',
+  description: 'EELA — the home for all Empowr CIC sessions. Browse programmes for kids, teens and adults.',
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },

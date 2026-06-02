@@ -28,7 +28,7 @@ export default function HomePage() {
         {/* HERO */}
         <section className="max-w-[880px] mx-auto px-5 pt-12 pb-10 sm:pt-16 sm:pb-14 text-center">
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-blue mb-4">
-            Empowr CIC — Lewisham
+            Empowr CIC
           </p>
           <h1 className="font-[900] text-black leading-[1.08] mb-5"
               style={{ fontSize: 'clamp(2rem, 5vw, 3.75rem)' }}>

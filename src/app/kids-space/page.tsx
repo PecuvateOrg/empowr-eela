@@ -9,7 +9,7 @@ import { LINKS } from '@/lib/links';
 export const metadata: Metadata = {
   title: 'Kids Space — Roller Skating for Children',
   description:
-    'Roller skating classes, camps, discos and more for children aged 5–14 in Lewisham. Safe, fun, expert-coached sessions at Empowr CIC.',
+    'Roller skating classes, camps, discos and more for children aged 5+ with Empowr CIC. Safe, fun, expert-coached sessions.',
 };
 
 const pillars = [

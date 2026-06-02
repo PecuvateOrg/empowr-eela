@@ -11,7 +11,7 @@ import type { Programme } from '@/lib/types';
 export const metadata: Metadata = {
   title: 'Roller Skating for Adults',
   description:
-    'Adult and teen roller skating sessions in Lewisham. Sk8 Skool, Synkron8, Skate Jam, Roller Disco, and community events — all 15+.',
+    'Adult and teen roller skating sessions with Empowr CIC. Sk8 Skool, Synkron8, Skate Jam, Roller Disco, and community events — all 15+.',
 };
 
 const programmes: Programme[] = [

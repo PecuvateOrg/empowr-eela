@@ -23,7 +23,7 @@ const perks = [
   {
     icon: 'mdi:heart-outline',
     title: 'Community membership',
-    body: 'Be part of a growing community of skaters, learners, and wellbeing enthusiasts in Lewisham.',
+    body: 'Be part of a growing community of skaters, learners, and wellbeing enthusiasts across the UK.',
   },
 ];
 
