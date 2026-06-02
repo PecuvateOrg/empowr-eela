@@ -42,3 +42,18 @@
 
 - Phase 2: wire form to a real backend (Supabase or Resend) when membership is ready to launch
 - Activate Kids Space programme cards when individual booking URLs are confirmed
+
+---
+
+## 2026-06-02 — Session 4: Lewisham copy audit
+
+### Done
+
+- **Removed Lewisham-only references** across all pages — hero badge (`Empowr CIC — Lewisham` → `Empowr CIC`), metadata descriptions on Home, Adults, Kids Space pages, and community perk on Members page
+- **Members page** — community perk now reads "across the UK" rather than "in Lewisham"; reassurance line updated to "Membership is always free"
+- **Members nav link** removed — page accessible by URL only (`/members`) while team reviews internally; nav link to be reinstated when ready to launch
+
+### Decisions
+
+- Lewisham logos (council, Young Mayor) retained in Trusted By strip — alt text is factually accurate and they remain genuine trust marks; they don't imply Lewisham exclusivity in context
+- Members nav link held back intentionally — not a bug, revisit when copy and launch plan are confirmed
