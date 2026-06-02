@@ -11,7 +11,7 @@ import type { Programme } from '@/lib/types';
 export const kidsProgrammes: Programme[] = [
   {
     id: 'kidz-classes',
-    tag: 'Learn (5–14)',
+    tag: 'Learn (5+)',
     tagColor: 'text-blue',
     title: 'Roller Skating Classes',
     icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue" />,
@@ -20,7 +20,7 @@ export const kidsProgrammes: Programme[] = [
   },
   {
     id: 'roller-disco',
-    tag: 'Fun (5–14)',
+    tag: 'Fun (5+)',
     tagColor: 'text-blue-dark',
     title: 'Roller Disco',
     icon: <Icon icon="mdi:music-note" width={36} height={36} className="text-blue-dark" />,
@@ -29,7 +29,7 @@ export const kidsProgrammes: Programme[] = [
   },
   {
     id: 'roller-camps',
-    tag: 'Camp (5–14)',
+    tag: 'Camp (5+)',
     tagColor: 'text-blue-light',
     title: 'Roller Camps',
     icon: <Icon icon="mdi:tent" width={36} height={36} className="text-blue-light" />,

@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import { LINKS } from '@/lib/links';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'EELA — Sessions for Everyone',
@@ -37,8 +39,8 @@ export default function HomePage() {
           </h1>
           <p className="text-mid leading-[1.8] mb-8 max-w-[540px] mx-auto"
              style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1rem)' }}>
-            At Empowr, we build wellbeing through hands-on experience. Whether you&apos;re five or
-            fifty-five, there&apos;s a session made for you.
+            At Empowr, we build wellbeing through hands-on experience. Whatever your age or
+            ability, there&apos;s a session made for you.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
@@ -52,7 +54,7 @@ export default function HomePage() {
               href="/kids-space"
               className="w-full sm:w-auto bg-card text-blue text-sm font-[800] px-8 py-4 rounded-full no-underline text-center border border-border transition-colors hover:bg-blue-pale"
             >
-              Kids Space (5–14)
+              Kids Space (5+)
             </Link>
           </div>
         </section>
@@ -76,7 +78,7 @@ export default function HomePage() {
                   Ages 15+
                 </span>
                 <h2 className="text-[1.5rem] sm:text-[1.75rem] font-[900] text-white leading-[1.15] mb-3">
-                  Adults & Teens
+                  Adults
                 </h2>
                 <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
                   Sk8 Skool, Synkron8, Skate Jam, Roller Disco, and community events —
@@ -103,7 +105,7 @@ export default function HomePage() {
               />
               <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full min-h-[280px]">
                 <span className="inline-block text-[10px] font-[800] uppercase tracking-[0.18em] text-white/70 mb-2">
-                  Ages 5–14
+                  Ages 5+
                 </span>
                 <h2 className="text-[1.5rem] sm:text-[1.75rem] font-[900] text-white leading-[1.15] mb-3">
                   Kidz Space
@@ -167,23 +169,21 @@ export default function HomePage() {
               Not sure where to start?
             </h2>
             <p className="text-sm text-white/80 leading-[1.7] mb-6 max-w-[440px] mx-auto">
-              Browse all programmes or reach out — we&apos;ll help you find the right session.
+              Answer a few quick questions and we&apos;ll point you to the right session.
             </p>
             <a
-              href="mailto:general@empowrcic.org"
+              href={LINKS.quiz}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-white text-blue text-sm font-[800] px-8 py-3.5 rounded-full no-underline text-center transition-opacity hover:opacity-90"
             >
-              Get in touch
+              Find my session
             </a>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-border py-6 px-5 text-center">
-        <p className="text-[12px] text-muted">
-          © {new Date().getFullYear()} Empowr CIC. All rights reserved.
-        </p>
-      </footer>
+      <Footer />
     </>
   );
 }

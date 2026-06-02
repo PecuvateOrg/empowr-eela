@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import FindSessionBanner from '@/components/FindSessionBanner';
 import { LINKS } from '@/lib/links';
 
@@ -36,7 +37,7 @@ export default function KidsSpacePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
             <div>
               <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-                Children · Ages 5–14
+                Children · Ages 5+
               </p>
               <h1 className="font-[900] text-black leading-[1.08] mb-4"
                   style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
@@ -113,11 +114,7 @@ export default function KidsSpacePage() {
         <FindSessionBanner />
       </main>
 
-      <footer className="border-t border-border py-6 px-5 text-center">
-        <p className="text-[12px] text-muted">
-          © {new Date().getFullYear()} Empowr CIC. All rights reserved.
-        </p>
-      </footer>
+      <Footer />
     </>
   );
 }

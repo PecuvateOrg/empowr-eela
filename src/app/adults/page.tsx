@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import FindSessionBanner from '@/components/FindSessionBanner';
 import { LINKS } from '@/lib/links';
@@ -92,7 +93,7 @@ export default function AdultsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
             <div>
               <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-                Teens & Adults · 15+
+                Adults · 15+
               </p>
               <h1 className="font-[900] text-black leading-[1.08] mb-4"
                   style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
@@ -120,7 +121,7 @@ export default function AdultsPage() {
               />
               <div className="absolute top-3 right-3 bg-red text-warm-white font-[900] text-center px-3 py-2.5 rounded-xl leading-[1.3]"
                    style={{ fontSize: '10px' }}>
-                Teens &<br />Adults<br />
+                Adults<br />
                 <span className="text-xl leading-[1.1] block">15+</span>
               </div>
             </div>
@@ -177,11 +178,7 @@ export default function AdultsPage() {
         <FindSessionBanner />
       </main>
 
-      <footer className="border-t border-border py-6 px-5 text-center">
-        <p className="text-[12px] text-muted">
-          © {new Date().getFullYear()} Empowr CIC. All rights reserved.
-        </p>
-      </footer>
+      <Footer />
     </>
   );
 }
