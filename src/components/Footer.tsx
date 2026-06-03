@@ -9,8 +9,7 @@ export default function Footer() {
               Empowr CIC
             </p>
             <p className="text-[12px] text-muted leading-[1.7]">
-              Community Interest Company promoting lifelong wellbeing through roller skating
-              and experiential learning.
+              Promoting lifelong well-being through the transformative power of experiential learning.
             </p>
           </div>
 

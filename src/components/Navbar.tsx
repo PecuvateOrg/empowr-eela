@@ -28,6 +28,7 @@ export default function Navbar() {
           >
             Adults
           </Link>
+          {/* About link — hidden until team reviews; accessible at /about */}
         </div>
       </nav>
     </header>
