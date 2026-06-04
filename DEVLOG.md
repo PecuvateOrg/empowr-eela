@@ -1,5 +1,20 @@
 # EELA — DEVLOG
 
+## 2026-06-04 — Session 6: Remove stats bar
+
+### Done
+
+- **Stats bar removed** from Home page and Adults page — data was inaccurate; removed cleanly (array + section deleted, not commented out)
+
+### Next
+
+- Team to review `/about` and confirm when to add nav link
+- Review `/members` nav link — still held back pending team decision
+- Phase 2: wire members form to backend, booking integration
+- Activate Kids Space programme cards when individual booking URLs are confirmed
+
+---
+
 ## 2026-06-01 — Session 2: Kids Space, EELA rebrand, launch
 
 ### Done
@@ -41,6 +56,31 @@
 ### Next
 
 - Phase 2: wire form to a real backend (Supabase or Resend) when membership is ready to launch
+- Activate Kids Space programme cards when individual booking URLs are confirmed
+
+---
+
+## 2026-06-03 — Session 5: About page + footer description
+
+### Done
+
+- **Footer description** updated to approved copy: "Promoting lifelong well-being through the transformative power of experiential learning."
+- **About page** (`/about`) — built using Empowr CIC Obsidian KB (EELA entity + programmes source); contains hero, core values strip, EELA framework intro, 5 sub-programme cards (MoveWell active, 4 coming soon), and Empowr CIC link at the bottom
+- **About nav link** held back — page accessible by URL only (`/about`) for team review; same pattern as `/members`
+- **Pushed to main** — Netlify auto-deployed
+
+### Decisions
+
+- About page scoped to EELA only — not a full Empowr CIC brand page; Empowr referenced only as a one-line footer link
+- Programme card descriptions outcome-focused only — activity examples (e.g. "skating, dance, yoga") removed; descriptions kept
+- Science/neuroplasticity section removed — too heavy for this page; values strip covers the principles lightly
+- Nav link withheld until team reviews the page at `/about`
+
+### Next
+
+- Team to review `/about` and confirm when to add nav link
+- Review `/members` nav link — still held back pending team decision
+- Phase 2 planning: wire members form to backend (Supabase or Resend), booking integration
 - Activate Kids Space programme cards when individual booking URLs are confirmed
 
 ---

@@ -9,12 +9,6 @@ export const metadata: Metadata = {
   title: 'EELA — Sessions for Everyone',
 };
 
-const stats = [
-  { value: '25K+', label: 'Attendances' },
-  { value: '10K+', label: 'Students' },
-  { value: '50+',  label: 'Coaches & volunteers' },
-];
-
 const trustedBy = [
   { src: '/assets/lewisham-logo.jpeg',  alt: 'London Borough of Lewisham' },
   { src: '/assets/dfe.jpeg',            alt: 'Department for Education' },
@@ -122,22 +116,6 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* STATS */}
-        <section className="bg-blue-pale border-y border-border py-10 px-5">
-          <div className="max-w-[880px] mx-auto grid grid-cols-3 gap-4 sm:gap-8 text-center">
-            {stats.map(({ value, label }) => (
-              <div key={label}>
-                <p className="text-[1.75rem] sm:text-[2.25rem] font-[900] text-blue leading-none mb-1">
-                  {value}
-                </p>
-                <p className="text-[11px] sm:text-xs font-[800] uppercase tracking-[0.12em] text-muted">
-                  {label}
-                </p>
-              </div>
-            ))}
           </div>
         </section>
 

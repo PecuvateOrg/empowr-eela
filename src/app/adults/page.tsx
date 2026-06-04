@@ -69,12 +69,6 @@ const pillars = [
   { icon: <Icon icon="mdi:shield-check" width={16} className="text-blue shrink-0" />,   label: 'Trusted by thousands' },
 ];
 
-const stats = [
-  { value: '25K+', label: 'Attendances' },
-  { value: '10K+', label: 'Students' },
-  { value: '50+',  label: 'Coaches & volunteers' },
-];
-
 export default function AdultsPage() {
   return (
     <>
@@ -158,22 +152,6 @@ export default function AdultsPage() {
             ))}
           </div>
         </section>
-
-        {/* STATS */}
-        {/*<section className="bg-blue-pale border-y border-border py-10 px-5 mb-10">
-          <div className="max-w-[880px] mx-auto grid grid-cols-3 gap-4 sm:gap-8 text-center">
-            {stats.map(({ value, label }) => (
-              <div key={label}>
-                <p className="text-[1.75rem] sm:text-[2.25rem] font-[900] text-blue leading-none mb-1">
-                  {value}
-                </p>
-                <p className="text-[11px] sm:text-xs font-[800] uppercase tracking-[0.12em] text-muted">
-                  {label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>*/}
 
         <FindSessionBanner />
       </main>
