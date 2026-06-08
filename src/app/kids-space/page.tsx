@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ProgrammeCard from '@/components/ProgrammeCard';
 import FindSessionBanner from '@/components/FindSessionBanner';
-import { LINKS } from '@/lib/links';
+import { kidsProgrammes } from '@/lib/kids-programmes';
 
 export const metadata: Metadata = {
   title: 'Kids Space — Roller Skating for Children',
@@ -86,29 +87,21 @@ export default function KidsSpacePage() {
           </div>
         </div>
 
-        {/* WHAT'S ON */}
-        <section className="max-w-[660px] mx-auto px-5 pb-14 text-center">
-          <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted mb-5">
-            🛼 What&apos;s on
-          </p>
-          <h2 className="font-[900] text-black leading-[1.15] mb-4"
-              style={{ fontSize: 'clamp(1.3rem, 3vw, 1.75rem)' }}>
-            Classes, camps, discos &amp; more
-          </h2>
-          <p className="text-mid leading-[1.8] mb-8"
-             style={{ fontSize: 'clamp(0.875rem, 1.8vw, 1rem)' }}>
-            Kidz Space runs roller skating classes for children and families, roller camps,
-            roller discos, and so much more — all designed to be safe, inclusive and full of fun.
-          </p>
-          <a
-            href={LINKS.kidzSpace}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue text-warm-white text-sm font-[800] px-10 py-4 rounded-full no-underline text-center transition-opacity hover:opacity-90"
-            style={{ boxShadow: 'var(--shadow-blue)' }}
-          >
-            Explore Kidz Space &rsaquo;
-          </a>
+        {/* PROGRAMME CARDS */}
+        <section className="max-w-[880px] mx-auto px-5 pb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex-1 h-px bg-border" />
+            <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
+              🛼 Choose your session
+            </p>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <div className="flex flex-col gap-4 max-w-[660px] mx-auto">
+            {kidsProgrammes.map((programme) => (
+              <ProgrammeCard key={programme.id} {...programme} />
+            ))}
+          </div>
         </section>
 
         <FindSessionBanner />
