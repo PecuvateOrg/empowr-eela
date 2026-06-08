@@ -31,6 +31,15 @@ export const kidsProgrammes: Programme[] = [
     bookingUrl: LINKS.kidzSaturdaySkate,
   },
   {
+    id: 'kidz-roller-disco',
+    tag: 'Sat · 5+ yrs',
+    tagColor: 'text-blue-dark',
+    title: 'Roller Disco for All Ages',
+    icon: <Icon icon="mdi:music-note" width={36} height={36} className="text-blue-dark" />,
+    bullets: ['Music & lights on wheels', 'Dance & skate together', 'Party atmosphere for all'],
+    bookingUrl: LINKS.kidzRollerDisco,
+  },
+  {
     id: 'kidz-summer-camps',
     tag: 'Camp · 5+ yrs',
     tagColor: 'text-blue',
@@ -38,14 +47,5 @@ export const kidsProgrammes: Programme[] = [
     icon: <Icon icon="mdi:tent" width={36} height={36} className="text-blue" />,
     bullets: ['Multi-day skating adventure', 'Games & activities', 'New friends & memories'],
     bookingUrl: LINKS.kidzSummerCamps,
-  },
-  {
-    id: 'kidz-roller-disco',
-    tag: 'All ages · 5+ yrs',
-    tagColor: 'text-blue-dark',
-    title: 'Roller Disco for All Ages',
-    icon: <Icon icon="mdi:music-note" width={36} height={36} className="text-blue-dark" />,
-    bullets: ['Music & lights on wheels', 'Dance & skate together', 'Party atmosphere for all'],
-    bookingUrl: LINKS.kidzRollerDisco,
   },
 ];
