@@ -46,11 +46,11 @@ const programmes: Programme[] = [
   },
   {
     id: 'all-ages',
-    tag: 'All ages',
+    tag: 'All ages (5+)',
     tagColor: 'text-blue',
     title: 'Sk8 Skool & Roller Disco',
     icon: <Icon icon="mdi:human-male-female-child" width={36} height={36} className="text-blue" />,
-    bullets: ['Family friendly', 'Fun for all ages', 'Roller Disco nights!'],
+    bullets: ['Open to all ages from 5+', 'Family-friendly atmosphere', 'Party atmosphere for all'],
     bookingUrl: LINKS.allAges,
   },
   {
