@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import FindSessionBanner from '@/components/FindSessionBanner';
+import KidsReviewsCarousel from '@/components/KidsReviewsCarousel';
 import { kidsProgrammes } from '@/lib/kids-programmes';
 
 export const metadata: Metadata = {
@@ -102,6 +103,18 @@ export default function KidsSpacePage() {
               <ProgrammeCard key={programme.id} {...programme} />
             ))}
           </div>
+        </section>
+
+        {/* REVIEWS */}
+        <section className="max-w-6xl mx-auto px-6 pb-14">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="flex-1 h-px bg-border" />
+            <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
+              What parents are saying
+            </p>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <KidsReviewsCarousel />
         </section>
 
         <FindSessionBanner />

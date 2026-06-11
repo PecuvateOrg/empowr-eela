@@ -9,7 +9,7 @@ export const kidsProgrammes: Programme[] = [
     tagColor: 'text-blue',
     title: 'Sk8 Skool for Kidz',
     icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue" />,
-    bullets: ['Learn to skate safely', 'Build balance & confidence', 'Beginner to advanced'],
+    bullets: ['Learn to skate safely', 'Build balance & confidence', 'For beginners'],
     bookingUrl: LINKS.kidzMondayClasses,
   },
   {
@@ -18,7 +18,7 @@ export const kidsProgrammes: Programme[] = [
     tagColor: 'text-blue-dark',
     title: 'Sk8 Skool for Kidz',
     icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue-dark" />,
-    bullets: ['Expert-coached sessions', 'Ages 5 to 15', 'Progress at your pace'],
+    bullets: ['Learn to skate safely', 'Build balance & confidence', 'For beginners'],
     bookingUrl: LINKS.kidzWednesdayClasses,
   },
   {
@@ -27,7 +27,7 @@ export const kidsProgrammes: Programme[] = [
     tagColor: 'text-blue-light',
     title: 'Sk8 Skool for All Ages',
     icon: <Icon icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
-    bullets: ['Open to all ages from 5+', 'Family-friendly atmosphere', 'Skills & fun combined'],
+    bullets: ['Open to all ages from 5+', 'Family-friendly atmosphere', 'For beginners'],
     bookingUrl: LINKS.kidzSaturdaySkate,
   },
   {
@@ -43,7 +43,7 @@ export const kidsProgrammes: Programme[] = [
     id: 'kidz-summer-camps',
     tag: 'Camp · 5+ yrs',
     tagColor: 'text-blue',
-    title: 'Summer Roller Camps',
+    title: 'Roller Quad Camps',
     icon: <Icon icon="mdi:tent" width={36} height={36} className="text-blue" />,
     bullets: ['Multi-day skating adventure', 'Games & activities', 'New friends & memories'],
     bookingUrl: LINKS.kidzSummerCamps,

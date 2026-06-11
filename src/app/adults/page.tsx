@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import FindSessionBanner from '@/components/FindSessionBanner';
+import AdultsReviewsCarousel from '@/components/AdultsReviewsCarousel';
 import { LINKS } from '@/lib/links';
 import type { Programme } from '@/lib/types';
 
@@ -22,7 +23,7 @@ const programmes: Programme[] = [
     tagColor: 'text-blue',
     title: 'Sk8 Skool',
     icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue" />,
-    bullets: ['Learn at your pace', 'Build skills & confidence', 'Fun, supportive coaching'],
+    bullets: ['Learn at your pace', 'Build skills & confidence', 'For beginners and improvers'],
     bookingUrl: LINKS.sk8Skool,
   },
   {
@@ -31,7 +32,7 @@ const programmes: Programme[] = [
     tagColor: 'text-blue-dark',
     title: 'Synkron8',
     icon: <Icon icon="mdi:music-note" width={36} height={36} className="text-blue-dark" />,
-    bullets: ['Music & movement', 'Learn routines', 'Get fit & have fun'],
+    bullets: ['Build balance & confidence', 'Learn routines and line dances', 'For beginners and improvers'],
     bookingUrl: LINKS.synkron8,
   },
   {
@@ -40,7 +41,7 @@ const programmes: Programme[] = [
     tagColor: 'text-blue-light',
     title: 'Skate Jam',
     icon: <Icon icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
-    bullets: ['Open skate time', 'Improve your skills', 'Skate & connect'],
+    bullets: ['Open skate time', 'Community led', 'For all levels'],
     bookingUrl: LINKS.skateJam,
   },
   {
@@ -58,7 +59,7 @@ const programmes: Programme[] = [
     tagColor: 'text-blue-dark',
     title: 'Roller Skate Events',
     icon: <Icon icon="mdi:calendar-star" width={36} height={36} className="text-blue-dark" />,
-    bullets: ["SK8 DJ's", 'Hot food & refreshments', 'Meet skaters'],
+    bullets: ["SK8 DJ's, hot food & vibes", 'Connect & meet skaters', 'For all levels'],
     bookingUrl: LINKS.rollerSkateEvents,
   },
 ];
@@ -151,6 +152,18 @@ export default function AdultsPage() {
               <ProgrammeCard key={programme.id} {...programme} />
             ))}
           </div>
+        </section>
+
+        {/* REVIEWS */}
+        <section className="max-w-6xl mx-auto px-6 pb-14">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="flex-1 h-px bg-border" />
+            <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
+              What our community says
+            </p>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <AdultsReviewsCarousel />
         </section>
 
         <FindSessionBanner />
