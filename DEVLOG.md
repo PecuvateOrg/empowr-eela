@@ -1,5 +1,32 @@
 # EELA — DEVLOG
 
+## 2026-06-13 — Session 7: Reviews carousels + programme card updates
+
+### Done
+
+- **KidsReviewsCarousel** — new component built, added to Kids Space page with 8 Trustpilot reviews (kids/family focused); section uses `max-w-6xl px-6` to match main site peek behaviour
+- **AdultsReviewsCarousel** — new component built, added to Adults page with 8 Trustpilot reviews (adults focused); same layout and section width
+- **Kids programme cards** — Mon + Wed Sk8 Skool bullets aligned to "Learn to skate safely / Build balance & confidence / For beginners"; Saturday Sk8 Skool third bullet → "For beginners"; Roller Quad Camps renamed (was Summer Roller Camps)
+- **Adults programme cards** — Sk8 Skool, Synkron8, Skate Jam, Roller Skate Events bullets updated; Sk8 Skool & Roller Disco tag → "All ages (5+)", bullets refreshed
+- **Stats bar removed** from Home and Adults pages (inaccurate data)
+- All pushed to `main` — Netlify auto-deployed
+
+### Decisions
+
+- Reviews hardcoded in components (not CMS) — Trustpilot blocks scraping; manual copy is cleaner and avoids external scripts
+- Worked on `feat/bookings-domain-cutover` branch but committed to `main` — session changes are independent of the bookings cutover work; feature branch left intact
+
+### Next
+
+- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home page moves to `/move-well`
+- Decide fate of `/about` page once homepage restructure is done
+- Team to review `/about` and `/members` nav links
+- Activate Kids Space programme cards when individual booking URLs are confirmed
+- Phase 2: wire members form to backend, booking integration
+- Complete bookings domain cutover (feature branch)
+
+---
+
 ## 2026-06-04 — Session 6: Remove stats bar
 
 ### Done
