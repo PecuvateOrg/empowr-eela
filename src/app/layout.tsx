@@ -26,6 +26,29 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 };
 
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Empowr CIC",
+    "url": "https://empowrcic.org",
+    "description": "Empowr CIC is a UK-based Community Interest Company focused on empowering individuals through education, employment, and community connection.",
+    "sameAs": [
+      "https://www.linkedin.com/company/empowr-cic",
+      "https://www.instagram.com/empowr.cic",
+      "https://www.facebook.com/empowr.cic",
+      "https://www.youtube.com/@empowr.cic"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "EELA by Empowr",
+    "url": "https://eela.empowrcic.org",
+    "description": "EELA is a session discovery and membership platform connecting people with learning and development opportunities run by Empowr CIC."
+  }
+];
+
 export default function RootLayout({
   children,
 }: {
@@ -33,6 +56,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={nunito.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="font-[family-name:var(--font-nunito)] antialiased">
         {children}
       </body>

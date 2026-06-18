@@ -1,0 +1,20 @@
+# EELA by Empowr
+
+> EELA (by Empowr) is a session discovery and membership platform connecting people with learning and development opportunities in their community.
+
+EELA helps adults and young people find, book, and track participation in programmes run by Empowr CIC — including adult skills sessions, children's activities, and community events. It makes Empowr's programme offering navigable and accessible in one place.
+
+## Sections
+
+- [Home](https://eela.empowrcic.org): Overview of EELA and featured programmes
+- [Adults](https://eela.empowrcic.org/adults): Skills development and learning sessions for adults
+- [Kids Space](https://eela.empowrcic.org/kids): Activities and programmes for children and young people
+
+## About
+
+EELA is operated by Empowr CIC (empowrcic.org), a UK-based Community Interest Company. All programmes listed on EELA are delivered or curated by Empowr CIC.
+
+## Contact
+
+- Website: https://eela.empowrcic.org
+- Parent organisation: https://empowrcic.org

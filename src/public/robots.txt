@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /account/
+Disallow: /dashboard/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /account/
+Disallow: /dashboard/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /account/
+Disallow: /dashboard/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /account/
+Disallow: /dashboard/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://eela.empowrcic.org/sitemap.xml
