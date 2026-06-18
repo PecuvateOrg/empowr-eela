@@ -46,6 +46,7 @@ export const kidsProgrammes: Programme[] = [
     title: 'Roller Quad Camps',
     icon: <Icon icon="mdi:tent" width={36} height={36} className="text-blue" />,
     bullets: ['Multi-day skating adventure', 'Games & activities', 'New friends & memories'],
-    bookingUrl: LINKS.kidzSummerCamps,
+    bookingUrl: '/roller-quad-camps',
+    buttonLabel: 'View options',
   },
 ];

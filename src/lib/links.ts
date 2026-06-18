@@ -7,6 +7,7 @@ export const LINKS = {
   rollerSkateEvents: 'https://empowrcic.wixsite.com/empowrcic/roller-skate-events',
 
   // Children / family
+  rollerQuadCampsHAF:     'https://app.holidayactivities.com/parent/providers/empowr-cic',
   kidzSpace:              'https://empowrcic.wixsite.com/empowrcic/kidzspace',
   kidzMondayClasses:      'https://empowrcic.wixsite.com/empowrcic/service-page/sk8-skool-for-kidz-5-15-yrs?referral=service_list_widget',
   kidzWednesdayClasses:   'https://empowrcic.wixsite.com/empowrcic/service-page/sk8-skool-for-kidz-5-15-yrs-1?referral=service_list_widget',

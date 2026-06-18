@@ -8,6 +8,7 @@ export interface Programme {
   icon: ReactNode;
   bullets: string[];
   bookingUrl: string;
+  buttonLabel?: string;
 }
 
 export interface Stat {
