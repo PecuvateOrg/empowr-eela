@@ -19,11 +19,11 @@ export const LINKS = {
   quiz:              'https://start.empowrcic.org/quiz',
 
   // Community
-  whatsapp:          'https://chat.whatsapp.com/EFSwGLtxaYLHCKcA2j4k6k',
+  whatsapp:          'https://chat.whatsapp.com/BuKlBkfDxHs2jdPyRzXwza',
   shop:              'https://empowrcic.wixsite.com/empowrcic/shop',
   donatingSkates:    'https://empowrcic.wixsite.com/empowrcic/b4e',
   heroes:            'https://hero.empowrcic.org/',
-  trustpilot:        'https://uk.trustpilot.com/review/empowrcic.org',
+  trustpilot:        'https://www.trustpilot.com/review/empowrcic.org',
 
   // Contact
   enquiries:         'https://empowrcic.org/contact',
