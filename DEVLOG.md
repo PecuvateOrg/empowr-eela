@@ -1,5 +1,34 @@
 # EELA — DEVLOG
 
+## 2026-06-18 — Session 8: Roller Quad Camps page
+
+### Done
+
+- **`/roller-quad-camps` page** — new page with 2-column hero (text + S3 image), pillars strip, two booking option cards, back-link to Kids Space
+- **Two booking cards**: Empowr Camps (standard booking, card/white style, first) and HAF Spaces (HAF programme, blue style, second)
+- **Hero image** — loaded from S3 (`empowr-cic.s3.us-east-1.amazonaws.com`); `empowr-cic.s3.us-east-1.amazonaws.com` added to `next.config.ts` remotePatterns; bucket confirmed public
+- **Photo badge** — "Kidz Space / 8+" — Kidz Space is the naming convention for all photo tags on Kids Space sub-pages
+- **HAF link** added to `links.ts` as `rollerQuadCampsHAF` pointing to `app.holidayactivities.com/parent/providers/empowr-cic`
+- **Kids Space card** — Roller Quad Camps card now routes internally to `/roller-quad-camps` with "View options" button label (not direct external booking)
+- **ProgrammeCard** — updated to auto-detect internal vs external links (`/` prefix → Next.js `<Link>`); optional `buttonLabel` prop added (defaults to "Book")
+- **Quiz banner removed** from Roller Quad Camps page — not appropriate for a page presenting specific booking options
+- Pushed to `main` — Netlify auto-deployed
+
+### Decisions
+
+- "Empowr Camps" used only as the card heading inside `/roller-quad-camps`; the Kids Space card and page h1 retain "Roller Quad Camps"
+- Kidz Space photo tag convention: all sub-pages under Kids Space use "Kidz Space" in the image badge, with the relevant age on the second line
+- Standard booking card placed first (programme-first UX); HAF Spaces second
+
+### Next
+
+- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
+- Team to review `/about` and `/members` nav links
+- Phase 2: wire members form to backend (Supabase/Resend), booking integration
+- Complete bookings domain cutover (feature branch)
+
+---
+
 ## 2026-06-13 — Session 7: Reviews carousels + programme card updates
 
 ### Done

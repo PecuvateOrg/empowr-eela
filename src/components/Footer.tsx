@@ -18,10 +18,12 @@ export default function Footer() {
               Contact
             </p>
             <a
-              href="mailto:general@empowrcic.org"
+              href="https://empowrcic.org/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[13px] text-muted hover:text-white transition-colors no-underline block"
             >
-              general@empowrcic.org
+              Get in touch
             </a>
           </div>
 

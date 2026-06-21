@@ -26,6 +26,6 @@ export const LINKS = {
   trustpilot:        'https://uk.trustpilot.com/review/empowrcic.org',
 
   // Contact
-  enquiries:         'mailto:general@empowrcic.org',
-  volunteering:      'mailto:general@empowrcic.org',
+  enquiries:         'https://empowrcic.org/contact',
+  volunteering:      'https://empowrcic.org/contact',
 } as const;
