@@ -12,6 +12,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/react": "^6.0.2",
     "next": "^15.0.0",
+    "posthog-js": "^1.392.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
