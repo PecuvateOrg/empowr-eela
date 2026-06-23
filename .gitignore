@@ -12,6 +12,7 @@ src/.env.*.local
 
 # Build outputs
 src/build/
+src/tsconfig.tsbuildinfo
 
 # OS
 .DS_Store
