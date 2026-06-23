@@ -1,7 +1,9 @@
 # EELA by Empowr
 
+## Identity
 Empowr CIC's central session discovery and membership platform — home, kids, and adults programmes, with members and booking features planned.
 
+## Self-Reference
 This file is the map. All workspace detail lives in workspace CONTEXT.md files.
 
 ---
