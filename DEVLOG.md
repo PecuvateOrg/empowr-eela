@@ -1,5 +1,45 @@
 # EELA — DEVLOG
 
+## 2026-06-28 — Session 10: PostHog consent banner + Navbar active state
+
+### Done
+
+- **`src/components/PostHogProvider.tsx`** — switched to `persistence: 'localStorage+cookie'` + `opt_out_capturing_by_default: true` (Variant B consent pattern — full persistence but opted out until user accepts)
+- **`src/components/CookieConsentBanner.tsx`** — new component: sticky bottom banner with Accept/Decline; uses `eela_analytics_consent` localStorage key; on accept calls `posthog.opt_in_capturing()` + fires `$pageview`; links to `https://empowrcic.org/legal/cookie-policy`
+- **`src/app/layout.tsx`** — `CookieConsentBanner` added after `{children}` inside `PostHogProvider`
+- **`src/components/Navbar.tsx`** — converted to client component; `usePathname()` used to apply active style (`text-blue bg-blue-pale`) to current page link; `aria-current="page"` added; fixes rage click on `/adults` nav link (user was already on page, no visual feedback)
+- All pushed to `main` — Netlify auto-deployed
+
+### Decisions
+
+- EELA uses Variant B (consent banner + full persistence) because a members section with cross-session tracking is planned; all other Empowr sites use Variant A (memory mode, no banner)
+- Consent state tracked via custom `eela_analytics_consent` localStorage key rather than `posthog.has_opted_in_capturing()` to avoid timing issues with PostHog init
+- Old `CookieBanner` component (Heroes-style, cosmetic only) was not present in EELA — banner is new
+
+### Next
+
+- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
+- Team to review `/about` and `/members` nav links
+- Phase 2: wire members form to backend (Supabase/Resend), booking integration
+- Complete bookings domain cutover (feature branch)
+
+---
+
+## 2026-06-26 — Session 9: EELA sub-programme naming update
+
+### Done
+
+- **`src/app/about/page.tsx`** — `programmes` array updated: Mind Body & Wellness → MindWell, Creative Expression & Arts → CreateWell, Outdoor & Adventure → ExploreWell, Team-Building & Leadership → ConnectWell
+- Taglines (Mindfulness & Recovery, Creativity & Self-Expression, Nature & Exploration, Collaboration & Growth) were already correct — only the primary `name` field changed
+- Pushed to `main` — Netlify auto-deployed
+
+### Decisions
+
+- Naming now consistent across: EELA about page, Empowr Main Site our-work page, and the supporter prospectus
+- MoveWell was already using the correct name in all three places
+
+---
+
 ## 2026-06-18 — Session 8: Roller Quad Camps page
 
 ### Done
