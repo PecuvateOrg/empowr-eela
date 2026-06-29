@@ -1,5 +1,27 @@
 # EELA — DEVLOG
 
+## 2026-06-29 — Session 11: Members page cleanup
+
+### Done
+
+- `src/app/members/page.tsx` — removed Wix account notice (Wix account URLs are all broken); page restored to clean coming-soon waitlist
+- `src/lib/links.ts` — removed `wixAccount` entry
+- Changes on `feat/members-account-notice` branch — parked, not merged
+
+### Decisions
+
+- Team decided against routing to Wix for account management; new standalone members platform will be built as a separate project
+- Members page stays as coming-soon waitlist until new platform is live; when ready, wire `handleSubmit` to Supabase/Resend and add nav link back in `Navbar.tsx`
+
+### Next
+
+- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
+- Phase 2: wire members form to backend (Supabase/Resend), booking integration
+- Complete bookings domain cutover (feature branch)
+- New members platform (separate project) — once live, merge `feat/members-account-notice` and activate members nav link
+
+---
+
 ## 2026-06-28 — Session 10: PostHog consent banner + Navbar active state
 
 ### Done
