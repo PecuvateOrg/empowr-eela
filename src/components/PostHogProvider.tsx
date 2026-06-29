@@ -13,6 +13,11 @@ export default function PostHogProvider({ children }: { children: React.ReactNod
       opt_out_capturing_by_default: true,
       capture_pageview: true,
       capture_pageleave: true,
+      before_send: (event) => {
+        const ua = navigator?.userAgent?.toLowerCase() ?? ''
+        if (/headless|phantomjs|selenium|webdriver|puppeteer|playwright/.test(ua)) return null
+        return event
+      },
     })
     posthog.register({
       site_id: 'empowr-eela',
