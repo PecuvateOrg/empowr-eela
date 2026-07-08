@@ -13,6 +13,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://eela.empowrcic.org'),
   title: {
     default: 'EELA by Empowr',
     template: '%s | EELA',
@@ -26,6 +27,21 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
+  openGraph: {
+    title: 'EELA by Empowr',
+    description: 'EELA — the home for all Empowr CIC sessions. Browse programmes for kids, teens and adults.',
+    url: 'https://eela.empowrcic.org',
+    siteName: 'EELA by Empowr',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    locale: 'en_GB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'EELA by Empowr',
+    description: 'EELA — the home for all Empowr CIC sessions. Browse programmes for kids, teens and adults.',
+    images: ['/og-image.png'],
+  },
 };
 
 const jsonLd = [
