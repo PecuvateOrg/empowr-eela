@@ -9,7 +9,7 @@ import { LINKS } from '@/lib/links';
 export const metadata: Metadata = {
   title: 'Roller Quad Camps — Kids Space',
   description:
-    'Multi-day roller skating camps for children aged 5+ with Empowr CIC. Book directly or apply for a free place through the HAF Programme.',
+    'Multi-day roller skating camps for children aged 8+ with Empowr CIC. Book directly or apply for a free place through the HAF Programme.',
 };
 
 const pillars = [
@@ -36,7 +36,7 @@ export default function RollerQuadCampsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
             <div>
               <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-                Camp · 5+ yrs
+                Camp · 8+ yrs
               </p>
               <h1
                 className="font-[900] text-black leading-[1.08] mb-4"
@@ -49,7 +49,7 @@ export default function RollerQuadCampsPage() {
                 className="text-mid leading-[1.8]"
                 style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1rem)' }}
               >
-                Multi-day skating adventures for children aged 5+. Games, activities, new friends
+                Multi-day skating adventures for children aged 8+. Games, activities, new friends
                 and memories — all on wheels. Choose the booking option that works for your family.
               </p>
             </div>
