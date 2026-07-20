@@ -1,5 +1,27 @@
 # EELA — DEVLOG
 
+## 2026-07-20 — Session 13: Roller Quad Camps minimum age corrected to 5+
+
+### Done
+
+- `src/app/roller-quad-camps/page.tsx` and `src/lib/kids-programmes.tsx` — minimum age changed from "8+" to "5+" across all four instances (SEO description, hero eyebrow tag, hero body copy, hero image badge, programme card tag)
+- Empowr CIC KB vault (`entities/movewell.md`, `entities/sessions.md`) updated to match, committed together with other pending vault edits (cancellation policy v1.1 rewrite, contact routing to empowrcic.org/contact, Beginners Street Skate course date confirmed) — pushed to `kb-empowr-cic`
+- Committed `b4c3875`, pushed to `main` — Netlify auto-deployed
+- Documented in `_config/registry/github.md` that every KB vault (including this one) is its own separate git repo, not part of `knowledge-based-system` — previously undocumented gap
+
+### Decisions
+
+- This reverses Session 12's standardisation on "8+" — direct user instruction this session to use "5+" instead. Session 12's move was to fix an *internal inconsistency* (some copy said 5+, some said 8+); this session is a substantive correction of the actual minimum age, not a re-litigation of that inconsistency fix
+
+### Next
+
+- Open question from Session 12 still unresolved: whether the Kids Space umbrella age label should also move, or stay as-is since it covers more than just Quad Camps
+- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
+- Phase 2: wire members form to backend (Supabase/Resend), booking integration
+- Complete bookings domain cutover (feature branch)
+
+---
+
 ## 2026-07-14 — Session 12: Roller Quad Camps age standardisation
 
 ### Done
@@ -68,18 +90,7 @@
 
 ---
 
-## 2026-06-26 — Session 9: EELA sub-programme naming update
-
-### Done
-
-- **`src/app/about/page.tsx`** — `programmes` array updated: Mind Body & Wellness → MindWell, Creative Expression & Arts → CreateWell, Outdoor & Adventure → ExploreWell, Team-Building & Leadership → ConnectWell
-- Taglines (Mindfulness & Recovery, Creativity & Self-Expression, Nature & Exploration, Collaboration & Growth) were already correct — only the primary `name` field changed
-- Pushed to `main` — Netlify auto-deployed
-
-### Decisions
-
-- Naming now consistent across: EELA about page, Empowr Main Site our-work page, and the supporter prospectus
-- MoveWell was already using the correct name in all three places
+## 2026-06-26 — Session 9: Updated EELA about page sub-programme names to MindWell/CreateWell/ExploreWell/ConnectWell, consistent with Main Site and prospectus
 
 ---
 
