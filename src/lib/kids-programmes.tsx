@@ -41,7 +41,7 @@ export const kidsProgrammes: Programme[] = [
   },
   {
     id: 'kidz-summer-camps',
-    tag: 'Camp · 8+ yrs',
+    tag: 'Camp · 5+ yrs',
     tagColor: 'text-blue',
     title: 'Roller Quad Camps',
     icon: <Icon icon="mdi:tent" width={36} height={36} className="text-blue" />,
