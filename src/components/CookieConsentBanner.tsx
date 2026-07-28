@@ -15,7 +15,6 @@ export default function CookieConsentBanner() {
   const handleAccept = () => {
     localStorage.setItem(CONSENT_KEY, 'accepted')
     posthog.opt_in_capturing()
-    posthog.capture('$pageview')
     setVisible(false)
   }
 
