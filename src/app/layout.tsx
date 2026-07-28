@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import PostHogProvider from '@/components/PostHogProvider';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
+import ChatBubble from '@/components/ChatBubble';
 import './globals.css';
 
 const nunito = Nunito({
@@ -84,6 +85,7 @@ export default function RootLayout({
         <PostHogProvider>
           {children}
           <CookieConsentBanner />
+          <ChatBubble orgSlug="empowr-cic" />
         </PostHogProvider>
       </body>
     </html>
