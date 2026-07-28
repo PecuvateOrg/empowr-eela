@@ -16,6 +16,7 @@
 
 - Still open from prior sessions: homepage restructure, Phase 2 backend wiring, bookings domain cutover
 - New from this session: T4 (booking-click capture on `ProgrammeCard.tsx`) not yet started — see AnalyticsHub DEVLOG for the full T3–T7 programme this was part of
+- **New request (2026-07-28, not started):** redesign `CookieConsentBanner.tsx`'s UI — user wants a small compact square instead of the current full-width bottom bar, sized just big enough to stay PECR-compliant (readable copy + two clearly tappable Accept/Decline targets). Copy/consent logic (`on_reject` mode, from this session) unchanged — visual/layout only.
 
 ---
 

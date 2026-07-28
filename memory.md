@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Live in production at eela.empowrcic.org. On Session 13 (2026-07-20) — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
+Live in production at eela.empowrcic.org. On Session 14 (2026-07-28) — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
 
 ## Status (resolved as of 2026-07-20 — all Phase 1 items below are long since complete)
 
@@ -24,7 +24,7 @@ Live in production at eela.empowrcic.org. On Session 13 (2026-07-20) — see `DE
 
 ## Next
 
-See `DEVLOG.md` Session 14 "Next" section for current open items — Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover, and the new T4 booking-click analytics capture (`ProgrammeCard.tsx`, not started).
+See `DEVLOG.md` Session 14 "Next" section for current open items — Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover, T4 booking-click analytics capture (`ProgrammeCard.tsx`, not started), and a new **cookie banner UI redesign** request (2026-07-28, not started) — user wants `CookieConsentBanner.tsx` shrunk from a full-width bottom bar to a small compact square, still big enough to stay PECR-compliant. Consent logic (`on_reject` mode) stays as-is; visual only.
 
 **2026-07-28 (Session 14):** PostHog switched from Variant B (full persistence, opt-out-by-default) to `cookieless_mode: 'on_reject'` — decliners are now counted cookielessly instead of producing zero events. Consent banner UI unchanged.
 
