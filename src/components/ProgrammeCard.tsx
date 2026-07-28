@@ -29,7 +29,7 @@ export default function ProgrammeCard({
       {buttonLabel} &rsaquo;
     </Link>
   ) : (
-    <a href={bookingUrl} target="_blank" rel="noopener noreferrer"
+    <a href={bookingUrl} target="_blank" rel="noopener"
        className={`hidden sm:inline-block ${btnClass}`} style={btnStyle}>
       {buttonLabel} &rsaquo;
     </a>
@@ -42,7 +42,7 @@ export default function ProgrammeCard({
       {buttonLabel} &rsaquo;
     </Link>
   ) : (
-    <a href={bookingUrl} target="_blank" rel="noopener noreferrer"
+    <a href={bookingUrl} target="_blank" rel="noopener"
        className="bg-blue text-warm-white text-[13px] font-[800] px-10 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
        style={btnStyle}>
       {buttonLabel} &rsaquo;
