@@ -1,5 +1,27 @@
 # EELA — DEVLOG
 
+## 2026-07-28 — Session 15: First live embed of the CRM chat widget (staged on this branch, not yet merged)
+
+### Done
+
+- Embedded the CRM's live chat widget on EELA for the first time — `src/components/ChatBubble.tsx` (ported from the proven, previously-unmerged `feat/chat-bubble-v2` prototype on Empowr Main Site, which already fixed a localStorage-in-iframe crash) wired into `src/app/layout.tsx` alongside `CookieConsentBanner`, pointing at `crm.pecuvate.com/widget?org=empowr-cic`
+- Verified live via Playwright against the real production CRM widget (not a local mock) — bubble opens, iframe loads the widget correctly, and confirmed the CRM's new satisfaction-gated escalation UX (see PecuvateCRM DEVLOG, session 3) is already live in production
+- Found EELA's Netlify site is configured with `build_settings.allowed_branches: ["main"]` — no branch deploys or PR deploy previews are possible until that's widened; this blocked getting a shareable preview URL tonight
+- Committed here on `feat/chat-widget-embed` (`bbab61a`), not `main` — deliberately held back per owner's decision to have the team test first and push tomorrow
+
+### Decisions
+
+- Bubble's close/toggle button sits in the same bottom-right corner as the cookie-consent banner when both are visible on first load — cosmetic overlap, not fixed yet. Note: a separate concurrent session logged a request to shrink `CookieConsentBanner.tsx` to a compact square (see Session 14's "Next" below) — worth revisiting this overlap once that redesign lands, since a smaller banner may resolve it on its own
+- Owner chose not to widen Netlify's `allowed_branches` for a preview link tonight — testing the standalone CRM `/widget` page directly was judged sufficient for now
+
+### Next
+
+- Get the team to review `feat/chat-widget-embed`, then merge to `main` and push — tomorrow
+- Decide whether to fix the cookie-banner/bubble overlap before or after that push (may resolve itself once the banner redesign above ships)
+- Still open from prior sessions: homepage restructure, Phase 2 backend wiring, bookings domain cutover, Kids Space umbrella age label decision
+
+---
+
 ## 2026-07-28 — Session 14: Cookieless analytics (on_reject), fixes decliner blind spot
 
 ### Done
@@ -62,25 +84,7 @@
 
 ---
 
-## 2026-06-29 — Session 11: Members page cleanup
-
-### Done
-
-- `src/app/members/page.tsx` — removed Wix account notice (Wix account URLs are all broken); page restored to clean coming-soon waitlist
-- `src/lib/links.ts` — removed `wixAccount` entry
-- Changes on `feat/members-account-notice` branch — parked, not merged
-
-### Decisions
-
-- Team decided against routing to Wix for account management; new standalone members platform will be built as a separate project
-- Members page stays as coming-soon waitlist until new platform is live; when ready, wire `handleSubmit` to Supabase/Resend and add nav link back in `Navbar.tsx`
-
-### Next
-
-- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
-- Phase 2: wire members form to backend (Supabase/Resend), booking integration
-- Complete bookings domain cutover (feature branch)
-- New members platform (separate project) — once live, merge `feat/members-account-notice` and activate members nav link
+## 2026-06-29 — Session 11: Removed broken Wix account notice from Members page (URLs all broken), restored clean coming-soon waitlist; team decided a standalone members platform will be built separately rather than routing to Wix
 
 ---
 
