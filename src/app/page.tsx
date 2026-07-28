@@ -152,7 +152,7 @@ export default function HomePage() {
             <a
               href={LINKS.quiz}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="inline-block bg-white text-blue text-sm font-[800] px-8 py-3.5 rounded-full no-underline text-center transition-opacity hover:opacity-90"
             >
               Find my session

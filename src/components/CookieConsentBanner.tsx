@@ -35,7 +35,7 @@ export default function CookieConsentBanner() {
           <a
             href="https://empowrcic.org/legal/cookie-policy"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
             className="text-blue underline underline-offset-2 hover:text-blue-dark"
           >
             Cookie Policy

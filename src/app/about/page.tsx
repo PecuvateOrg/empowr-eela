@@ -182,7 +182,7 @@ export default function AboutPage() {
             <a
               href="https://empowrcic.org"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="text-blue font-[700] hover:opacity-80 transition-opacity"
             >
               Empowr CIC

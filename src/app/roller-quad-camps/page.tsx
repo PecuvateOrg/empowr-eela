@@ -122,7 +122,7 @@ export default function RollerQuadCampsPage() {
               <a
                 href={LINKS.kidzSummerCamps}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="inline-block bg-blue text-warm-white text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
                 style={{ boxShadow: 'var(--shadow-blue)' }}
               >

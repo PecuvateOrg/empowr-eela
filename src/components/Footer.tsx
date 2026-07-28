@@ -20,7 +20,7 @@ export default function Footer() {
             <a
               href="https://empowrcic.org/contact"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="text-[13px] text-muted hover:text-white transition-colors no-underline block"
             >
               Get in touch
@@ -34,7 +34,7 @@ export default function Footer() {
             <a
               href="https://waiver.empowrcic.org"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="text-[13px] text-muted hover:text-white transition-colors no-underline block"
             >
               Waiver Form
