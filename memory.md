@@ -24,7 +24,9 @@ Live in production at eela.empowrcic.org. On Session 13 (2026-07-20) — see `DE
 
 ## Next
 
-See `DEVLOG.md` Session 13 "Next" section for current open items — Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover.
+See `DEVLOG.md` Session 14 "Next" section for current open items — Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover, and the new T4 booking-click analytics capture (`ProgrammeCard.tsx`, not started).
+
+**2026-07-28 (Session 14):** PostHog switched from Variant B (full persistence, opt-out-by-default) to `cookieless_mode: 'on_reject'` — decliners are now counted cookielessly instead of producing zero events. Consent banner UI unchanged.
 
 ## Pre-Close Checklist
 

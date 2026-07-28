@@ -1,5 +1,24 @@
 # EELA — DEVLOG
 
+## 2026-07-28 — Session 14: Cookieless analytics (on_reject), fixes decliner blind spot
+
+### Done
+
+- `src/components/PostHogProvider.tsx`: replaced `persistence: 'localStorage+cookie'` + `opt_out_capturing_by_default: true` with `cookieless_mode: 'on_reject'` (`3620f25`) — decliners are now counted cookielessly instead of producing zero events (previously `opt_out_capturing_by_default` suppressed all capture until Accept, silently undercounting real traffic and making the org dashboard sum incompatible counting methods across sites)
+- `src/components/CookieConsentBanner.tsx`: removed the manual `posthog.capture('$pageview')` replay in `handleAccept` — redundant now that default capture works, and would otherwise double-count the landing pageview; PostHog's `opt_in_capturing()`/`opt_out_capturing()` drive the cookieless-mode switch automatically per their docs, so no other banner logic changed
+- Banner itself (UI, Accept/Decline copy) unchanged — this session was a legal-basis and consent-mode fix, not a redesign
+
+### Decisions
+
+- User's call: keep the consent banner (`on_reject` mode) rather than dropping it (`always`, matching the other 3 Empowr sites) — cross-day identity is genuinely useful once EELA has real member accounts, which `on_reject` preserves for consenters while still fixing the decliner blind spot
+
+### Next
+
+- Still open from prior sessions: homepage restructure, Phase 2 backend wiring, bookings domain cutover
+- New from this session: T4 (booking-click capture on `ProgrammeCard.tsx`) not yet started — see AnalyticsHub DEVLOG for the full T3–T7 programme this was part of
+
+---
+
 ## 2026-07-20 — Session 13: Roller Quad Camps minimum age corrected to 5+
 
 ### Done
@@ -65,28 +84,7 @@
 
 ---
 
-## 2026-06-28 — Session 10: PostHog consent banner + Navbar active state
-
-### Done
-
-- **`src/components/PostHogProvider.tsx`** — switched to `persistence: 'localStorage+cookie'` + `opt_out_capturing_by_default: true` (Variant B consent pattern — full persistence but opted out until user accepts)
-- **`src/components/CookieConsentBanner.tsx`** — new component: sticky bottom banner with Accept/Decline; uses `eela_analytics_consent` localStorage key; on accept calls `posthog.opt_in_capturing()` + fires `$pageview`; links to `https://empowrcic.org/legal/cookie-policy`
-- **`src/app/layout.tsx`** — `CookieConsentBanner` added after `{children}` inside `PostHogProvider`
-- **`src/components/Navbar.tsx`** — converted to client component; `usePathname()` used to apply active style (`text-blue bg-blue-pale`) to current page link; `aria-current="page"` added; fixes rage click on `/adults` nav link (user was already on page, no visual feedback)
-- All pushed to `main` — Netlify auto-deployed
-
-### Decisions
-
-- EELA uses Variant B (consent banner + full persistence) because a members section with cross-session tracking is planned; all other Empowr sites use Variant A (memory mode, no banner)
-- Consent state tracked via custom `eela_analytics_consent` localStorage key rather than `posthog.has_opted_in_capturing()` to avoid timing issues with PostHog init
-- Old `CookieBanner` component (Heroes-style, cosmetic only) was not present in EELA — banner is new
-
-### Next
-
-- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
-- Team to review `/about` and `/members` nav links
-- Phase 2: wire members form to backend (Supabase/Resend), booking integration
-- Complete bookings domain cutover (feature branch)
+## 2026-06-28 — Session 10: PostHog consent banner (Variant B, since superseded by cookieless `on_reject` mode 2026-07-28) + Navbar active-state fix via `usePathname()`
 
 ---
 
