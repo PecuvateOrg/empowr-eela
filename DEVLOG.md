@@ -1,5 +1,20 @@
 # EELA — DEVLOG
 
+## 2026-07-29 — Session 15: Booking-click capture (T4) + cross-site UTM tagging (T5)
+
+### Done
+
+- `src/components/ProgrammeCard.tsx`: added `'use client'` + a `trackBookingClick` handler firing `posthog.capture('booking_click', {programme, destination})` on every Book button (desktop/mobile, internal/external), before navigation — closes the "invisible booking clicks" gap flagged in the AnalyticsHub behavioural-analytics handoff (F6). Commit `141602a`.
+- `src/lib/links.ts`, `Footer.tsx`, `about/page.tsx`, `CookieConsentBanner.tsx`: every outbound link to hero.empowrcic.org, start.empowrcic.org, and empowrcic.org now carries `?utm_source=empowr-eela&utm_medium=internal` — the practical alternative to full cross-domain session linking (T5), which was ruled out this session as incompatible with cookieless mode (full reasoning in AnalyticsHub DEVLOG). Commit `dff9e8d`.
+- Verification note for future sessions: PostHog's own bot detection blocks headless-Playwright network-level verification of any `capture()` call, even on live production. Confirm handler correctness via a temporary `console.log` instead.
+
+### Next
+
+- Still open from prior sessions: homepage restructure, Phase 2 backend wiring, bookings domain cutover, `CookieConsentBanner.tsx` compact-UI redesign (2026-07-28 request, not started)
+- Nothing further from the AnalyticsHub programme — T4/T5 both closed this session
+
+---
+
 ## 2026-07-28 — Session 14: Cookieless analytics (on_reject), fixes decliner blind spot
 
 ### Done
@@ -63,25 +78,7 @@
 
 ---
 
-## 2026-06-29 — Session 11: Members page cleanup
-
-### Done
-
-- `src/app/members/page.tsx` — removed Wix account notice (Wix account URLs are all broken); page restored to clean coming-soon waitlist
-- `src/lib/links.ts` — removed `wixAccount` entry
-- Changes on `feat/members-account-notice` branch — parked, not merged
-
-### Decisions
-
-- Team decided against routing to Wix for account management; new standalone members platform will be built as a separate project
-- Members page stays as coming-soon waitlist until new platform is live; when ready, wire `handleSubmit` to Supabase/Resend and add nav link back in `Navbar.tsx`
-
-### Next
-
-- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
-- Phase 2: wire members form to backend (Supabase/Resend), booking integration
-- Complete bookings domain cutover (feature branch)
-- New members platform (separate project) — once live, merge `feat/members-account-notice` and activate members nav link
+## 2026-06-29 — Session 11: Members page cleanup — removed broken Wix account notice, restored coming-soon waitlist; team decided against Wix for account management, new platform to be built separately
 
 ---
 
