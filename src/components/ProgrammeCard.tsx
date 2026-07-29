@@ -1,5 +1,8 @@
+'use client';
+
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import posthog from 'posthog-js';
 
 interface ProgrammeCardProps {
   tag: string;
@@ -24,25 +27,29 @@ export default function ProgrammeCard({
   const btnClass = 'shrink-0 bg-blue text-warm-white text-[13px] font-[800] px-5 py-2.5 rounded-full no-underline transition-opacity hover:opacity-90 whitespace-nowrap';
   const btnStyle = { boxShadow: 'var(--shadow-blue)' };
 
+  const trackBookingClick = () => {
+    posthog.capture('booking_click', { programme: title, destination: bookingUrl });
+  };
+
   const DesktopBtn = isInternal ? (
-    <Link href={bookingUrl} className={`hidden sm:inline-block ${btnClass}`} style={btnStyle}>
+    <Link href={bookingUrl} onClick={trackBookingClick} className={`hidden sm:inline-block ${btnClass}`} style={btnStyle}>
       {buttonLabel} &rsaquo;
     </Link>
   ) : (
-    <a href={bookingUrl} target="_blank" rel="noopener"
+    <a href={bookingUrl} onClick={trackBookingClick} target="_blank" rel="noopener"
        className={`hidden sm:inline-block ${btnClass}`} style={btnStyle}>
       {buttonLabel} &rsaquo;
     </a>
   );
 
   const MobileBtn = isInternal ? (
-    <Link href={bookingUrl}
+    <Link href={bookingUrl} onClick={trackBookingClick}
           className="bg-blue text-warm-white text-[13px] font-[800] px-10 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
           style={btnStyle}>
       {buttonLabel} &rsaquo;
     </Link>
   ) : (
-    <a href={bookingUrl} target="_blank" rel="noopener"
+    <a href={bookingUrl} onClick={trackBookingClick} target="_blank" rel="noopener"
        className="bg-blue text-warm-white text-[13px] font-[800] px-10 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
        style={btnStyle}>
       {buttonLabel} &rsaquo;
