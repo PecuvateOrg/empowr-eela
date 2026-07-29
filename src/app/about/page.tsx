@@ -180,7 +180,7 @@ export default function AboutPage() {
           <p className="text-[13px] text-muted leading-[1.7]">
             EELA is a programme of{' '}
             <a
-              href="https://empowrcic.org"
+              href="https://empowrcic.org/?utm_source=empowr-eela&utm_medium=internal"
               target="_blank"
               rel="noopener"
               className="text-blue font-[700] hover:opacity-80 transition-opacity"

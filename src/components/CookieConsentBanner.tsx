@@ -32,7 +32,7 @@ export default function CookieConsentBanner() {
         <p className="text-sm text-mid leading-relaxed">
           We use cookies to improve your experience and remember your preferences.{' '}
           <a
-            href="https://empowrcic.org/legal/cookie-policy"
+            href="https://empowrcic.org/legal/cookie-policy?utm_source=empowr-eela&utm_medium=internal"
             target="_blank"
             rel="noopener"
             className="text-blue underline underline-offset-2 hover:text-blue-dark"

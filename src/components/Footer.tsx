@@ -18,7 +18,7 @@ export default function Footer() {
               Contact
             </p>
             <a
-              href="https://empowrcic.org/contact"
+              href="https://empowrcic.org/contact?utm_source=empowr-eela&utm_medium=internal"
               target="_blank"
               rel="noopener"
               className="text-[13px] text-muted hover:text-white transition-colors no-underline block"
