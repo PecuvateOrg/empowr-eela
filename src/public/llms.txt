@@ -8,7 +8,7 @@ EELA helps adults and young people find, book, and track participation in progra
 
 - [Home](https://eela.empowrcic.org): Overview of EELA and featured programmes
 - [Adults](https://eela.empowrcic.org/adults): Skills development and learning sessions for adults
-- [Kids Space](https://eela.empowrcic.org/kids): Activities and programmes for children and young people
+- [Kids Space](https://eela.empowrcic.org/kids-space): Activities and programmes for children and young people
 
 ## About
 
