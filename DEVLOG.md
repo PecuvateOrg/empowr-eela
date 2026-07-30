@@ -1,5 +1,26 @@
 # EELA — DEVLOG
 
+## 2026-07-29 — Session 16: Cookie banner redesign + live preview via chat-widget branch
+
+### Done
+
+- `CookieConsentBanner.tsx` redesigned from an edge-to-edge bottom bar to a floating rounded card (`rounded-[20px]`, `--shadow-md`, `mdi:cookie-outline` icon badge, pill Accept/Decline buttons) — matches the site's existing design language (`FindSessionBanner`/`ProgrammeCard` patterns). Same consent logic underneath (`localStorage` + `posthog.opt_in_capturing()`/`opt_out_capturing()`), no functional change — `on_reject` cookieless mode still governs whether Accept upgrades a visitor to persistent cross-day identity.
+- Verified live in local dev: Accept/Decline correctly dismiss + persist, zero console errors, desktop + mobile checked.
+- Also verified on a real Netlify branch-deploy preview, not just local dev: applied the same change on top of `feat/chat-widget-embed` (still unmerged, already allow-listed for branch deploys) rather than standing up a new preview mechanism, pushed (`0180cd4`). Live at `https://feat-chat-widget-embed--empowr-eela.netlify.app` — banner (bottom-left) and chat bubble (bottom-right) render together with no overlap, which incidentally resolves the previously-flagged cosmetic overlap as a side effect of the new layout.
+- Compared against Main Site's separate cookie banner this session (see that repo's DEVLOG): Main Site's was dead code under its `cookieless_mode: 'always'` setup and got deleted; EELA's is genuinely functional under `on_reject` and was correctly left in place, just redesigned.
+
+### Decisions
+
+- Banner change intentionally left uncommitted on `main` at the user's request — they're working on EELA in a separate session and will push once the team approves the chat widget, since that session will already have this change once `feat/chat-widget-embed` merges.
+- `feat/chat-widget-embed` is now 2 commits behind `main` (missing this session's T4/T5 work, landed after the branch was cut) — needs a rebase before merging, not a fast-forward.
+
+### Next
+
+- Push `feat/chat-widget-embed` to `main` once the team approves — now carries the banner redesign too, rebase first (see above)
+- Everything else unchanged from Session 15: homepage restructure, Phase 2 backend wiring, bookings domain cutover
+
+---
+
 ## 2026-07-29 — Session 15: Booking-click capture (T4) + cross-site UTM tagging (T5)
 
 ### Done
@@ -57,24 +78,7 @@
 
 ---
 
-## 2026-07-14 — Session 12: Roller Quad Camps age standardisation
-
-### Done
-
-- `src/app/roller-quad-camps/page.tsx` — standardised age range to "8+" across the page (SEO description, hero eyebrow tag, hero body copy); hero image badge already said 8+, page was inconsistent
-- Committed and pushed to `main` — Netlify auto-deployed
-
-### Decisions
-
-- Scope limited strictly to the Quad Camps page — left the general Kids Space umbrella age ("5+", covers Sk8 Skool classes for 5-12yr olds too) and the unrelated Adults/Roller Disco "5+" label untouched, since neither is Quad-Camps-specific
-- Confirmed no live Quad Camps row exists in Empowr Members' Supabase `mem_offerings` table — ages are hardcoded in EELA page copy only, nothing to sync there
-
-### Next
-
-- Open question for the user: whether the Kids Space umbrella age label should also move, or stay 5+ since it covers more than just Quad Camps
-- EELA homepage restructure: new `/` presenting EELA as a platform (5 programme pillars); current skating home moves to `/move-well`
-- Phase 2: wire members form to backend (Supabase/Resend), booking integration
-- Complete bookings domain cutover (feature branch)
+## 2026-07-14 — Session 12: Roller Quad Camps age standardised to "8+" page-wide (later reversed to "5+" in Session 13); confirmed no live Supabase `mem_offerings` row to sync
 
 ---
 
