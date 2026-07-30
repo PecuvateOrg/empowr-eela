@@ -1,5 +1,14 @@
 # EELA — DEVLOG
 
+## 2026-07-30 — PostHog route-change tracking fix (fleet-wide)
+
+- `capture_pageview: true` → `'history_change'` in `PostHogProvider.tsx`. posthog-js gates `HistoryAutocapture` on an exact string match (`isEnabled(){return"history_change"===...}`), so `true` means hard page loads only — client-side `<Link>` navigation produced **no pageview**. All internal navigation on this site has been invisible to analytics; bounce rate and pages/session were artefacts, not behaviour.
+- Found during a full review of Empowr Heroes, where 11 autocaptured clicks on the primary CTA showed up against 4 pageviews for the destination page. Same config on every Next.js site here — fixed across Heroes, Main Site, EELA, Members, Landing Page, plus the canonical templates in `_config/guides/posthog-consent.md` (which is where they all inherited it).
+- `cookieless_mode: 'on_reject'` unchanged — this is orthogonal to consent.
+- Verified: `npx tsc --noEmit` clean.
+
+*(Single-line change; the in-progress `CookieConsentBanner.tsx` edit in this working tree belongs to another session and was deliberately left uncommitted.)*
+
 ## 2026-07-29 — Session 16: Cookie banner redesign + live preview via chat-widget branch
 
 ### Done
