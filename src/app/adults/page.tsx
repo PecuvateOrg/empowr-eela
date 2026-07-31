@@ -13,7 +13,7 @@ import type { Programme } from '@/lib/types';
 export const metadata: Metadata = {
   title: 'Roller Skating for Adults',
   description:
-    'Adult and teen roller skating sessions with Empowr CIC. Sk8 Skool, Synkron8, Skate Jam, Roller Disco, and community events — all 15+.',
+    'Adult and teen roller skating sessions with Empowr CIC. Sk8 Skool, Synkron8, Skate Jam, and community events — all 15+.',
 };
 
 const programmes: Programme[] = [
@@ -48,9 +48,9 @@ const programmes: Programme[] = [
     id: 'all-ages',
     tag: 'All ages (5+)',
     tagColor: 'text-blue',
-    title: 'Sk8 Skool & Roller Disco',
+    title: 'Sk8 Skool (All Ages)',
     icon: <Icon icon="mdi:human-male-female-child" width={36} height={36} className="text-blue" />,
-    bullets: ['Open to all ages from 5+', 'Family-friendly atmosphere', 'Party atmosphere for all'],
+    bullets: ['Open to all ages from 5+', 'Family-friendly atmosphere', 'For beginners'],
     bookingUrl: LINKS.allAges,
   },
   {

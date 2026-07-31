@@ -30,6 +30,8 @@ export const kidsProgrammes: Programme[] = [
     bullets: ['Open to all ages from 5+', 'Family-friendly atmosphere', 'For beginners'],
     bookingUrl: LINKS.kidzSaturdaySkate,
   },
+  /* Roller Disco for All Ages discontinued 2026-07-31 — slot repurposed for private bookings,
+     no public offering to advertise yet. Kept here in case the team reinstates it.
   {
     id: 'kidz-roller-disco',
     tag: 'Sat · 5+ yrs',
@@ -39,6 +41,7 @@ export const kidsProgrammes: Programme[] = [
     bullets: ['Music & lights on wheels', 'Dance & skate together', 'Party atmosphere for all'],
     bookingUrl: LINKS.kidzRollerDisco,
   },
+  */
   {
     id: 'kidz-summer-camps',
     tag: 'Camp · 5+ yrs',
