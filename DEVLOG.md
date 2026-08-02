@@ -1,5 +1,14 @@
 # EELA — DEVLOG
 
+## 2026-07-31 — Roller Disco removed from site copy; branch-deploy previews enabled for feat/chat-widget-embed
+
+- `kids-programmes.tsx`: commented out the "Roller Disco for All Ages" card — session discontinued (team decision, confirmed via the CRM PecuvateCRM session same day). `adults/page.tsx`: renamed the bundled "Sk8 Skool & Roller Disco" card to "Sk8 Skool (All Ages)", dropped disco-flavoured copy; `page.tsx` homepage blurb also dropped the Roller Disco mention. `tsc --noEmit` clean. Committed `d42be5a` to `main`, not yet pushed.
+- Netlify site `empowr-eela` had `build_settings.allowed_branches: ["main"]`, which was silently blocking any branch/PR preview (the gap flagged in Session 15). Widened to `["main", "feat/chat-widget-embed"]` via the Netlify API and triggered a real branch build so the team can actually review the still-unmerged chat widget — live at `https://feat-chat-widget-embed--empowr-eela.netlify.app`.
+- `CookieConsentBanner.tsx`'s in-progress redesign (belongs to the concurrent chat-widget-embed session, see memory.md) confirmed still untouched — correctly left alone again.
+- Next: push `d42be5a` and, once the team approves, `feat/chat-widget-embed` itself to `main`.
+
+---
+
 ## 2026-07-30 — PostHog route-change tracking fix (fleet-wide)
 
 - `capture_pageview: true` → `'history_change'` in `PostHogProvider.tsx`. posthog-js gates `HistoryAutocapture` on an exact string match (`isEnabled(){return"history_change"===...}`), so `true` means hard page loads only — client-side `<Link>` navigation produced **no pageview**. All internal navigation on this site has been invisible to analytics; bounce rate and pages/session were artefacts, not behaviour.
@@ -45,23 +54,7 @@
 
 ---
 
-## 2026-07-28 — Session 14: Cookieless analytics (on_reject), fixes decliner blind spot
-
-### Done
-
-- `src/components/PostHogProvider.tsx`: replaced `persistence: 'localStorage+cookie'` + `opt_out_capturing_by_default: true` with `cookieless_mode: 'on_reject'` (`3620f25`) — decliners are now counted cookielessly instead of producing zero events (previously `opt_out_capturing_by_default` suppressed all capture until Accept, silently undercounting real traffic and making the org dashboard sum incompatible counting methods across sites)
-- `src/components/CookieConsentBanner.tsx`: removed the manual `posthog.capture('$pageview')` replay in `handleAccept` — redundant now that default capture works, and would otherwise double-count the landing pageview; PostHog's `opt_in_capturing()`/`opt_out_capturing()` drive the cookieless-mode switch automatically per their docs, so no other banner logic changed
-- Banner itself (UI, Accept/Decline copy) unchanged — this session was a legal-basis and consent-mode fix, not a redesign
-
-### Decisions
-
-- User's call: keep the consent banner (`on_reject` mode) rather than dropping it (`always`, matching the other 3 Empowr sites) — cross-day identity is genuinely useful once EELA has real member accounts, which `on_reject` preserves for consenters while still fixing the decliner blind spot
-
-### Next
-
-- Still open from prior sessions: homepage restructure, Phase 2 backend wiring, bookings domain cutover
-- New from this session: T4 (booking-click capture on `ProgrammeCard.tsx`) not yet started — see AnalyticsHub DEVLOG for the full T3–T7 programme this was part of
-- **New request (2026-07-28, not started):** redesign `CookieConsentBanner.tsx`'s UI — user wants a small compact square instead of the current full-width bottom bar, sized just big enough to stay PECR-compliant (readable copy + two clearly tappable Accept/Decline targets). Copy/consent logic (`on_reject` mode, from this session) unchanged — visual/layout only.
+## 2026-07-28 — Session 14: Switched PostHog to `cookieless_mode: 'on_reject'` so decliners are counted cookielessly instead of producing zero events; consent banner UI unchanged
 
 ---
 
