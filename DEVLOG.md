@@ -1,5 +1,13 @@
 # EELA — DEVLOG
 
+## 2026-08-04 — sitemap.xml added; robots.txt now declares it
+
+- Added `src/app/sitemap.ts` (6 routes) and restored the `Sitemap:` line in `robots.txt`. Verified live at `eela.empowrcic.org/sitemap.xml` after deploy (`b9b616e`).
+- `kids-space` and `adults` are prioritised just below home — they're the two audience entry points and now also the destinations for Main Site's legacy Wix `/service-page/*` redirects, so they carry the inbound discovery traffic.
+- **No `force-static` directive needed here.** EELA runs on the Netlify Next runtime, not `output: 'export'` — Main Site's build failed without it, EELA's didn't. Check `next.config` before assuming either way.
+- This completes the other half of the 2026-07-30 link audit, which removed the dead `Sitemap:` line rather than build a generator. The line is back, with a real sitemap behind it.
+- `CookieConsentBanner.tsx` is still modified and uncommitted in the working tree (in-progress work from another session, first noted 2026-07-30) — left untouched again.
+
 ## 2026-07-31 — Roller Disco removed from site copy; branch-deploy previews enabled for feat/chat-widget-embed
 
 - `kids-programmes.tsx`: commented out the "Roller Disco for All Ages" card — session discontinued (team decision, confirmed via the CRM PecuvateCRM session same day). `adults/page.tsx`: renamed the bundled "Sk8 Skool & Roller Disco" card to "Sk8 Skool (All Ages)", dropped disco-flavoured copy; `page.tsx` homepage blurb also dropped the Roller Disco mention. `tsc --noEmit` clean. Committed `d42be5a` to `main`, not yet pushed.
@@ -39,18 +47,7 @@
 
 ---
 
-## 2026-07-29 — Session 15: Booking-click capture (T4) + cross-site UTM tagging (T5)
-
-### Done
-
-- `src/components/ProgrammeCard.tsx`: added `'use client'` + a `trackBookingClick` handler firing `posthog.capture('booking_click', {programme, destination})` on every Book button (desktop/mobile, internal/external), before navigation — closes the "invisible booking clicks" gap flagged in the AnalyticsHub behavioural-analytics handoff (F6). Commit `141602a`.
-- `src/lib/links.ts`, `Footer.tsx`, `about/page.tsx`, `CookieConsentBanner.tsx`: every outbound link to hero.empowrcic.org, start.empowrcic.org, and empowrcic.org now carries `?utm_source=empowr-eela&utm_medium=internal` — the practical alternative to full cross-domain session linking (T5), which was ruled out this session as incompatible with cookieless mode (full reasoning in AnalyticsHub DEVLOG). Commit `dff9e8d`.
-- Verification note for future sessions: PostHog's own bot detection blocks headless-Playwright network-level verification of any `capture()` call, even on live production. Confirm handler correctness via a temporary `console.log` instead.
-
-### Next
-
-- Still open from prior sessions: homepage restructure, Phase 2 backend wiring, bookings domain cutover, `CookieConsentBanner.tsx` compact-UI redesign (2026-07-28 request, not started)
-- Nothing further from the AnalyticsHub programme — T4/T5 both closed this session
+## 2026-07-29 - Session 15: Booking-click capture (T4) via posthog.capture on ProgrammeCard + cross-site UTM tagging (T5); PostHog bot detection blocks headless verification of capture() calls
 
 ---
 
