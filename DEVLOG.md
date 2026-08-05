@@ -1,5 +1,11 @@
 # EELA — DEVLOG
 
+## 2026-08-05 — CookieConsentBanner note corrected: deliberate hold, not stale work
+
+- `memory.md` had framed the long-uncommitted `CookieConsentBanner.tsx` as parked work of unknown status, on the grounds that the "concurrent session in progress" note was six days old. **The user corrected this:** the banner redesign is tied to the `feat/chat-widget-embed` work and stays uncommitted until that widget is finalised. The dependency is the reason for the delay, not neglect.
+- Note rewritten to say so explicitly, with instructions for a fresh session: expected, do not discard, **do not commit** — it goes in as part of finalising the chat widget.
+- Worth keeping in mind generally: a stale-looking timestamp is not evidence of abandonment. Ask before recategorising someone else's in-flight work.
+
 ## 2026-08-04 — sitemap.xml added; robots.txt now declares it
 
 - Added `src/app/sitemap.ts` (6 routes) and restored the `Sitemap:` line in `robots.txt`. Verified live at `eela.empowrcic.org/sitemap.xml` after deploy (`b9b616e`).
@@ -26,26 +32,7 @@
 
 *(Single-line change; the in-progress `CookieConsentBanner.tsx` edit in this working tree belongs to another session and was deliberately left uncommitted.)*
 
-## 2026-07-29 — Session 16: Cookie banner redesign + live preview via chat-widget branch
-
-### Done
-
-- `CookieConsentBanner.tsx` redesigned from an edge-to-edge bottom bar to a floating rounded card (`rounded-[20px]`, `--shadow-md`, `mdi:cookie-outline` icon badge, pill Accept/Decline buttons) — matches the site's existing design language (`FindSessionBanner`/`ProgrammeCard` patterns). Same consent logic underneath (`localStorage` + `posthog.opt_in_capturing()`/`opt_out_capturing()`), no functional change — `on_reject` cookieless mode still governs whether Accept upgrades a visitor to persistent cross-day identity.
-- Verified live in local dev: Accept/Decline correctly dismiss + persist, zero console errors, desktop + mobile checked.
-- Also verified on a real Netlify branch-deploy preview, not just local dev: applied the same change on top of `feat/chat-widget-embed` (still unmerged, already allow-listed for branch deploys) rather than standing up a new preview mechanism, pushed (`0180cd4`). Live at `https://feat-chat-widget-embed--empowr-eela.netlify.app` — banner (bottom-left) and chat bubble (bottom-right) render together with no overlap, which incidentally resolves the previously-flagged cosmetic overlap as a side effect of the new layout.
-- Compared against Main Site's separate cookie banner this session (see that repo's DEVLOG): Main Site's was dead code under its `cookieless_mode: 'always'` setup and got deleted; EELA's is genuinely functional under `on_reject` and was correctly left in place, just redesigned.
-
-### Decisions
-
-- Banner change intentionally left uncommitted on `main` at the user's request — they're working on EELA in a separate session and will push once the team approves the chat widget, since that session will already have this change once `feat/chat-widget-embed` merges.
-- `feat/chat-widget-embed` is now 2 commits behind `main` (missing this session's T4/T5 work, landed after the branch was cut) — needs a rebase before merging, not a fast-forward.
-
-### Next
-
-- Push `feat/chat-widget-embed` to `main` once the team approves — now carries the banner redesign too, rebase first (see above)
-- Everything else unchanged from Session 15: homepage restructure, Phase 2 backend wiring, bookings domain cutover
-
----
+## 2026-07-29 - Session 16: CookieConsentBanner redesigned to a floating rounded card (same consent logic, on_reject cookieless mode unchanged), verified on a real Netlify branch-deploy preview stacked on feat/chat-widget-embed (`0180cd4`); left uncommitted on main at the user request pending that branch merging
 
 ## 2026-07-29 - Session 15: Booking-click capture (T4) via posthog.capture on ProgrammeCard + cross-site UTM tagging (T5); PostHog bot detection blocks headless verification of capture() calls
 
