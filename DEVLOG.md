@@ -1,5 +1,12 @@
 # EELA — DEVLOG
 
+## 2026-08-12 — Chat widget bubble merged to main, live on eela.empowrcic.org
+
+- Cherry-picked `bbab61a` (`feat: embed live chat widget bubble`) from the long-parked `feat/chat-widget-embed` branch onto `main` — the bubble was staged 2026-07-28 specifically to let the team try it before it went live; owner confirmed that testing is done, go ahead and merge.
+- **Cherry-picked, not merged whole-branch, on purpose.** The branch's other two commits were dead weight by now: `0180cd4` (cookie banner redesign) is superseded — the same redesign already landed on `main` separately as `bf098ec` (see the 2026-08-05 entry below); `4b20ff3` was a DEVLOG/memory docs commit that would only conflict against five months of since-written entries. `bbab61a` itself only touches `layout.tsx` (2 lines, wiring) and adds `ChatBubble.tsx` — fully disjoint from the banner file, so the cherry-pick applied clean, no conflicts.
+- `ChatBubble.tsx` points at `https://crm.pecuvate.com/widget?org=empowr-cic` — confirmed correct, no stale/dev URL. Verified `tsc --noEmit` clean after a stale `.next` cache (left over from a different local branch checkout) was cleared.
+- **Known cosmetic inconsistency, not fixed here:** the floating launcher button is still `#1a1a2e` (dark navy) — the CRM widget it opens now renders in Empowr's brand blue (`#4A70C2`, done the same day on the CRM side). Flagged to the owner, not changed without a decision since it's a site-level style choice, not a CRM widget config value.
+
 ## 2026-08-05 — CookieConsentBanner note corrected: deliberate hold, not stale work
 
 - `memory.md` had framed the long-uncommitted `CookieConsentBanner.tsx` as parked work of unknown status, on the grounds that the "concurrent session in progress" note was six days old. **The user corrected this:** the banner redesign is tied to the `feat/chat-widget-embed` work and stays uncommitted until that widget is finalised. The dependency is the reason for the delay, not neglect.
