@@ -42,7 +42,7 @@ const programmes: Programme[] = [
     title: 'Skate Jam',
     icon: <Icon icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
     bullets: ['Open skate time', 'Community led', 'For all levels'],
-    bookingUrl: LINKS.skateJam,
+    bookingUrl: '/adults/skate-jam',
   },
   {
     id: 'all-ages',
