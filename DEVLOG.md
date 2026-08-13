@@ -6,6 +6,8 @@
 - **Cherry-picked, not merged whole-branch, on purpose.** The branch's other two commits were dead weight by now: `0180cd4` (cookie banner redesign) is superseded — the same redesign already landed on `main` separately as `bf098ec` (see the 2026-08-05 entry below); `4b20ff3` was a DEVLOG/memory docs commit that would only conflict against five months of since-written entries. `bbab61a` itself only touches `layout.tsx` (2 lines, wiring) and adds `ChatBubble.tsx` — fully disjoint from the banner file, so the cherry-pick applied clean, no conflicts.
 - `ChatBubble.tsx` points at `https://crm.pecuvate.com/widget?org=empowr-cic` — confirmed correct, no stale/dev URL. Verified `tsc --noEmit` clean after a stale `.next` cache (left over from a different local branch checkout) was cleared.
 - **Known cosmetic inconsistency, not fixed here:** the floating launcher button is still `#1a1a2e` (dark navy) — the CRM widget it opens now renders in Empowr's brand blue (`#4A70C2`, done the same day on the CRM side). Flagged to the owner, not changed without a decision since it's a site-level style choice, not a CRM widget config value.
+- **Later same session: the bubble now opens itself.** Owner's call, since this is a new feature going live — it should greet visitors proactively rather than sit there waiting to be noticed. Added a 1.5s `setTimeout` in `ChatBubble.tsx` before flipping `open` to `true`, giving the page a moment to render first. Paired with a rewritten, less reactive-sounding greeting (set in PecuvateCRM's `org_ai_config`, not code here — see that project's DEVLOG) since the old copy assumed the visitor had already asked something. Live-verified with a screenshot: bubble open, correct new greeting text (em dash intact), brand-blue header, logo legible.
+- The `#1a1a2e` launcher-button inconsistency noted above is now more visible, since the panel it opens is on-screen by default rather than only after a click — still not fixed, still the owner's call to make.
 
 ## 2026-08-05 — CookieConsentBanner note corrected: deliberate hold, not stale work
 
@@ -31,13 +33,6 @@
 ---
 
 ## 2026-07-30 — PostHog route-change tracking fix (fleet-wide)
-
-- `capture_pageview: true` → `'history_change'` in `PostHogProvider.tsx`. posthog-js gates `HistoryAutocapture` on an exact string match (`isEnabled(){return"history_change"===...}`), so `true` means hard page loads only — client-side `<Link>` navigation produced **no pageview**. All internal navigation on this site has been invisible to analytics; bounce rate and pages/session were artefacts, not behaviour.
-- Found during a full review of Empowr Heroes, where 11 autocaptured clicks on the primary CTA showed up against 4 pageviews for the destination page. Same config on every Next.js site here — fixed across Heroes, Main Site, EELA, Members, Landing Page, plus the canonical templates in `_config/guides/posthog-consent.md` (which is where they all inherited it).
-- `cookieless_mode: 'on_reject'` unchanged — this is orthogonal to consent.
-- Verified: `npx tsc --noEmit` clean.
-
-*(Single-line change; the in-progress `CookieConsentBanner.tsx` edit in this working tree belongs to another session and was deliberately left uncommitted.)*
 
 ## 2026-07-29 - Session 16: CookieConsentBanner redesigned to a floating rounded card (same consent logic, on_reject cookieless mode unchanged), verified on a real Netlify branch-deploy preview stacked on feat/chat-widget-embed (`0180cd4`); left uncommitted on main at the user request pending that branch merging
 

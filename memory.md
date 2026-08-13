@@ -2,9 +2,11 @@
 
 ## Current Phase
 
-Live in production at eela.empowrcic.org. On Session 16 (2026-07-29) — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
+Live in production at eela.empowrcic.org. Chat widget bubble merged and live as of 2026-08-12 — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
 
-**Uncommitted `CookieConsentBanner.tsx` — deliberately held, not stale (confirmed by the user 2026-08-04).** The banner redesign is tied to the `feat/chat-widget-embed` work and **stays uncommitted until that chat widget is finalised** — that dependency is the reason for the delay, not neglect. Observed and correctly left untouched at three close-outs so far (07-29, 07-30, 08-04). If you're a fresh session and `git status` shows this file modified: that is expected, it is not stray work, do not discard it and do not commit it. It gets committed as part of finalising the chat widget, not before. See `[[feedback_concurrent_sessions_same_repo]]`.
+**RESOLVED 2026-08-12 — the `CookieConsentBanner.tsx` uncommitted-file situation described below is over.** The banner redesign landed on `main` as `bf098ec`, separately from the chat-widget work it was waiting on (confirmed via `git log` — it was not carried over as part of the widget merge, which cherry-picked only the unrelated `bbab61a`). If a fresh session sees `CookieConsentBanner.tsx` as clean in `git status`, that's correct, not a regression.
+
+~~**Uncommitted `CookieConsentBanner.tsx` — deliberately held, not stale (confirmed by the user 2026-08-04).**~~ Historical context only, no longer current: the banner redesign was tied to the `feat/chat-widget-embed` work and stayed uncommitted pending that widget being finalised — that dependency was the reason for the delay, not neglect. See `[[feedback_concurrent_sessions_same_repo]]` for the general hazard this illustrated.
 
 ## Status (resolved as of 2026-07-20 — all Phase 1 items below are long since complete)
 
@@ -26,7 +28,9 @@ Live in production at eela.empowrcic.org. On Session 16 (2026-07-29) — see `DE
 
 ## Next
 
-See `DEVLOG.md` Session 16 "Next" section for current open items — push `feat/chat-widget-embed` to `main` once the team approves (needs a rebase first, it's 2 commits behind `main`), Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover.
+~~Push `feat/chat-widget-embed` to `main` once the team approves~~ — **DONE 2026-08-12**, cherry-picked the real commit (`bbab61a`) rather than the whole stale branch; see `DEVLOG.md`. Remaining from `DEVLOG.md`'s "Next session" section: Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover, restore Roller Disco content (reinstated 2026-08-06, this site's copy still reflects the old removal). New from 2026-08-12: the floating launcher button (`ChatBubble.tsx`) is still hardcoded dark navy while the panel it opens is now Empowr brand blue — flagged twice, not fixed, owner's call.
+
+**2026-08-12:** Chat bubble merged (see resolution note above) and upgraded same session from click-to-open to auto-opening ~1.5s after page load, paired with a rewritten proactive greeting (set in PecuvateCRM's `org_ai_config`, not this repo). Live-verified via screenshot.
 
 **2026-07-30:** `capture_pageview` fixed from `true` to `'history_change'` in `PostHogProvider.tsx` (commit `8171337`). `true` disables posthog-js client-side route-change capture entirely, so **no internal navigation on this site was ever recorded** — bounce rate and pages/session before this date are artefacts, not behaviour. Found on Empowr Heroes and fixed fleet-wide, plus the canonical template. `cookieless_mode: 'on_reject'` untouched — orthogonal to consent. The uncommitted `CookieConsentBanner.tsx` redesign belonging to the other session was deliberately left alone; only `PostHogProvider.tsx` + `DEVLOG.md` were staged.
 
