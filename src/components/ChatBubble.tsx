@@ -1,8 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const WIDGET_URL = 'https://crm.pecuvate.com/widget'
+
+// Opens on its own shortly after the page settles, so it reads as a proactive
+// greeting rather than a cold empty bubble waiting to be clicked. The delay
+// lets the page render first so the panel doesn't compete with page load.
+const AUTO_OPEN_DELAY_MS = 1500
 
 interface Props {
   orgSlug: string
@@ -10,6 +15,11 @@ interface Props {
 
 export default function ChatBubble({ orgSlug }: Props) {
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setOpen(true), AUTO_OPEN_DELAY_MS)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
