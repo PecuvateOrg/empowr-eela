@@ -66,8 +66,13 @@ This file is the map. All workspace detail lives in workspace CONTEXT.md files.
 
 ---
 
-## Skills and Tools
+## Skills and Tools Available
 
-- `/webapp-testing` — Playwright browser preview and screenshot capture
-- `/netlify-deploy` — deploy to Netlify and wire custom domain
-- `/netlify-supabase-check` — pre-deploy integration audit (when Supabase is added)
+| Tool / Skill | Trigger | Purpose |
+|---|---|---|
+| `/netlify-deploy` | deploying to Netlify | Deploy to Netlify and configure `eela.empowrcic.org` |
+| `/netlify-supabase-check` | before go-live, once Supabase is added (Phase 2) | Audit Netlify + Supabase integration failure points |
+| `/pre-build-check` | before any deploy | Validate build structure and frontend quality |
+| `/pre-deploy-security` | before any deploy | Security hygiene scan — FAILs block the deploy |
+| `/webapp-testing` | after frontend changes | Playwright browser preview and screenshot capture |
+| `/simplify` | after a feature is built | Review changed code for reuse, quality, and efficiency |
