@@ -9,6 +9,17 @@ Skate Jam is the one to copy from going forward — it's the superset. Roller Qu
 
 ---
 
+## Multi-offering hubs (e.g. Private Bookings)
+
+Some entry points aren't a single session — they're a small family of distinct offerings (Private Bookings: 1:1 coaching, group coaching, birthday parties, custom events). Established pattern for these, decided 2026-08-17:
+
+- **One landing page** (Roller Quad Camps-style: hero + description + a "choose your booking" row of bubble/chip cards, one per offering) at the hub's own route, e.g. `src/app/private-bookings/page.tsx`.
+- **Each offering gets its own detail page**, one folder level down (e.g. `src/app/private-bookings/birthday-party/page.tsx`), built on this same session-detail-page template — not stacked as sections on the landing page. Offerings like the birthday party have too much unique content (safety info, what-to-bring, step-by-step booking) to share a page cleanly.
+- The landing page's bubble/chip cards link out to each detail page rather than scrolling to an in-page anchor.
+- An entry **card** pointing at the hub (e.g. `ProgrammeCard` with the "Tailored to you (5+/15+)" copy) can appear on more than one parent listing page (Private Bookings appears on both `/adults` and `/kids-space`) — same target route both times.
+
+---
+
 ## Section order
 
 1. **Breadcrumb** — `← <Parent section>` (e.g. `← Adults`), links to the parent listing page.
