@@ -10,6 +10,7 @@ This directory contains technical documentation for the Empowr EELA platform. Re
 |---|---|
 | [tech-stack.md](./tech-stack.md) | Dependencies, framework, design system, folder structure, naming conventions |
 | [system-flow.md](./system-flow.md) | End-to-end request lifecycle, data flow, external integrations, deployment pipeline |
+| [session-detail-page-template.md](./session-detail-page-template.md) | Canonical layout for a session/offering detail page (Skate Jam is the reference implementation) — read before building the next one |
 
 ---
 
