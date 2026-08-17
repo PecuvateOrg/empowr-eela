@@ -47,7 +47,7 @@ Some entry points aren't a single session — they're a small family of distinct
 
 7. **FAQ accordion** — same two-part shape as the content Empowr supplies: `### Frequently Asked Questions` then `### Plan Your Route` (or equivalent practical info). Content source of truth is the KB — see below.
 
-   Current implementation (`SkateJamFaq.tsx`) hardcodes its questions/answers inline. **When building the second FAQ instance, extract a shared `FaqAccordion` component** (props: `items: {question, answer}[]`) the same way `ReviewsCarousel` was extracted from `AdultsReviewsCarousel` — don't copy-paste the accordion state/markup a second time.
+   Shared components (extracted 2026-08-17, Synkron8 was the second instance): [`FaqAccordion.tsx`](../src/components/FaqAccordion.tsx) (props: `items: {question, answer}[]`, defined per-page as a local `const faqs` array) and [`RouteInfo.tsx`](../src/components/RouteInfo.tsx) (props: `venueName, address, ways, note`). All three Honor Oak sessions (Skate Jam, Synkron8, Beginners Foundations) share one `HONOR_OAK_ROUTE` data object in [`lib/route-data.tsx`](../src/lib/route-data.tsx) — spread it in rather than retyping the venue/travel text per page.
 
 ---
 
