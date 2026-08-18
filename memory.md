@@ -2,9 +2,11 @@
 
 ## Current Phase
 
-Live in production at eela.empowrcic.org. On Session 16 (2026-07-29) — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
+Live in production at eela.empowrcic.org. As of the 2026-08-18 close-out — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
 
-**Uncommitted `CookieConsentBanner.tsx` — deliberately held, not stale (confirmed by the user 2026-08-04).** The banner redesign is tied to the `feat/chat-widget-embed` work and **stays uncommitted until that chat widget is finalised** — that dependency is the reason for the delay, not neglect. Observed and correctly left untouched at three close-outs so far (07-29, 07-30, 08-04). If you're a fresh session and `git status` shows this file modified: that is expected, it is not stray work, do not discard it and do not commit it. It gets committed as part of finalising the chat widget, not before. See `[[feedback_concurrent_sessions_same_repo]]`.
+**Resolved 2026-08-12 — `CookieConsentBanner.tsx` concurrent-session hold is over, do not treat it as still open.** The redesign was committed as `bf098ec` back on 2026-07-29/30 and merged to `main`; `git log -1 -- src/components/CookieConsentBanner.tsx` confirms no changes to it since. The chat widget itself went live the same way — `bbab61a` cherry-picked onto `main` directly rather than merging the whole `feat/chat-widget-embed` branch, which had drifted too far from `main`'s newer work. The three-close-out "deliberately held" note below this line described a real, correct hold at the time (07-29 through 08-04) — it is dead history now, kept only so a fresh session doesn't mistake this correction for the original claim.
+
+**2026-08-17/18 — Synkron8, Beginners Foundations, and Private Bookings hub built** (`feature/skate-jam-page`, not pushed as of this close-out). Full detail pages for `/adults/synkron8` and `/adults/beginners-foundations`, plus a new `/private-bookings` hub with 4 offering sub-pages, all sourced from the KB. Shared `FaqAccordion`/`RouteInfo` components extracted. See `DEVLOG.md` 2026-08-17 and 2026-08-18 entries for full detail.
 
 ## Status (resolved as of 2026-07-20 — all Phase 1 items below are long since complete)
 
@@ -26,7 +28,13 @@ Live in production at eela.empowrcic.org. On Session 16 (2026-07-29) — see `DE
 
 ## Next
 
-See `DEVLOG.md` Session 16 "Next" section for current open items — push `feat/chat-widget-embed` to `main` once the team approves (needs a rebase first, it's 2 commits behind `main`), Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover.
+- **Push `feature/skate-jam-page`** — carries the 2026-08-17/18 Synkron8/Beginners Foundations/Private Bookings work, sitting locally only as of this close-out.
+- Kids Space umbrella age label decision (still open, unresolved since it was first raised).
+- EELA homepage restructure — new `/` presenting EELA as a platform with 5 programme pillars.
+- Restore Roller Disco content on the site to match its 2026-08-06 reinstatement (seasonal, not weekly) — separate from the Private Bookings work above, see `DEVLOG.md` 2026-07-31 entry and its supersession note.
+- ~~Push `feat/chat-widget-embed`~~ — done 2026-08-12 via cherry-pick, see Current Phase above.
+- ~~Members backend wiring (Phase 2)~~ — not an EELA deliverable; owned by the separate Empowr Members project since 2026-07-06 (members.empowrcic.org). EELA stays discovery/content-only.
+- ~~Bookings domain cutover~~ — premise gone since 2026-07-07 (`bookings.empowrcic.org` deleted from Route53); `feat/bookings-domain-cutover` branch is parked, do not merge.
 
 **2026-07-30:** `capture_pageview` fixed from `true` to `'history_change'` in `PostHogProvider.tsx` (commit `8171337`). `true` disables posthog-js client-side route-change capture entirely, so **no internal navigation on this site was ever recorded** — bounce rate and pages/session before this date are artefacts, not behaviour. Found on Empowr Heroes and fixed fleet-wide, plus the canonical template. `cookieless_mode: 'on_reject'` untouched — orthogonal to consent. The uncommitted `CookieConsentBanner.tsx` redesign belonging to the other session was deliberately left alone; only `PostHogProvider.tsx` + `DEVLOG.md` were staged.
 

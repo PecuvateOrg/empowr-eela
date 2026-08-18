@@ -1,5 +1,12 @@
 # EELA — DEVLOG
 
+## 2026-08-18 — Private Bookings card moved to the end of the Adults list; local preview run
+
+- `adults/page.tsx`: moved the Private Bookings entry from position 5 (right after Beginners Foundations) to the last slot in `programmes`, after Roller Skate Events — user-requested reorder, no content or link changes. Kids Space's copy of the card was already last there, so no change needed on that page. `tsc --noEmit` clean, rebuilt and reflected on a local preview.
+- Ran the app locally on `localhost:3000` twice this session for the user to review the 2026-08-17 build in a browser (`next build` + `next start`, per the standing rule that plain `next dev` is flaky on this machine). First start attempt hit `EADDRINUSE` — a `next start` process from the prior session's Playwright test run was still holding port 3000 (its `with_server.py` teardown hadn't killed it). Identified the exact PID via `Get-CimInstance Win32_Process` (confirmed its command line before touching it, not a broad `taskkill`), stopped it, rebuilt, and restarted cleanly.
+- Server stopped at session close, port 3000 confirmed free.
+- Still sits on `feature/skate-jam-page`, not pushed — this entry's reorder is uncommitted as of close-out; see Pre-Close Checklist / git status.
+
 ## 2026-08-17 — Synkron8, Beginners Foundations, and Private Bookings (hub + 4 sub-pages) built
 
 - New session detail pages on the Skate Jam template: `/adults/synkron8` and `/adults/beginners-foundations`. Both use real KB copy (`vaults/EMPOWR CIC/entities/session-faqs.md`), not placeholder text — Beginners Foundations' "what will I learn" answer is the specific skill list (Bubbles, Crossovers, Transitions, Balance and control, Manuals, Pivots), confirmed by Empowr the same day after the KB carried two conflicting drafts.
@@ -25,21 +32,9 @@
 
 ## 2026-07-31 — Roller Disco removed from site copy; branch-deploy previews enabled for feat/chat-widget-embed
 
-- `kids-programmes.tsx`: commented out the "Roller Disco for All Ages" card — session discontinued (team decision, confirmed via the CRM PecuvateCRM session same day). `adults/page.tsx`: renamed the bundled "Sk8 Skool & Roller Disco" card to "Sk8 Skool (All Ages)", dropped disco-flavoured copy; `page.tsx` homepage blurb also dropped the Roller Disco mention. `tsc --noEmit` clean. Committed `d42be5a` to `main`, not yet pushed.
-- Netlify site `empowr-eela` had `build_settings.allowed_branches: ["main"]`, which was silently blocking any branch/PR preview (the gap flagged in Session 15). Widened to `["main", "feat/chat-widget-embed"]` via the Netlify API and triggered a real branch build so the team can actually review the still-unmerged chat widget — live at `https://feat-chat-widget-embed--empowr-eela.netlify.app`.
-- `CookieConsentBanner.tsx`'s in-progress redesign (belongs to the concurrent chat-widget-embed session, see memory.md) confirmed still untouched — correctly left alone again.
-- Next: push `d42be5a` and, once the team approves, `feat/chat-widget-embed` itself to `main`.
-
 ---
 
-## 2026-07-30 — PostHog route-change tracking fix (fleet-wide)
-
-- `capture_pageview: true` → `'history_change'` in `PostHogProvider.tsx`. posthog-js gates `HistoryAutocapture` on an exact string match (`isEnabled(){return"history_change"===...}`), so `true` means hard page loads only — client-side `<Link>` navigation produced **no pageview**. All internal navigation on this site has been invisible to analytics; bounce rate and pages/session were artefacts, not behaviour.
-- Found during a full review of Empowr Heroes, where 11 autocaptured clicks on the primary CTA showed up against 4 pageviews for the destination page. Same config on every Next.js site here — fixed across Heroes, Main Site, EELA, Members, Landing Page, plus the canonical templates in `_config/guides/posthog-consent.md` (which is where they all inherited it).
-- `cookieless_mode: 'on_reject'` unchanged — this is orthogonal to consent.
-- Verified: `npx tsc --noEmit` clean.
-
-*(Single-line change; the in-progress `CookieConsentBanner.tsx` edit in this working tree belongs to another session and was deliberately left uncommitted.)*
+## 2026-07-30 — PostHog route-change tracking fix (fleet-wide): `capture_pageview` corrected from `true` to `'history_change'`, restoring client-side navigation tracking across all internal `<Link>` clicks
 
 ## 2026-07-29 - Session 16: CookieConsentBanner redesigned to a floating rounded card (same consent logic, on_reject cookieless mode unchanged), verified on a real Netlify branch-deploy preview stacked on feat/chat-widget-embed (`0180cd4`); left uncommitted on main at the user request pending that branch merging
 
