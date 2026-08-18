@@ -41,7 +41,7 @@ export default function CookieConsentBanner() {
     <div
       role="dialog"
       aria-label="Cookie consent"
-      className={`fixed bottom-4 left-4 right-4 z-50 sm:left-6 sm:right-auto sm:max-w-md rounded-[20px] border border-border bg-warm-white p-5 transition-all duration-300 ease-out ${
+      className={`fixed bottom-4 left-4 right-4 z-[60] sm:left-6 sm:right-auto sm:max-w-md rounded-[20px] border border-border bg-warm-white p-5 transition-all duration-300 ease-out ${
         mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
       style={{ boxShadow: 'var(--shadow-md)' }}
