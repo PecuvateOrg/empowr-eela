@@ -1,14 +1,5 @@
 # EELA — DEVLOG
 
-## 2026-08-19 — Roller Disco restored, reworded for seasonal framing
-
-- Reinstated Roller Disco content removed by `d42be5a` (2026-07-31), which was itself superseded 2026-08-06 when Empowr confirmed the session is coming back — seasonally, on occasional dates within the Private Bookings space at The Ladywell Centre, not the old fixed weekly Saturday slot. `entities/sessions.md` in the vault is the authoritative source for the new framing.
-- `kids-programmes.tsx`: un-commented the `kidz-roller-disco` card, tag changed from `Sat · 5+ yrs` to `Seasonal · 5+ yrs`, bullets reworded off the old "Sat" framing.
-- `adults/page.tsx`: added a new standalone `roller-disco` card (last in the list) rather than re-bundling it into the Sk8 Skool (All Ages) card the way it was pre-removal — the two are no longer the same slot. Metadata description also restored to mention Roller Disco. Reuses `LINKS.kidzRollerDisco` (same all-ages Wix service page); no dedicated adults link exists.
-- `page.tsx`: restored "Roller Disco" to the homepage Adults card copy line (Kidz card's generic "discos" mention was already accurate, left unchanged).
-- Verified: `tsc --noEmit` clean (after clearing a stale `.next` cache left over from a different branch checkout), full `next build` (10 routes, exit 0), Playwright screenshot check on both `/adults` and `/kids-space` against a real `next start` build — both new cards render correctly, no layout breakage.
-- Does not touch the unmerged `feature/skate-jam-page` Private Bookings hub — that stays a separate, deliberately-not-yet-merged piece of work; this restoration keeps using the existing Wix booking link rather than pointing at pages that aren't live on `main`.
-
 ## 2026-08-14
 
 - Created `README.md` at the project root, closing an M10 gap flagged by the scheduled mwp-health compliance audit.
