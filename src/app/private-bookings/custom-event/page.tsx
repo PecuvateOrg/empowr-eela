@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { LINKS } from '@/lib/links';
+import CustomEventEnquiryModal from '@/components/CustomEventEnquiryModal';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 export const metadata: Metadata = {
   title: 'Custom Roller Skating Event — Private Bookings',
@@ -101,6 +102,10 @@ export default function CustomEventPage() {
           </div>
         </section>
 
+        <AvailabilityCalendar
+          description="Ladywell Centre Saturdays 3-5PM are shown below. Off-site or another day? Just include your preferred date and location in the form."
+        />
+
         {/* GET A QUOTE */}
         <section className="max-w-[880px] mx-auto px-5 pb-14">
           <div className="flex items-center gap-3 mb-6">
@@ -124,14 +129,7 @@ export default function CustomEventPage() {
                 <li key={line}>• {line}</li>
               ))}
             </ul>
-            <a
-              href={LINKS.enquiries}
-              target="_blank"
-              rel="noopener"
-              className="inline-block bg-white text-blue text-sm font-[800] px-8 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
-            >
-              Enquire for a quote &rsaquo;
-            </a>
+            <CustomEventEnquiryModal />
           </div>
         </section>
 

@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import EnquiryModal from '@/components/EnquiryModal';
-import { LINKS } from '@/lib/links';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 export const metadata: Metadata = {
   title: 'Roller Disco Birthday Party — Private Bookings',
@@ -92,35 +92,7 @@ export default function BirthdayPartyPage() {
           </div>
         </section>
 
-        {/* AVAILABILITY */}
-        <section className="max-w-[880px] mx-auto px-5 pb-10">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex-1 h-px bg-border" />
-            <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
-              🗓 Check available dates
-            </p>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-
-          <p className="text-sm text-mid leading-[1.7] text-center max-w-[560px] mx-auto mb-6">
-            See which Saturdays are already booked below, then enquire with your preferred date
-            using the button underneath.
-          </p>
-
-          <div
-            className="rounded-[20px] border border-border overflow-hidden"
-            style={{ boxShadow: 'var(--shadow-sm)' }}
-          >
-            <iframe
-              src={LINKS.birthdayPartyCalendar}
-              title="Birthday party availability calendar"
-              className="w-full"
-              height={500}
-              style={{ border: 0 }}
-              loading="lazy"
-            />
-          </div>
-        </section>
+        <AvailabilityCalendar />
 
         {/* BOOKING */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">

@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { LINKS } from '@/lib/links';
+import EnquiryModal from '@/components/EnquiryModal';
+import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 export const metadata: Metadata = {
   title: '1:1 Private Skate Coaching — Private Bookings',
@@ -94,6 +95,8 @@ export default function OneToOneCoachingPage() {
           </div>
         </section>
 
+        <AvailabilityCalendar />
+
         {/* BOOKING */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex items-center gap-3 mb-6">
@@ -116,14 +119,13 @@ export default function OneToOneCoachingPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               Get in touch with your preferred date to book.
             </p>
-            <a
-              href={LINKS.enquiries}
-              target="_blank"
-              rel="noopener"
-              className="inline-block bg-white text-blue text-sm font-[800] px-8 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
-            >
-              Enquire to book &rsaquo;
-            </a>
+            <EnquiryModal
+              subject="Private Booking Enquiry — 1:1 Coaching"
+              source="eela-one-to-one-coaching"
+              triggerLabel="Enquire to book"
+              partySizeLabel="Number of people"
+              partySizeMin={1}
+            />
           </div>
         </section>
 

@@ -32,6 +32,8 @@ export const LINKS = {
   enquiries:         'https://empowrcic.org/contact?utm_source=empowr-eela&utm_medium=internal',
   volunteering:      'https://empowrcic.org/contact?utm_source=empowr-eela&utm_medium=internal',
 
-  // Private Bookings — availability (Roller Disco Birthday Party calendar)
-  birthdayPartyCalendar: 'https://calendar.google.com/calendar/embed?src=c_747e5c60d5a0020143141ecc4f4d2c66710dc78f56211cd44016ae219293042b%40group.calendar.google.com&ctz=Europe%2FLondon',
+  // Private Bookings — availability. One shared calendar: all four offerings
+  // (1:1 coaching, group coaching, birthday party, custom event) compete for
+  // the same Saturday 3-5PM Ladywell Centre slot, so one calendar covers all.
+  privateBookingsCalendar: 'https://calendar.google.com/calendar/embed?src=c_747e5c60d5a0020143141ecc4f4d2c66710dc78f56211cd44016ae219293042b%40group.calendar.google.com&ctz=Europe%2FLondon',
 } as const;
