@@ -62,6 +62,16 @@ const programmes: Programme[] = [
     bullets: ["SK8 DJ's, hot food & vibes", 'Connect & meet skaters', 'For all levels'],
     bookingUrl: LINKS.rollerSkateEvents,
   },
+  {
+    id: 'private-bookings',
+    tag: 'Private (5+/15+)',
+    tagColor: 'text-blue-dark',
+    title: 'Private Bookings',
+    icon: <Icon icon="mdi:calendar-heart" width={36} height={36} className="text-blue-dark" />,
+    bullets: ['1:1 coaching', 'Group coaching (min 3)', 'Birthday party booking (min 10)'],
+    bookingUrl: '/private-bookings',
+    buttonLabel: 'View options',
+  },
 ];
 
 const pillars = [

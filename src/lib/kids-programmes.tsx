@@ -52,4 +52,14 @@ export const kidsProgrammes: Programme[] = [
     bookingUrl: '/roller-quad-camps',
     buttonLabel: 'View options',
   },
+  {
+    id: 'private-bookings',
+    tag: 'Private · 5+ yrs',
+    tagColor: 'text-blue-dark',
+    title: 'Private Bookings',
+    icon: <Icon icon="mdi:calendar-heart" width={36} height={36} className="text-blue-dark" />,
+    bullets: ['1:1 coaching', 'Group coaching (min 3)', 'Birthday party booking (min 10)'],
+    bookingUrl: '/private-bookings',
+    buttonLabel: 'View options',
+  },
 ];

@@ -1,5 +1,13 @@
 # EELA — DEVLOG
 
+## 2026-08-20 — Private Bookings hub launched as its own branch, isolated from `feature/skate-jam-page`
+
+- New `/private-bookings` hub (landing page + 4 offering pages: 1:1 coaching, group coaching, birthday party, custom event), each with a live Google Calendar availability embed and an in-page enquiry modal that submits into Main Site's real contact-form backend (same CRM routing, spam protection, and confirmation email — no duplicate backend built). Custom Event gets its own richer modal variant (Location, Budget, a 7-item Desired Inclusions checklist) instead of the shared `EnquiryModal`, since its field shape genuinely differs from the other three.
+- Entry cards added to both `/adults` and `/kids-space`.
+- **Deliberately reconstructed onto a fresh branch (`feat/private-bookings`) off `main`, rather than merging `feature/skate-jam-page` as-is.** That branch bundles this work together with unrelated, not-yet-ready Skate Jam/Synkron8/Beginners Foundations pages in the same commits (most notably `186fe43`, which touches all of them at once) — at the user's request, this lets Private Bookings ship on its own timeline without waiting on those. The only file with genuinely interleaved changes was `adults/page.tsx` (Synkron8 link change + Beginners Foundations card + Private Bookings card, all added in the same commit); it was hand-edited here to carry only the Private Bookings card. Everything else (the 5 hub pages, `EnquiryModal.tsx`, `AvailabilityCalendar.tsx`, `CustomEventEnquiryModal.tsx`, the `kids-programmes.tsx` card, the `links.ts` calendar entry) was fully self-contained with zero dependency on Skate Jam/Synkron8/Beginners Foundations code, confirmed by grepping for cross-imports before assuming so.
+- Verified identically to how the work was originally built: `tsc --noEmit` clean, full `next build` (13 routes, no Skate-Jam-family routes present), and a real end-to-end submission through the actual production contact-form backend, all passing on this reconstructed branch exactly as they did on the original.
+- `feature/skate-jam-page` itself is untouched and still holds the full original work (Skate Jam, Synkron8, Beginners Foundations, and this same Private Bookings system) for whenever those other pieces are ready to ship.
+
 ## 2026-08-14
 
 - Created `README.md` at the project root, closing an M10 gap flagged by the scheduled mwp-health compliance audit.
