@@ -20,6 +20,11 @@ type Status = "idle" | "submitting" | "success" | "error";
 const inputClass =
   "w-full rounded-xl border border-border px-4 py-3 text-sm text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue/30 transition-colors";
 
+// Narrower, fixed-width variant for the date and party-size fields — full
+// width reads oddly for a handful of digits, and the two should match each
+// other rather than one being date-length and the other number-length.
+const narrowInputClass = inputClass.replace("w-full", "w-[180px]");
+
 type EnquiryModalProps = {
   /** Sent to the backend as the enquiry's fixed subject line. */
   subject: string;
@@ -203,7 +208,7 @@ export default function EnquiryModal({
                     type="date"
                     required
                     min={minDate}
-                    className={inputClass}
+                    className={narrowInputClass}
                   />
                 </div>
 
@@ -218,7 +223,7 @@ export default function EnquiryModal({
                     required
                     min={partySizeMin}
                     placeholder={`${partySizeMin}+`}
-                    className={inputClass}
+                    className={narrowInputClass}
                   />
                 </div>
 
