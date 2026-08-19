@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import EnquiryModal from '@/components/EnquiryModal';
 import { LINKS } from '@/lib/links';
 
 export const metadata: Metadata = {
@@ -143,14 +144,12 @@ export default function BirthdayPartyPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               The birthday person&apos;s place is free. Non-skaters welcome in the seating area.
             </p>
-            <a
-              href={LINKS.enquiries}
-              target="_blank"
-              rel="noopener"
-              className="inline-block bg-white text-blue text-sm font-[800] px-8 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
-            >
-              Enquire to book &rsaquo;
-            </a>
+            <EnquiryModal
+              subject="Private Booking Enquiry — Birthday Party"
+              defaultMessage={"Preferred date: \nNumber of skaters (excl. birthday person): \n\n"}
+              source="eela-birthday-party"
+              triggerLabel="Enquire to book"
+            />
           </div>
         </section>
 
