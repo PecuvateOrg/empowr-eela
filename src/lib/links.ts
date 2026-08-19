@@ -31,4 +31,9 @@ export const LINKS = {
   // Contact
   enquiries:         'https://empowrcic.org/contact?utm_source=empowr-eela&utm_medium=internal',
   volunteering:      'https://empowrcic.org/contact?utm_source=empowr-eela&utm_medium=internal',
+
+  // Private Bookings — availability
+  // TODO: swap in Empowr's real public embed URL (Calendar Settings → Integrate calendar → Embed code,
+  // or build from the Calendar ID: `https://calendar.google.com/calendar/embed?src=<CALENDAR_ID>&ctz=Europe%2FLondon`).
+  birthdayPartyCalendar: 'https://calendar.google.com/calendar/embed?src=PLACEHOLDER_CALENDAR_ID&ctz=Europe%2FLondon',
 } as const;
