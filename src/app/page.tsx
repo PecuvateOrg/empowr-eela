@@ -75,7 +75,7 @@ export default function HomePage() {
                   Adults
                 </h2>
                 <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
-                  Sk8 Skool, Synkron8, Skate Jam, and community events —
+                  Sk8 Skool, Synkron8, Skate Jam, Roller Disco, and community events —
                   all built around your level and your pace.
                 </p>
                 <Link
