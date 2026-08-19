@@ -23,24 +23,47 @@ const inputClass =
 type EnquiryModalProps = {
   /** Sent to the backend as the enquiry's fixed subject line. */
   subject: string;
-  /** Prefilled into the message textarea — the visitor edits it before sending. */
-  defaultMessage?: string;
   /** Attribution tag so the team can see which page an enquiry came from. */
   source: string;
   /** Text on the button that opens the modal. */
   triggerLabel?: string;
   triggerClassName?: string;
+  /** Label for the participant-count field, e.g. "Number of skaters (excl. birthday person)". */
+  partySizeLabel: string;
+  /** Minimum accepted in the participant-count field, e.g. 10 for a birthday party. */
+  partySizeMin: number;
+  /** How many days from today the date picker's earliest selectable date is. Matches the site's "book at least N weeks ahead" policy. */
+  dateMinDaysAhead?: number;
 };
+
+function formatDateForMessage(isoDate: string): string {
+  if (!isoDate) return "";
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 export default function EnquiryModal({
   subject,
-  defaultMessage = "",
   source,
   triggerLabel = "Enquire to book",
   triggerClassName,
+  partySizeLabel,
+  partySizeMin,
+  dateMinDaysAhead = 14,
 }: EnquiryModalProps) {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
+  const [minDate, setMinDate] = useState("");
+
+  useEffect(() => {
+    const d = new Date();
+    d.setDate(d.getDate() + dateMinDaysAhead);
+    setMinDate(d.toISOString().slice(0, 10));
+  }, [dateMinDaysAhead]);
 
   useEffect(() => {
     if (!open) return;
@@ -61,11 +84,23 @@ export default function EnquiryModal({
     setStatus("submitting");
 
     const form = e.currentTarget;
+    const preferredDate = (form.elements.namedItem("preferredDate") as HTMLInputElement).value;
+    const partySize = (form.elements.namedItem("partySize") as HTMLInputElement).value;
+    const extraQuestions = (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim();
+
+    const message = [
+      `Preferred date: ${formatDateForMessage(preferredDate)}`,
+      `${partySizeLabel}: ${partySize}`,
+      extraQuestions ? `\nExtra questions:\n${extraQuestions}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
     const data = {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       subject,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      message,
       // Honeypot — real users leave this blank; bots fill it in.
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
       source,
@@ -158,16 +193,45 @@ export default function EnquiryModal({
                   <input id="email" name="email" type="email" required autoComplete="email" className={inputClass} />
                 </div>
 
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="preferredDate" className="block text-sm font-semibold text-black mb-1.5">
+                      Preferred date
+                    </label>
+                    <input
+                      id="preferredDate"
+                      name="preferredDate"
+                      type="date"
+                      required
+                      min={minDate}
+                      className={inputClass}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="partySize" className="block text-sm font-semibold text-black mb-1.5">
+                      {partySizeLabel}
+                    </label>
+                    <input
+                      id="partySize"
+                      name="partySize"
+                      type="number"
+                      required
+                      min={partySizeMin}
+                      placeholder={`${partySizeMin}+`}
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-black mb-1.5">
-                    Message
+                    Extra questions <span className="font-normal text-muted">(optional)</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    required
-                    rows={5}
-                    defaultValue={defaultMessage}
+                    rows={4}
                     className={`${inputClass} resize-none`}
                   />
                 </div>

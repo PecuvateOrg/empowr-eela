@@ -146,9 +146,10 @@ export default function BirthdayPartyPage() {
             </p>
             <EnquiryModal
               subject="Private Booking Enquiry — Birthday Party"
-              defaultMessage={"Preferred date: \nNumber of skaters (excl. birthday person): \n\n"}
               source="eela-birthday-party"
               triggerLabel="Enquire to book"
+              partySizeLabel="Number of skaters (excl. birthday person)"
+              partySizeMin={10}
             />
           </div>
         </section>
