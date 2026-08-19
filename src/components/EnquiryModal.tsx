@@ -193,35 +193,33 @@ export default function EnquiryModal({
                   <input id="email" name="email" type="email" required autoComplete="email" className={inputClass} />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="preferredDate" className="block text-sm font-semibold text-black mb-1.5">
-                      Preferred date
-                    </label>
-                    <input
-                      id="preferredDate"
-                      name="preferredDate"
-                      type="date"
-                      required
-                      min={minDate}
-                      className={inputClass}
-                    />
-                  </div>
+                <div>
+                  <label htmlFor="preferredDate" className="block text-sm font-semibold text-black mb-1.5">
+                    Preferred date
+                  </label>
+                  <input
+                    id="preferredDate"
+                    name="preferredDate"
+                    type="date"
+                    required
+                    min={minDate}
+                    className={inputClass}
+                  />
+                </div>
 
-                  <div>
-                    <label htmlFor="partySize" className="block text-sm font-semibold text-black mb-1.5">
-                      {partySizeLabel}
-                    </label>
-                    <input
-                      id="partySize"
-                      name="partySize"
-                      type="number"
-                      required
-                      min={partySizeMin}
-                      placeholder={`${partySizeMin}+`}
-                      className={inputClass}
-                    />
-                  </div>
+                <div>
+                  <label htmlFor="partySize" className="block text-sm font-semibold text-black mb-1.5">
+                    {partySizeLabel}
+                  </label>
+                  <input
+                    id="partySize"
+                    name="partySize"
+                    type="number"
+                    required
+                    min={partySizeMin}
+                    placeholder={`${partySizeMin}+`}
+                    className={inputClass}
+                  />
                 </div>
 
                 <div>
