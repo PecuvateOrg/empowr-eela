@@ -2,7 +2,11 @@
 
 ## Current Phase
 
-Live in production at eela.empowrcic.org. Chat widget bubble merged and live as of 2026-08-12 — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
+Live in production at eela.empowrcic.org. As of 2026-08-20, Private Bookings (1:1 coaching, group coaching, birthday party, custom event) is live at `/private-bookings/*` with a Google Calendar availability view and an in-page enquiry form on every offering — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
+
+**Private Bookings shipped on its own branch, deliberately split from `feature/skate-jam-page`.** That branch also holds Skate Jam, Synkron8, and Beginners Foundations pages, bundled together in the same commits — the user's explicit call (2026-08-20) was to keep those three bundled for now rather than split them too. `feature/skate-jam-page` still exists with a live branch-deploy preview for whenever that changes.
+
+**The Private Bookings enquiry form shares Main Site's contact-form backend, cross-origin — not a duplicate.** Requires a CORS allow-list on Main Site's `contact.ts` (already in place, live). CRM routing on that shared backend is currently paused (env vars deliberately unset on Main Site) — submissions go straight to `enquiries@empowrcic.org` until that's re-enabled, at which point both sites' forms pick it up automatically.
 
 **RESOLVED 2026-08-12 — the `CookieConsentBanner.tsx` uncommitted-file situation described below is over.** The banner redesign landed on `main` as `bf098ec`, separately from the chat-widget work it was waiting on (confirmed via `git log` — it was not carried over as part of the widget merge, which cherry-picked only the unrelated `bbab61a`). If a fresh session sees `CookieConsentBanner.tsx` as clean in `git status`, that's correct, not a regression.
 
@@ -28,7 +32,9 @@ Live in production at eela.empowrcic.org. Chat widget bubble merged and live as 
 
 ## Next
 
-~~Push `feat/chat-widget-embed` to `main` once the team approves~~ — **DONE 2026-08-12**, cherry-picked the real commit (`bbab61a`) rather than the whole stale branch; see `DEVLOG.md`. Remaining from `DEVLOG.md`'s "Next session" section: Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover, restore Roller Disco content (reinstated 2026-08-06, this site's copy still reflects the old removal). New from 2026-08-12: the floating launcher button (`ChatBubble.tsx`) is still hardcoded dark navy while the panel it opens is now Empowr brand blue — flagged twice, not fixed, owner's call.
+~~Push `feat/chat-widget-embed` to `main` once the team approves~~ — **DONE 2026-08-12**, cherry-picked the real commit (`bbab61a`) rather than the whole stale branch; see `DEVLOG.md`. ~~Restore Roller Disco content~~ — **superseded 2026-08-20**: Roller Disco is not a standalone public card, it's the "Roller Disco Birthday Party" offering under `/private-bookings/birthday-party`, which is now live — nothing further needed there. Still genuinely open: Kids Space umbrella age label decision, EELA homepage restructure (5 programme pillars), Members backend wiring (Phase 2), bookings domain cutover, the floating chat-launcher button still hardcoded dark navy against a now-brand-blue panel (flagged repeatedly, owner's call). New from 2026-08-20: decide whether/when to split Skate Jam, Synkron8, and Beginners Foundations off `feature/skate-jam-page` the same way Private Bookings was — currently deliberately left bundled.
+
+**2026-08-20:** Private Bookings (calendar + enquiry form, all 4 offerings) shipped on its own branch and merged live — see Current Phase above and `DEVLOG.md` for full detail.
 
 **2026-08-12:** Chat bubble merged (see resolution note above) and upgraded same session from click-to-open to auto-opening ~1.5s after page load, paired with a rewritten proactive greeting (set in PecuvateCRM's `org_ai_config`, not this repo). Live-verified via screenshot.
 
