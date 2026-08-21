@@ -31,3 +31,35 @@ export const HONOR_OAK_ROUTE: RouteInfoProps = {
   ],
   note: 'Walking times are approximate — we recommend planning your journey with TfL (tfl.gov.uk/plan-a-journey) before travelling.',
 };
+
+export const LADYWELL_ROUTE: RouteInfoProps = {
+  venueName: 'The Ladywell Centre',
+  address: '148 Dressington Avenue, London, SE4 1JF',
+  ways: [
+    {
+      icon: 'mdi:train',
+      label: 'By train',
+      lines: [
+        'Ladywell Station — approx. 4 min walk',
+        'Southeastern services on the Hayes line',
+      ],
+    },
+    {
+      icon: 'mdi:bus',
+      label: 'By bus',
+      lines: [
+        'Bus stop within 150m of the venue',
+        'Routes 122, 47, P4',
+      ],
+    },
+    {
+      icon: 'mdi:car',
+      label: 'By car',
+      lines: [
+        'Free on-site car park, including Blue Badge bays',
+        'Located at the front of the building',
+      ],
+    },
+  ],
+  note: 'Walking times are approximate — we recommend planning your journey with TfL (tfl.gov.uk/plan-a-journey) before travelling.',
+};

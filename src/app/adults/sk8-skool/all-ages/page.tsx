@@ -3,9 +3,11 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import AdultsReviewsCarousel from '@/components/AdultsReviewsCarousel';
+import KidsReviewsCarousel from '@/components/KidsReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
+import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
+import { LADYWELL_ROUTE } from '@/lib/route-data';
 
 export const metadata: Metadata = {
   title: 'Sk8 Skool for All Ages — Sk8 Skool',
@@ -162,15 +164,23 @@ export default function Sk8SkoolAllAgesPage() {
             </p>
             <div className="flex-1 h-px bg-border" />
           </div>
-          <AdultsReviewsCarousel />
+          <KidsReviewsCarousel />
         </section>
 
         {/* FAQ */}
-        <section className="max-w-[880px] mx-auto px-5 pb-14">
+        <section className="max-w-[880px] mx-auto px-5 pb-8">
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-4">
             FAQ
           </p>
           <FaqAccordion items={faqs} />
+        </section>
+
+        {/* PLAN YOUR ROUTE */}
+        <section className="max-w-[880px] mx-auto px-5 pb-14">
+          <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-4">
+            Plan Your Route
+          </p>
+          <RouteInfo {...LADYWELL_ROUTE} />
         </section>
 
       </main>
