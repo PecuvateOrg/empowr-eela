@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import KidsReviewsCarousel from '@/components/KidsReviewsCarousel';
+import AllAgesReviewsCarousel from '@/components/AllAgesReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
@@ -23,29 +23,39 @@ const chips = [
 
 const faqs: FaqItem[] = [
   {
-    question: 'Who is Sk8 Skool for All Ages for?',
+    question: 'Who is Sk8 Skool for?',
     answer:
-      'This session is open to all ages from 5+ — children and adults can attend and skate together. It runs the same coached, progressive structure as Sk8 Skool for Kidz, just with a broader age range.',
+      'Sk8 Skool is a beginner-only roller-skating class for people of all ages. It is designed for complete beginners who want to build their confidence, balance and control on skates.',
+  },
+  {
+    question: 'What will I learn?',
+    answer:
+      "During Sk8 Skool, you'll work on balance and control at a level suited to your ability, helping you develop confidence on your skates.\n\nYou'll build your skills through repetition, games and challenges adapted to your level, with guidance from your coach.",
   },
   {
     question: 'Is coaching included?',
     answer:
-      'Yes. Sessions are coach-led, with skills demonstrated and broken down for participants of all ages and abilities.',
+      "Yes. Sk8 Skool is a structured class led by an Empowr coach. You'll receive demonstrations, guidance and support throughout each class.",
+  },
+  {
+    question: 'Do adults and children skate together?',
+    answer:
+      'Yes. All Sk8 Skool students share the same skating space. However, students are usually split into groups based on age or ability, allowing our coaches to provide a more tailored learning experience.',
   },
   {
     question: 'Do I need to bring my own skates and protective equipment?',
     answer:
-      'Yes, please bring your own roller skates. Protective equipment (helmet, wrist guards, elbow and knee pads) is strongly recommended, particularly for beginners.',
+      'Yes. All participants must bring their own quad roller skates and protective equipment. Inline skates are not permitted.\n\nAll children under 18 must wear full protective equipment throughout the class, including:\nA helmet\nWrist guards\nElbow pads\nKnee pads\n\nSkate and protective equipment hire are not available.',
   },
   {
-    question: 'Is there an age requirement or supervision policy?',
+    question: 'How many classes should I attend?',
     answer:
-      'Open to all ages from 5+. Under-18s attending must have parent or guardian consent, and younger children should be accompanied by a parent or guardian.',
+      'We recommend attending at least eight classes to begin seeing progress. However, everyone develops at their own pace, so regular attendance is advised to help you build your skills, confidence and control.',
   },
   {
-    question: 'Do I need to book in advance?',
+    question: 'Can parents stay and watch?',
     answer:
-      'We recommend booking in advance, as spaces are limited.',
+      'Yes. There is a small seating area where parents or guardians can remain and watch the session. However, parents are not required to stay. Children can be left with our team and collected when the class has finished. Please note that seating is limited.',
   },
 ];
 
@@ -164,7 +174,7 @@ export default function Sk8SkoolAllAgesPage() {
             </p>
             <div className="flex-1 h-px bg-border" />
           </div>
-          <KidsReviewsCarousel />
+          <AllAgesReviewsCarousel />
         </section>
 
         {/* FAQ */}
