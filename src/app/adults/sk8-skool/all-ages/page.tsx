@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import AllAgesReviewsCarousel from '@/components/AllAgesReviewsCarousel';
+import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
@@ -174,7 +174,7 @@ export default function Sk8SkoolAllAgesPage() {
             </p>
             <div className="flex-1 h-px bg-border" />
           </div>
-          <AllAgesReviewsCarousel />
+          <Sk8SkoolClassReviewsCarousel />
         </section>
 
         {/* FAQ */}

@@ -33,6 +33,6 @@ const REVIEWS: Review[] = [
   },
 ];
 
-export default function AllAgesReviewsCarousel() {
+export default function Sk8SkoolClassReviewsCarousel() {
   return <ReviewsCarousel reviews={REVIEWS} />;
 }
