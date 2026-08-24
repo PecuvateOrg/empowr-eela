@@ -142,32 +142,60 @@ export default function Sk8SkoolAllAgesPage() {
           <div className="flex items-center gap-3 mb-6">
             <div className="flex-1 h-px bg-border" />
             <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
-              🎟 Book your place
+              🎟 Choose your booking
             </p>
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          <div
-            className="max-w-[420px] mx-auto rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col items-center text-center"
-            style={{ boxShadow: 'var(--shadow-blue)' }}
-          >
-            <Icon icon="mdi:roller-skate" width={36} className="text-white/80 mb-4" />
-            <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
-              Sk8 Skool for All Ages
-            </h2>
-            <p className="text-2xl font-[900] text-white mb-1">£12.50 / hour</p>
-            <p className="text-xs text-white/70 font-[700] mb-3">or £40/month subscription</p>
-            <p className="text-sm text-white/80 leading-[1.7] mb-6">
-              Every Saturday at The Ladywell Centre.
-            </p>
-            <a
-              href={LINKS.kidzSaturdaySkate}
-              target="_blank"
-              rel="noopener"
-              className="inline-block bg-white text-blue text-sm font-[800] px-8 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            {/* Pay As You Go */}
+            <div
+              className="rounded-[20px] bg-card border border-border p-6 sm:p-8 flex flex-col"
+              style={{ boxShadow: 'var(--shadow-sm)' }}
             >
-              Book now &rsaquo;
-            </a>
+              <Icon icon="mdi:ticket-outline" width={36} className="text-blue mb-4" />
+              <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
+                Pay As You Go
+              </h2>
+              <p className="text-2xl font-[900] text-red mb-3">£12.50 / hour</p>
+              <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
+                Single class, book week to week. No commitment.
+              </p>
+              <a
+                href={LINKS.kidzSaturdaySkate}
+                target="_blank"
+                rel="noopener"
+                className="inline-block bg-blue text-warm-white text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
+                style={{ boxShadow: 'var(--shadow-blue)' }}
+              >
+                Book now &rsaquo;
+              </a>
+            </div>
+
+            {/* Sk8 Skool Membership */}
+            <div
+              className="rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col"
+              style={{ boxShadow: 'var(--shadow-blue)' }}
+            >
+              <Icon icon="mdi:star-circle" width={36} className="text-white/80 mb-4" />
+              <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
+                Sk8 Skool Membership
+              </h2>
+              <p className="text-2xl font-[900] text-white mb-3">£40/mo</p>
+              <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
+                Unlimited Saturdays for the month. Cancel anytime.
+              </p>
+              <a
+                href={LINKS.kidzSaturdaySkate}
+                target="_blank"
+                rel="noopener"
+                className="inline-block bg-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
+              >
+                Book now &rsaquo;
+              </a>
+            </div>
+
           </div>
         </section>
 

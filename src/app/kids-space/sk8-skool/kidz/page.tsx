@@ -168,11 +168,59 @@ export default function Sk8SkoolKidzPage() {
             </div>
 
           </div>
+        </section>
 
-          <p className="text-sm text-mid text-center mt-6">
-            Attending regularly? Subscribe for <span className="font-[800] text-black">£30/month</span> for
-            ongoing access to Sk8 Skool for Kidz, instead of booking each date.
-          </p>
+        {/* PAYMENT OPTIONS */}
+        <section className="max-w-[880px] mx-auto px-5 pb-14">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex-1 h-px bg-border" />
+            <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
+              🎟 Choose your booking
+            </p>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            {/* Pay As You Go */}
+            <div
+              className="rounded-[20px] bg-card border border-border p-6 sm:p-8 flex flex-col"
+              style={{ boxShadow: 'var(--shadow-sm)' }}
+            >
+              <Icon icon="mdi:ticket-outline" width={36} className="text-blue mb-4" />
+              <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
+                Pay As You Go
+              </h2>
+              <p className="text-2xl font-[900] text-red mb-3">£10 / session</p>
+              <p className="text-sm text-mid leading-[1.7] flex-1">
+                Book Monday or Wednesday classes individually, week to week — pick your day above. No commitment.
+              </p>
+            </div>
+
+            {/* Sk8 Skool Membership */}
+            <div
+              className="rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col"
+              style={{ boxShadow: 'var(--shadow-blue)' }}
+            >
+              <Icon icon="mdi:star-circle" width={36} className="text-white/80 mb-4" />
+              <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
+                Sk8 Skool Membership
+              </h2>
+              <p className="text-2xl font-[900] text-white mb-3">£30/mo</p>
+              <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
+                Unlimited Monday &amp; Wednesday classes for the month. Cancel anytime.
+              </p>
+              <a
+                href={LINKS.kidzSpace}
+                target="_blank"
+                rel="noopener"
+                className="inline-block bg-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
+              >
+                Book now &rsaquo;
+              </a>
+            </div>
+
+          </div>
         </section>
 
         {/* REVIEWS */}
