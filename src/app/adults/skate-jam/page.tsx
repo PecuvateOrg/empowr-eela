@@ -151,7 +151,8 @@ export default function SkateJamPage() {
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Pay As You Go
               </h2>
-              <p className="text-2xl font-[900] text-red mb-3">£10</p>
+              <p className="text-2xl font-[900] text-red mb-1">£7 online</p>
+              <p className="text-xs text-mid font-[700] mb-3">£10 on the door</p>
               <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
                 Single session, book week to week. No commitment.
               </p>

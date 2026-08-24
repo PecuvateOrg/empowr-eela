@@ -112,9 +112,10 @@ export default function RollerQuadCampsPage() {
               <span className="text-[10px] font-[800] uppercase tracking-[0.18em] text-muted mb-2">
                 Standard Booking
               </span>
-              <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-3">
+              <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Empowr Camps
               </h2>
+              <p className="text-2xl font-[900] text-red mb-3">From £45</p>
               <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
                 Book your child&apos;s place directly. Multi-day skating adventure with expert
                 coaching, games, and activities.
