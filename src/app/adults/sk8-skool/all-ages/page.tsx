@@ -57,6 +57,11 @@ const faqs: FaqItem[] = [
     answer:
       'Yes. There is a small seating area where parents or guardians can remain and watch the session. However, parents are not required to stay. Children can be left with our team and collected when the class has finished. Please note that seating is limited.',
   },
+  {
+    question: 'Is there a membership option?',
+    answer:
+      'Yes. Alongside paying £12.50 per class, you can subscribe for £40/month for ongoing weekly access to Sk8 Skool for All Ages without booking each date individually.',
+  },
 ];
 
 export default function Sk8SkoolAllAgesPage() {
@@ -150,7 +155,8 @@ export default function Sk8SkoolAllAgesPage() {
             <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
               Sk8 Skool for All Ages
             </h2>
-            <p className="text-2xl font-[900] text-white mb-3">£12.50 / hour</p>
+            <p className="text-2xl font-[900] text-white mb-1">£12.50 / hour</p>
+            <p className="text-xs text-white/70 font-[700] mb-3">or £40/month subscription</p>
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               Every Saturday at The Ladywell Centre.
             </p>

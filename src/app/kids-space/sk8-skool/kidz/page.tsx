@@ -33,7 +33,12 @@ const faqs: FaqItem[] = [
   {
     question: "What's the difference between the Monday and Wednesday sessions?",
     answer:
-      'Both cover the same Sk8 Skool for Kidz programme. Monday runs indoors at Goldsmiths Community Centre. Wednesday runs outdoors at the Sports Field and is only available April to August.',
+      'Both cover the same Sk8 Skool for Kidz programme. Monday runs indoors at Goldsmiths Community Centre year-round. Wednesday runs outdoors at the Sports Field from April to August, then moves indoors to Honor Oak Community Centre for the rest of the year.',
+  },
+  {
+    question: 'Is there a membership option?',
+    answer:
+      'Yes. Alongside paying £10 per session, you can subscribe for £30/month for ongoing access to Sk8 Skool for Kidz without booking each date individually.',
   },
   {
     question: 'Do I need to bring my own skates and protective equipment?',
@@ -149,7 +154,8 @@ export default function Sk8SkoolKidzPage() {
               </h2>
               <p className="text-2xl font-[900] text-white mb-3">£10 / session</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-2 flex-1">
-                Outdoors, Sports Field SE4 2HU. Seasonal — runs April to August only.
+                Outdoors, Sports Field SE4 2HU, April–August. Moves indoors to Honor Oak
+                Community Centre for the rest of the year.
               </p>
               <a
                 href={LINKS.kidzWednesdayClasses}
@@ -162,6 +168,11 @@ export default function Sk8SkoolKidzPage() {
             </div>
 
           </div>
+
+          <p className="text-sm text-mid text-center mt-6">
+            Attending regularly? Subscribe for <span className="font-[800] text-black">£30/month</span> for
+            ongoing access to Sk8 Skool for Kidz, instead of booking each date.
+          </p>
         </section>
 
         {/* REVIEWS */}
