@@ -58,6 +58,11 @@ const faqs: FaqItem[] = [
       'Yes. Beginners Foundations is delivered as a progressive course, with each class building on the skills covered during the previous week. We therefore recommend attending every scheduled class. Missed classes cannot be transferred, refunded or replaced.',
   },
   {
+    question: 'Do I need to complete both levels?',
+    answer:
+      "We recommend completing both Level 1 and Level 2 before attending Skate Jam, our open skate session — Skate Jam is the equivalent next step, and its pace and environment may feel overwhelming without these foundation skills in place first.",
+  },
+  {
     question: 'Can friends or family come to watch?',
     answer:
       'Unfortunately, non-skating spectators are not permitted on-site because the venue does not have adequate space to safely accommodate spectators during the course.',
@@ -128,37 +133,76 @@ export default function BeginnersFoundationsPage() {
           </div>
         </section>
 
-        {/* BOOKING */}
+        {/* BOOKING OPTIONS */}
         <section className="max-w-[880px] mx-auto px-5 pb-14">
           <div className="flex items-center gap-3 mb-6">
             <div className="flex-1 h-px bg-border" />
             <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
-              🎟 Book your place
+              🎟 Choose your level
             </p>
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          <div
-            className="max-w-[420px] mx-auto rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col items-center text-center"
-            style={{ boxShadow: 'var(--shadow-blue)' }}
-          >
-            <Icon icon="mdi:seed-outline" width={36} className="text-white/80 mb-4" />
-            <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
-              Beginners Foundations
-            </h2>
-            <p className="text-2xl font-[900] text-white mb-3">£55 / course</p>
-            <p className="text-sm text-white/80 leading-[1.7] mb-6">
-              Indoors only. Missed classes cannot be transferred or refunded.
-            </p>
-            <a
-              href={LINKS.beginnersFoundations}
-              target="_blank"
-              rel="noopener"
-              className="inline-block bg-white text-blue text-sm font-[800] px-8 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            {/* Level 1 — Tuesdays */}
+            <div
+              className="rounded-[20px] bg-card border border-border p-6 sm:p-8 flex flex-col"
+              style={{ boxShadow: 'var(--shadow-sm)' }}
             >
-              Book now &rsaquo;
-            </a>
+              <Icon icon="mdi:numeric-1-circle" width={36} className="text-blue mb-4" />
+              <span className="text-[10px] font-[800] uppercase tracking-[0.18em] text-muted mb-2">
+                Every Tuesday · 7:30–9:30 PM
+              </span>
+              <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
+                Level 1
+              </h2>
+              <p className="text-2xl font-[900] text-red mb-3">£55 / course</p>
+              <p className="text-sm text-mid leading-[1.7] mb-2 flex-1">
+                Foundational skills — bubbles, crossovers, and transitions.
+              </p>
+              <a
+                href={LINKS.beginnersFoundations}
+                target="_blank"
+                rel="noopener"
+                className="inline-block bg-blue text-warm-white text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
+                style={{ boxShadow: 'var(--shadow-blue)' }}
+              >
+                Book now &rsaquo;
+              </a>
+            </div>
+
+            {/* Level 2 — Wednesdays */}
+            <div
+              className="rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col"
+              style={{ boxShadow: 'var(--shadow-blue)' }}
+            >
+              <Icon icon="mdi:numeric-2-circle" width={36} className="text-white/80 mb-4" />
+              <span className="text-[10px] font-[800] uppercase tracking-[0.18em] text-white/60 mb-2">
+                Every Wednesday · 7:30–9:30 PM
+              </span>
+              <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
+                Level 2
+              </h2>
+              <p className="text-2xl font-[900] text-white mb-3">£55 / course</p>
+              <p className="text-sm text-white/80 leading-[1.7] mb-2 flex-1">
+                Builds on Level 1 — balance and control, manuals and pivots.
+              </p>
+              <a
+                href={LINKS.beginnersFoundations}
+                target="_blank"
+                rel="noopener"
+                className="inline-block bg-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
+              >
+                Book now &rsaquo;
+              </a>
+            </div>
+
           </div>
+
+          <p className="text-sm text-mid text-center mt-6">
+            Both indoors at Honor Oak Community Centre. Missed classes cannot be transferred or refunded.
+          </p>
         </section>
 
         {/* REVIEWS */}
