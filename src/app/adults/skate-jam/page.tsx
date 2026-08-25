@@ -70,7 +70,7 @@ export default function SkateJamPage() {
           </Link>
 
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-            Weekly Session · Ages 8+
+            Weekly Session · Ages 15+
           </p>
           <h1
             className="font-[900] text-black leading-[1.08] mb-4"
