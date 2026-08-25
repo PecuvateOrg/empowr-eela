@@ -2,6 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import Script from "next/script";
+
+// Public by design — this ships in the page HTML; only the paired secret is
+// sensitive, and that lives on Main Site (which runs the shared contact
+// function), not here. Must stay the same sitekey as Main Site's
+// ContactForm.tsx: all four origins are registered against one Turnstile
+// widget, so a second widget here would fail hostname validation.
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 // Submits into the exact same backend as Main Site's own contact form
 // (empowrcic.org/contact) — same Netlify Function, same CRM routing,
@@ -109,6 +117,10 @@ export default function EnquiryModal({
       // Honeypot — real users leave this blank; bots fill it in.
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
       source,
+      // Turnstile's implicit rendering injects this hidden input into the
+      // enclosing form itself — no callback wiring needed. Absent entirely
+      // when TURNSTILE_SITE_KEY is unset, which contact.ts treats as "skip".
+      turnstileToken: (form.elements.namedItem("cf-turnstile-response") as HTMLInputElement | null)?.value,
     };
 
     try {
@@ -247,6 +259,13 @@ export default function EnquiryModal({
                     </a>
                     .
                   </p>
+                )}
+
+                {TURNSTILE_SITE_KEY && (
+                  <>
+                    <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" async defer />
+                    <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />
+                  </>
                 )}
 
                 <button
