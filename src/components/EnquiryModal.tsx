@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import Script from "next/script";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 // Public by design — this ships in the page HTML; only the paired secret is
 // sensitive, and that lives on Main Site (which runs the shared contact
 // function), not here. Must stay the same sitekey as Main Site's
-// ContactForm.tsx: all four origins are registered against one Turnstile
-// widget, so a second widget here would fail hostname validation.
+// ContactForm.tsx: every origin is registered against one Turnstile widget,
+// so a second widget here would fail hostname validation.
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 // Submits into the exact same backend as Main Site's own contact form
@@ -71,6 +71,7 @@ export default function EnquiryModal({
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [minDate, setMinDate] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   useEffect(() => {
     const d = new Date();
@@ -90,6 +91,9 @@ export default function EnquiryModal({
   function closeAndReset() {
     setOpen(false);
     setStatus("idle");
+    // The widget unmounts with the modal, so the token it issued dies with it.
+    // Clearing here keeps a stale token from being submitted on the next open.
+    setTurnstileToken("");
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -117,10 +121,7 @@ export default function EnquiryModal({
       // Honeypot — real users leave this blank; bots fill it in.
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
       source,
-      // Turnstile's implicit rendering injects this hidden input into the
-      // enclosing form itself — no callback wiring needed. Absent entirely
-      // when TURNSTILE_SITE_KEY is unset, which contact.ts treats as "skip".
-      turnstileToken: (form.elements.namedItem("cf-turnstile-response") as HTMLInputElement | null)?.value,
+      turnstileToken,
     };
 
     try {
@@ -261,16 +262,24 @@ export default function EnquiryModal({
                   </p>
                 )}
 
+                {/* Explicitly rendered, not via the `cf-turnstile` class. The
+                    implicit script only scans the DOM once on load and never
+                    watches for later changes, so a widget mounted inside a
+                    modal renders on the first open and silently fails on every
+                    reopen — no token, and the backend rejects the enquiry.
+                    Verified failing that way before this component was used. */}
                 {TURNSTILE_SITE_KEY && (
-                  <>
-                    <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" async defer />
-                    <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />
-                  </>
+                  <Turnstile
+                    siteKey={TURNSTILE_SITE_KEY}
+                    onSuccess={setTurnstileToken}
+                    onError={() => setTurnstileToken("")}
+                    onExpire={() => setTurnstileToken("")}
+                  />
                 )}
 
                 <button
                   type="submit"
-                  disabled={status === "submitting"}
+                  disabled={status === "submitting" || (!!TURNSTILE_SITE_KEY && !turnstileToken)}
                   className="w-full bg-blue text-white font-[800] text-sm px-8 py-3 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status === "submitting" ? "Sending…" : "Send Message"}
