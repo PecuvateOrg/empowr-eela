@@ -1,5 +1,14 @@
 # EELA — DEVLOG
 
+## 2026-08-25 — Private Bookings enquiries had been silently lost since ~08-17; Turnstile added to the modal
+
+The reported problem — "birthday party enquiries aren't alerting us" — was real but not caused by anything in this repo. The shared backend on Main Site had been failing to deliver the team's notification for every form using it; full root cause in `Empowr Main Site/DEVLOG.md` and the workspace `DEVLOG.md`.
+
+- **Nobody had ever successfully used this form.** Searched the whole `enquiries@empowrcic.org` mailbox for the modal's subject pattern and its `eela-*` source tags: zero matches, ever. The birthday-party interest that *did* arrive (the Helen Birtwistle thread) came through Main Site's general contact form, not this modal. So the fix below closes a path that was broken before it ever carried a real enquiry.
+- **Turnstile added to `EnquiryModal.tsx`**, passing its token to Main Site's contact function. No secret in this repo — verification happens in that function, so EELA only carries the public sitekey, and it must be the *same* sitekey since one widget covers both origins.
+- 🔴 **The modal is exactly the case Turnstile's default rendering breaks.** The implicit `cf-turnstile` script scans the DOM once when it loads and never watches for later changes, so the widget rendered on first open and silently not on any reopen — leaving no token for a backend that had just started rejecting tokenless submissions. Proven in a real browser before fixing: the `cf-turnstile-response` input Turnstile creates was present on open #1 and absent on open #2. Fixed with `@marsidev/react-turnstile` (explicit rendering, already used in EFN Dashboard) and re-verified passing on both opens. Submit is disabled until a token exists.
+- Commits `16bf755` and `cdb1838`, both on `main` and deployed. **Deliberately put on `main`, not on `feat/eela-booking-cutover`** — that branch carries ~20 commits of unrelated in-flight booking-cutover work that isn't ready to ship, and `EnquiryModal.tsx` is identical on both branches, so the change applied cleanly without dragging any of it along. The feature branch was left exactly as found and will pick this up on its next merge from `main`.
+
 ## 2026-08-20 — Private Bookings availability calendar + enquiry system built, then isolated and merged to `main` — live in production
 
 - **Roller Disco false start, corrected within the session.** Restored a standalone public "Roller Disco" card to `main` (kids-space, adults, homepage), reworded off the KB's seasonal framing — then reverted it (`c9e7334`) once it emerged that Roller Disco is already covered as the "Roller Disco Birthday Party" offering under Private Bookings, being actively built on `feature/skate-jam-page`. No lasting effect on `main`; see `memory.md` for the full two-offering breakdown (public seasonal Roller Disco vs. the private birthday-party booking) — they're genuinely different things, not a KB contradiction.
@@ -23,11 +32,7 @@
 - **Later same session: the bubble now opens itself.** Owner's call, since this is a new feature going live — it should greet visitors proactively rather than sit there waiting to be noticed. Added a 1.5s `setTimeout` in `ChatBubble.tsx` before flipping `open` to `true`, giving the page a moment to render first. Paired with a rewritten, less reactive-sounding greeting (set in PecuvateCRM's `org_ai_config`, not code here — see that project's DEVLOG) since the old copy assumed the visitor had already asked something. Live-verified with a screenshot: bubble open, correct new greeting text (em dash intact), brand-blue header, logo legible.
 - The `#1a1a2e` launcher-button inconsistency noted above is now more visible, since the panel it opens is on-screen by default rather than only after a click — still not fixed, still the owner's call to make.
 
-## 2026-08-05 — CookieConsentBanner note corrected: deliberate hold, not stale work
-
-- `memory.md` had framed the long-uncommitted `CookieConsentBanner.tsx` as parked work of unknown status, on the grounds that the "concurrent session in progress" note was six days old. **The user corrected this:** the banner redesign is tied to the `feat/chat-widget-embed` work and stays uncommitted until that widget is finalised. The dependency is the reason for the delay, not neglect.
-- Note rewritten to say so explicitly, with instructions for a fresh session: expected, do not discard, **do not commit** — it goes in as part of finalising the chat widget.
-- Worth keeping in mind generally: a stale-looking timestamp is not evidence of abandonment. Ask before recategorising someone else's in-flight work.
+## 2026-08-05 — CookieConsentBanner's long-uncommitted state corrected in memory.md as a deliberate hold tied to `feat/chat-widget-embed`, not abandoned work; general lesson recorded that a stale timestamp is not evidence of neglect
 
 ## 2026-08-04 — sitemap.xml added (6 routes) and robots.txt now declares it, completing the other half of the 2026-07-30 link audit
 
