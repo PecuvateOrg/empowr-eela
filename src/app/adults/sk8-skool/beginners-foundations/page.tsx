@@ -159,7 +159,8 @@ export default function BeginnersFoundationsPage() {
               </h2>
               <p className="text-2xl font-[900] text-red mb-3">£55 / course</p>
               <p className="text-sm text-mid leading-[1.7] mb-2 flex-1">
-                Foundational skills — bubbles, crossovers, and transitions.
+                Suitable for complete beginners or improvers who are learning and developing
+                the basic foundations of roller skating.
               </p>
               <a
                 href={LINKS.beginnersFoundations}
@@ -186,7 +187,9 @@ export default function BeginnersFoundationsPage() {
               </h2>
               <p className="text-2xl font-[900] text-white mb-3">£55 / course</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-2 flex-1">
-                Builds on Level 1 — balance and control, manuals and pivots.
+                Suitable for advanced beginners or those who have completed Level 1. This level
+                focuses on combining your foundations and developing them into more controlled
+                skills and movement.
               </p>
               <a
                 href={LINKS.beginnersFoundations}
