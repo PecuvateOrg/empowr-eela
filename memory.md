@@ -2,7 +2,9 @@
 
 ## Current Phase
 
-Live in production at eela.empowrcic.org. As of the 2026-08-18 close-out — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
+Live in production at eela.empowrcic.org. As of the 2026-08-25 close-out — see `DEVLOG.md` for full running history. This file stopped being actively maintained after Phase 1 (May 2026); `DEVLOG.md` is the authoritative source of running state for this project, not this file.
+
+**2026-08-25 — Sk8 Skool work has moved well past `feature/skate-jam-page`.** A whole further branch, `feat/sk8-skool-merge` (branched off `feature/skate-jam-page`), now carries the Kids Space Sk8 Skool hub merge plus a site-wide KB audit that fixed 6 pricing/copy gaps (Synkron8, Skate Jam, Roller Quad Camps, Beginners Foundations). Preview: `feat-sk8-skool-merge--empowr-eela.netlify.app`. Neither branch is merged to `main` yet. See `DEVLOG.md` 2026-08-25 entry for full detail.
 
 **Resolved 2026-08-12 — `CookieConsentBanner.tsx` concurrent-session hold is over, do not treat it as still open.** The redesign was committed as `bf098ec` back on 2026-07-29/30 and merged to `main`; `git log -1 -- src/components/CookieConsentBanner.tsx` confirms no changes to it since. The chat widget itself went live the same way — `bbab61a` cherry-picked onto `main` directly rather than merging the whole `feat/chat-widget-embed` branch, which had drifted too far from `main`'s newer work. The three-close-out "deliberately held" note below this line described a real, correct hold at the time (07-29 through 08-04) — it is dead history now, kept only so a fresh session doesn't mistake this correction for the original claim.
 
@@ -28,7 +30,8 @@ Live in production at eela.empowrcic.org. As of the 2026-08-18 close-out — see
 
 ## Next
 
-- **Push `feature/skate-jam-page`** — carries the 2026-08-17/18 Synkron8/Beginners Foundations/Private Bookings work, sitting locally only as of this close-out.
+- **`feature/skate-jam-page` and `feat/sk8-skool-merge` are both pushed to origin but not merged to `main`.** The 2026-08-17/18 Synkron8/Beginners Foundations/Private Bookings work and the 2026-08-21/25 Sk8 Skool hub merge + KB audit fixes all sit on these two branches. Merge decision is the user's, not yet made.
+- **Resolve the Kids Space Roller Skate Events link target** (`LINKS.rollerSkateEvents` — currently the adult-only 15+ Wix page, card copy is family-oriented) — flagged 2026-08-25, awaiting the user's call.
 - Kids Space umbrella age label decision (still open, unresolved since it was first raised).
 - EELA homepage restructure — new `/` presenting EELA as a platform with 5 programme pillars.
 - Restore Roller Disco content on the site to match its 2026-08-06 reinstatement (seasonal, not weekly) — separate from the Private Bookings work above, see `DEVLOG.md` 2026-07-31 entry and its supersession note.

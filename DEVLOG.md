@@ -1,5 +1,13 @@
 # EELA — DEVLOG
 
+## 2026-08-25 — Kids Space Sk8 Skool merged into a hub; site-wide KB audit found and fixed 6 pricing/copy gaps across 5 pages
+
+- Merged Kids Space's 3 flat Sk8 Skool cards (Monday, Wednesday, All Ages) into one hub (`/kids-space/sk8-skool` + `/kids-space/sk8-skool/kidz`), mirroring the Adults Sk8 Skool pattern; added a Roller Skate Events card to `/kids-space`. Kidz + All Ages both gained real Subscription pricing (£30/mo, £40/mo) via a Pay As You Go/Membership two-card layout matching Skate Jam's existing pattern; the earlier "Wednesday is outdoor-only, April-August" claim was corrected — it runs year-round, moving indoors to Honor Oak CC the rest of the year.
+- **Ran a full site-vs-KB audit** (every session page against `vaults/EMPOWR CIC/entities/sessions.md`) after the user asked whether the site now matched the KB — it didn't, on 6 counts. Fixed: Synkron8 missing its Membership card (£45/mo, despite its own FAQ mentioning one), Skate Jam's flat £10 price split into the real £7-online/£10-door tiers, Roller Quad Camps showing no price at all (added "From £45"), Skate Jam's hero tag corrected from the wrong "Ages 8+" to "Ages 15+" (contradicted both the KB and the page's own FAQ), and its FAQ's beginner-readiness answer corrected to recommend only Beginners Foundations, not Synkron8 (never part of the Indoor Pathway). Beginners Foundations itself was restructured from one undifferentiated £55/course card into a Level 1 (Tue)/Level 2 (Wed) two-card grid, with Empowr-supplied descriptions for each level.
+- **Still open, deliberately not fixed**: the Kids Space Roller Skate Events card links to `LINKS.rollerSkateEvents` (the KB-confirmed adult-only 15+ Wix page) despite family-oriented bullet copy — flagged to the user, awaiting a decision on whether it should point at `LINKS.kidzRollerDisco` instead.
+- **Mid-session branch collision, resolved non-destructively**: a concurrent session had switched this shared working directory to a new branch (`feat/eela-booking-cutover`) and committed its own Members-links work right as this session went to commit. Used a temporary `git worktree` to cherry-pick this session's commits onto the correct branch (`feat/sk8-skool-merge`) and push cleanly, rather than touch their branch.
+- Everything this session pushed sits on `feat/sk8-skool-merge` (off `feature/skate-jam-page`, not `main`) — preview at `feat-sk8-skool-merge--empowr-eela.netlify.app`, not yet merged. `tsc --noEmit` clean, full `next build` (22 routes), Playwright against production `next start` builds — zero console errors across every page touched.
+
 ## 2026-08-18 — Private Bookings card moved to the end of the Adults list; local preview run
 
 - `adults/page.tsx`: moved the Private Bookings entry from position 5 (right after Beginners Foundations) to the last slot in `programmes`, after Roller Skate Events — user-requested reorder, no content or link changes. Kids Space's copy of the card was already last there, so no change needed on that page. `tsc --noEmit` clean, rebuilt and reflected on a local preview.
@@ -22,13 +30,7 @@
 - Note rewritten to say so explicitly, with instructions for a fresh session: expected, do not discard, **do not commit** — it goes in as part of finalising the chat widget.
 - Worth keeping in mind generally: a stale-looking timestamp is not evidence of abandonment. Ask before recategorising someone else's in-flight work.
 
-## 2026-08-04 — sitemap.xml added; robots.txt now declares it
-
-- Added `src/app/sitemap.ts` (6 routes) and restored the `Sitemap:` line in `robots.txt`. Verified live at `eela.empowrcic.org/sitemap.xml` after deploy (`b9b616e`).
-- `kids-space` and `adults` are prioritised just below home — they're the two audience entry points and now also the destinations for Main Site's legacy Wix `/service-page/*` redirects, so they carry the inbound discovery traffic.
-- **No `force-static` directive needed here.** EELA runs on the Netlify Next runtime, not `output: 'export'` — Main Site's build failed without it, EELA's didn't. Check `next.config` before assuming either way.
-- This completes the other half of the 2026-07-30 link audit, which removed the dead `Sitemap:` line rather than build a generator. The line is back, with a real sitemap behind it.
-- `CookieConsentBanner.tsx` is still modified and uncommitted in the working tree (in-progress work from another session, first noted 2026-07-30) — left untouched again.
+## 2026-08-04 — Added sitemap.xml (6 routes) and restored the Sitemap: line in robots.txt; kids-space and adults prioritised for legacy Wix redirect traffic
 
 ## 2026-07-31 — Roller Disco removed from site copy; branch-deploy previews enabled for feat/chat-widget-embed
 
