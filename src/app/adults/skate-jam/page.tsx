@@ -25,7 +25,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Is Skate Jam suitable for complete beginners?',
     answer:
-      "Yes! Skate Jam welcomes all skating levels, including complete beginners. However, we recommend completing our Beginners Foundations course or attending a Synkron8 session first to help you build confidence in the basics.",
+      "Yes! Skate Jam welcomes all skating levels, including complete beginners. However, we recommend completing our Beginners Foundations course first to help you build confidence in the basics.",
   },
   {
     question: 'Is coaching included in the session?',
