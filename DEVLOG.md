@@ -1,5 +1,17 @@
 # EELA — DEVLOG
 
+## 2026-08-26 — Booking links repointed from Wix to the Members platform; "Beginners Foundation" corrected to the singular
+
+Code for this sits on `feat/eela-booking-cutover` (off `feat/sk8-skool-merge`, **unpushed**); only this log entry and `memory.md` are on `main`.
+
+- **`lib/links.ts` now sends every confirmed bookable session to `members.empowrcic.org/sessions/[slug]`** instead of Wix: Skate Jam, Synkron8, Sk8 Skool All Ages, Sk8 Skool Kidz (both days), Beginners Foundation, Roller Skate Events, and the **Empowr-owned** Roller Quad Camp. `rollerQuadCampsHAF` stays on `app.holidayactivities.com` (a funder's system) and Private Bookings is untouched — neither ever went through Wix.
+- **The governing rule set this session**: `vaults/EMPOWR CIC/entities/sessions.md` is the single source of truth for what sessions exist; this site displays it and Members' catalogue must correlate with it. **Wix is explicitly out of scope** as a reconciliation target.
+- **No new auth work was needed.** Members' `middleware.ts` already guards `/book/*` and bounces anonymous visitors to `/login?next=…`, returning them to the exact booking after sign-in — precisely the "reads whether they're a member, then drops them into booking" flow that was asked for. The gap was only ever EELA's outbound links.
+- **Renamed "Beginners Foundations" → "Beginners Foundation"** across 12 display-copy usages in 4 files, confirmed by Empowr: it is the foundation of a skater's skills. Route path `/adults/sk8-skool/beginners-foundations` and the Members slug both still read plural — a deliberate, separate decision, since changing a URL is not the same as changing copy.
+- **Deleted the stale local branch `feat/bookings-domain-cutover`** (was `ba019b6`, recoverable via reflog). A superseded Wix-era plan pointing everything at `bookings.empowrcic.org`; merging it would have deleted Private Bookings, the enquiry modal, PostHog, `robots.txt`, the README and `docs/`.
+- ⚠️ **These links 404 until Members goes live** — its catalogue entries exist but are all `active=false` by design. The branch is not independently deployable.
+- **Members offerings now exist for Prep to Street Skate L1/L2 and All Ages Roller Disco, but EELA has no pages for them** — new outstanding work. The All Ages Roller Disco offering (5+, £15) is also the natural answer to the open Kids Space "Roller Skate Events" family-copy question.
+
 ## 2026-08-25 — Private Bookings enquiries had been silently lost since ~08-17; Turnstile added to the modal
 
 The reported problem — "birthday party enquiries aren't alerting us" — was real but not caused by anything in this repo. The shared backend on Main Site had been failing to deliver the team's notification for every form using it; full root cause in `Empowr Main Site/DEVLOG.md` and the workspace `DEVLOG.md`.
