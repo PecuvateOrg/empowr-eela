@@ -23,7 +23,7 @@ const programmes: Programme[] = [
     tagColor: 'text-blue',
     title: 'Sk8 Skool',
     icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue" />,
-    bullets: ['Beginners Foundations, Synkron8 & All Ages', 'Build skills & confidence', 'For beginners and improvers'],
+    bullets: ['Beginners Foundation, Synkron8 & All Ages', 'Build skills & confidence', 'For beginners and improvers'],
     bookingUrl: '/adults/sk8-skool',
     buttonLabel: 'View options',
   },

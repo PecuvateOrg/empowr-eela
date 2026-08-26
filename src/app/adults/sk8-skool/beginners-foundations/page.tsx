@@ -10,7 +10,7 @@ import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 export const metadata: Metadata = {
-  title: 'Beginners Foundations — Sk8 Skool',
+  title: 'Beginners Foundation — Sk8 Skool',
   description:
     'Our indoor beginners course with Empowr CIC — build balance, control and confidence from your first steps on skates.',
 };
@@ -28,19 +28,19 @@ const chips = [
 
 const faqs: FaqItem[] = [
   {
-    question: 'Is Beginners Foundations suitable for complete beginners?',
+    question: 'Is Beginners Foundation suitable for complete beginners?',
     answer:
-      'Yes! Beginners Foundations is specifically designed for complete beginners and anyone who wants to improve their basic skating skills, confidence and control.',
+      'Yes! Beginners Foundation is specifically designed for complete beginners and anyone who wants to improve their basic skating skills, confidence and control.',
   },
   {
     question: 'What will I learn during the course?',
     answer:
-      "During the Beginners Foundations course, you'll learn:\nBubbles\nCrossovers\nTransitions\nBalance and control\nManuals\nPivots\n\nEach skill will be demonstrated and broken down into manageable steps, with time to practise and receive guidance from your coach.",
+      "During the Beginners Foundation course, you'll learn:\nBubbles\nCrossovers\nTransitions\nBalance and control\nManuals\nPivots\n\nEach skill will be demonstrated and broken down into manageable steps, with time to practise and receive guidance from your coach.",
   },
   {
     question: 'Is coaching included?',
     answer:
-      'Yes. Beginners Foundations is a structured course led by an Empowr coach. Each skill will be demonstrated and broken down into manageable steps, with time to practise and receive guidance.',
+      'Yes. Beginners Foundation is a structured course led by an Empowr coach. Each skill will be demonstrated and broken down into manageable steps, with time to practise and receive guidance.',
   },
   {
     question: 'Do I need to bring my own skates and protective equipment?',
@@ -50,12 +50,12 @@ const faqs: FaqItem[] = [
   {
     question: 'What is the age requirement?',
     answer:
-      'Beginners Foundations is open to participants aged 15 and over. Anyone under 18 must provide the required consent from a parent or guardian.',
+      'Beginners Foundation is open to participants aged 15 and over. Anyone under 18 must provide the required consent from a parent or guardian.',
   },
   {
     question: 'Do I need to attend every week?',
     answer:
-      'Yes. Beginners Foundations is delivered as a progressive course, with each class building on the skills covered during the previous week. We therefore recommend attending every scheduled class. Missed classes cannot be transferred, refunded or replaced.',
+      'Yes. Beginners Foundation is delivered as a progressive course, with each class building on the skills covered during the previous week. We therefore recommend attending every scheduled class. Missed classes cannot be transferred, refunded or replaced.',
   },
   {
     question: 'Do I need to complete both levels?',
@@ -98,7 +98,7 @@ export default function BeginnersFoundationsPage() {
             className="text-mid leading-[1.8] max-w-[560px]"
             style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1rem)' }}
           >
-            Never skated before, or want to go back to basics? Beginners Foundations takes
+            Never skated before, or want to go back to basics? Beginners Foundation takes
             you from your first steps on skates through bubbles, crossovers, transitions,
             balance, manuals and pivots — one skill at a time, with a coach alongside you.
           </p>

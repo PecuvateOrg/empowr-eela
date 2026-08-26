@@ -9,7 +9,7 @@ import type { Programme } from '@/lib/types';
 export const metadata: Metadata = {
   title: 'Sk8 Skool — Adults',
   description:
-    'Sk8 Skool with Empowr CIC — Beginners Foundations, Synkron8, and Sk8 Skool for All Ages. Learn at your pace and build confidence, all in one place.',
+    'Sk8 Skool with Empowr CIC — Beginners Foundation, Synkron8, and Sk8 Skool for All Ages. Learn at your pace and build confidence, all in one place.',
 };
 
 const pillars = [
@@ -23,7 +23,7 @@ const offerings: Programme[] = [
     id: 'beginners-foundations',
     tag: 'Course',
     tagColor: 'text-blue',
-    title: 'Beginners Foundations',
+    title: 'Beginners Foundation',
     icon: <Icon icon="mdi:seed-outline" width={36} height={36} className="text-blue" />,
     bullets: ['From first steps on skates', 'Progressive, coach-led course', 'Indoors, next intake Sept 2026'],
     bookingUrl: '/adults/sk8-skool/beginners-foundations',
