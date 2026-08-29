@@ -73,7 +73,7 @@ export default function Sk8SkoolAllAgesPage() {
         {/* HERO */}
         <section className="max-w-[880px] mx-auto px-5 pt-10 pb-8 sm:pt-14 sm:pb-10">
           <Link
-            href="/adults/sk8-skool"
+            href="/kids-space/sk8-skool"
             className="inline-flex items-center gap-1.5 text-sm font-[700] text-blue no-underline mb-6 hover:opacity-80 transition-opacity"
           >
             ← Sk8 Skool
