@@ -19,21 +19,13 @@ export const metadata: Metadata = {
 const programmes: Programme[] = [
   {
     id: 'sk8-skool',
-    tag: 'Learn (15+)',
+    tag: 'Learn (5+/15+)',
     tagColor: 'text-blue',
     title: 'Sk8 Skool',
     icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue" />,
-    bullets: ['Learn at your pace', 'Build skills & confidence', 'For beginners and improvers'],
-    bookingUrl: LINKS.sk8Skool,
-  },
-  {
-    id: 'synkron8',
-    tag: 'Dance (15+)',
-    tagColor: 'text-blue-dark',
-    title: 'Synkron8',
-    icon: <Icon icon="mdi:music-note" width={36} height={36} className="text-blue-dark" />,
-    bullets: ['Build balance & confidence', 'Learn routines and line dances', 'For beginners and improvers'],
-    bookingUrl: LINKS.synkron8,
+    bullets: ['Beginners Foundation, Synkron8 & All Ages', 'Build skills & confidence', 'For beginners and improvers'],
+    bookingUrl: '/adults/sk8-skool',
+    buttonLabel: 'View options',
   },
   {
     id: 'skate-jam',
@@ -42,16 +34,7 @@ const programmes: Programme[] = [
     title: 'Skate Jam',
     icon: <Icon icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
     bullets: ['Open skate time', 'Community led', 'For all levels'],
-    bookingUrl: LINKS.skateJam,
-  },
-  {
-    id: 'all-ages',
-    tag: 'All ages (5+)',
-    tagColor: 'text-blue',
-    title: 'Sk8 Skool (All Ages)',
-    icon: <Icon icon="mdi:human-male-female-child" width={36} height={36} className="text-blue" />,
-    bullets: ['Open to all ages from 5+', 'Family-friendly atmosphere', 'For beginners'],
-    bookingUrl: LINKS.allAges,
+    bookingUrl: '/adults/skate-jam',
   },
   {
     id: 'roller-skate-events',

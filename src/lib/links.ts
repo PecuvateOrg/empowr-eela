@@ -2,6 +2,9 @@ export const LINKS = {
   // Adults programmes
   sk8Skool:          'https://empowrcic.wixsite.com/empowrcic/sk8-skool',
   synkron8:          'https://empowrcic.wixsite.com/empowrcic/sk8-skool',
+  // No dedicated Wix service-page slug confirmed for this course — routes through
+  // the same Sk8 Skool booking hub as synkron8 (same precedent as above).
+  beginnersFoundations: 'https://empowrcic.wixsite.com/empowrcic/sk8-skool',
   skateJam:          'https://empowrcic.wixsite.com/empowrcic/skate-jam',
   allAges:           'https://empowrcic.wixsite.com/empowrcic/kidzspace',
   rollerSkateEvents: 'https://empowrcic.wixsite.com/empowrcic/roller-skate-events',
