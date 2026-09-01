@@ -3,10 +3,17 @@
 // members.empowrcic.org before merge; a Members slug that 404s silently
 // sends a parent to a dead page, so re-verify if you add one.
 //
-// THE CUTOVER IS DELIBERATELY PARTIAL. Camps and Roller Disco stay on Wix
-// because their Members offerings are inactive with no scheduled dates
-// (roller-quad-camp 404s today) — a working Wix booking page beats a 404.
-// Move them when the dates exist in Members, not before.
+// THE CUTOVER IS TOTAL: every bookable session routes to Members, including
+// the two with no dates yet. Members renders a "Dates coming soon" page for an
+// ACTIVE offering with no occurrences, so those two get a real page with the
+// real price and an "email us" line rather than a Wix page or a 404.
+//
+// ⚠️ THIS DEPENDS ON A DATA FLAG, NOT ON CODE. roller-quad-camp and
+// all-ages-roller-disco must be active = true in mem_offerings. While they are
+// inactive, getOffering() filters them out and dynamicParams = false turns that
+// into a hard 404 — these two links break. Flip them from the Members ADMIN UI,
+// never raw SQL: the slug set is frozen at build time and only the admin route
+// fires triggerCatalogueRebuild().
 const MEMBERS_BASE_URL = 'https://members.empowrcic.org';
 
 export const LINKS = {
@@ -37,14 +44,13 @@ export const LINKS = {
   kidzMondayClasses:      `${MEMBERS_BASE_URL}/sessions/sk8-skool-kidz`,
   kidzWednesdayClasses:   `${MEMBERS_BASE_URL}/sessions/sk8-skool-kidz`,
   kidzSaturdaySkate:      `${MEMBERS_BASE_URL}/sessions/sk8-skool-all-ages`,
-  // STAYS ON WIX — see the partial-cutover note above. The Wix page is live
-  // and sells camps; Members' roller-quad-camp offering is inactive with no
-  // occurrences. This is the paid route; rollerQuadCampsHAF above is the
-  // separate benefit-eligible DfE-funded route and is NOT a substitute.
-  kidzSummerCamps:        'https://empowrcic.wixsite.com/empowrcic/service-page/summer-roller-camp-coming-soon?referral=service_list_widget',
-  // STAYS ON WIX — Roller Disco is retired as a weekly session and its
-  // Members offering (all-ages-roller-disco) is inactive.
-  kidzRollerDisco:        'https://empowrcic.wixsite.com/empowrcic/service-page/all-ages-roller-disco-5yrs-1?referral=service_list_widget',
+  // No dates scheduled yet — lands on the "Dates coming soon" state, which
+  // still shows the £45 price and venue. This is the PAID route;
+  // rollerQuadCampsHAF above is the separate benefit-eligible DfE-funded
+  // route and is NOT a substitute for it.
+  kidzSummerCamps:        `${MEMBERS_BASE_URL}/sessions/roller-quad-camp`,
+  // No dates scheduled yet — same "Dates coming soon" state as camps.
+  kidzRollerDisco:        `${MEMBERS_BASE_URL}/sessions/all-ages-roller-disco`,
 
   // Quiz — links to landing page quiz until a native quiz is built on this platform
   quiz:              'https://start.empowrcic.org/quiz?utm_source=empowr-eela&utm_medium=internal',
