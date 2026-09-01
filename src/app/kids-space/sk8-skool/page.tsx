@@ -36,7 +36,7 @@ const offerings: Programme[] = [
     title: 'Sk8 Skool for All Ages',
     icon: <Icon icon="mdi:human-male-female-child" width={36} height={36} className="text-blue-light" />,
     bullets: ['Open to all ages from 5+', 'Same coached structure as Sk8 Skool for Kidz', 'For beginners'],
-    bookingUrl: '/adults/sk8-skool/all-ages',
+    bookingUrl: '/kids-space/sk8-skool/all-ages',
     buttonLabel: 'View details',
   },
 ];
