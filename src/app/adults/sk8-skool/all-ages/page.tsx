@@ -187,12 +187,12 @@ export default function Sk8SkoolAllAgesPage() {
                 Unlimited Saturdays for the month. Cancel anytime.
               </p>
               <a
-                href={LINKS.kidzSaturdaySkate}
+                href={LINKS.membersSubscribe}
                 target="_blank"
                 rel="noopener"
                 className="inline-block bg-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
               >
-                Book now &rsaquo;
+                Subscribe &rsaquo;
               </a>
             </div>
 
