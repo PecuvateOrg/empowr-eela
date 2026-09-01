@@ -27,10 +27,6 @@ export const LINKS = {
   // front door (the /members page), not the only one.
   membersSignup:     `${MEMBERS_BASE_URL}/signup`,
   membersLogin:      `${MEMBERS_BASE_URL}/login`,
-  // Monthly Subscriptions. Guarded by Members' middleware, so a signed-out
-  // visitor is sent to /login?next=/membership and lands back here after
-  // signing up — which is right, since a Subscription must name a skater.
-  membersSubscribe:  `${MEMBERS_BASE_URL}/membership`,
 
   // Children / family
   rollerQuadCampsHAF:     'https://app.holidayactivities.com/parent/providers/empowr-cic',

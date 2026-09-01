@@ -127,7 +127,7 @@ export default function Sk8SkoolKidzPage() {
               </h2>
               <p className="text-2xl font-[900] text-red mb-1">£10 / session</p>
               <p className="text-xs font-[700] text-mid mb-3">or{' '}
-                <a href={LINKS.membersSubscribe} target="_blank" rel="noopener" className="text-blue underline">£30/mo unlimited Mondays</a>{' '}
+                <a href={`${LINKS.kidzMondayClasses}#subscribe`} target="_blank" rel="noopener" className="text-blue underline">£30/mo unlimited Mondays</a>{' '}
                 — cancel anytime</p>
               <p className="text-sm text-mid leading-[1.7] mb-2 flex-1">
                 Indoors, all weather. Goldsmiths Community Centre, Castillon Road.
@@ -157,7 +157,7 @@ export default function Sk8SkoolKidzPage() {
               </h2>
               <p className="text-2xl font-[900] text-white mb-1">£10 / session</p>
               <p className="text-xs font-[700] text-white/70 mb-3">or{' '}
-                <a href={LINKS.membersSubscribe} target="_blank" rel="noopener" className="text-white underline">£30/mo unlimited Wednesdays</a>{' '}
+                <a href={`${LINKS.kidzWednesdayClasses}#subscribe`} target="_blank" rel="noopener" className="text-white underline">£30/mo unlimited Wednesdays</a>{' '}
                 — cancel anytime</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-2 flex-1">
                 Outdoors, Sports Field SE4 2HU, April–August. Moves indoors to Honor Oak
