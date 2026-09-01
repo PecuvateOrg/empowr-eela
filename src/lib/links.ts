@@ -21,6 +21,13 @@ export const LINKS = {
   skateJam:          `${MEMBERS_BASE_URL}/sessions/skate-jam`,
   rollerSkateEvents: `${MEMBERS_BASE_URL}/sessions/roller-skate-events`,
 
+  // Members platform — account entry points. The booking flow also funnels
+  // here on its own: a signed-out /book/<id> 307s to /login?next=..., and
+  // that page carries a "Create an account" link. These keys are the second
+  // front door (the /members page), not the only one.
+  membersSignup:     `${MEMBERS_BASE_URL}/signup`,
+  membersLogin:      `${MEMBERS_BASE_URL}/login`,
+
   // Children / family
   rollerQuadCampsHAF:     'https://app.holidayactivities.com/parent/providers/empowr-cic',
   kidzSpace:              'https://empowrcic.wixsite.com/empowrcic/kidzspace',
