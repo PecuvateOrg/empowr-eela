@@ -1,22 +1,56 @@
+// Members platform base. Bookable sessions route here instead of Wix — the
+// 2026-09-01 cutover. Every URL below was verified live (HTTP 200) against
+// members.empowrcic.org before merge; a Members slug that 404s silently
+// sends a parent to a dead page, so re-verify if you add one.
+//
+// THE CUTOVER IS TOTAL: every bookable session routes to Members, including
+// the two with no dates yet. Members renders a "Dates coming soon" page for an
+// ACTIVE offering with no occurrences, so those two get a real page with the
+// real price and an "email us" line rather than a Wix page or a 404.
+//
+// ⚠️ THIS DEPENDS ON A DATA FLAG, NOT ON CODE. roller-quad-camp and
+// all-ages-roller-disco must be active = true in mem_offerings. While they are
+// inactive, getOffering() filters them out and dynamicParams = false turns that
+// into a hard 404 — these two links break. Flip them from the Members ADMIN UI,
+// never raw SQL: the slug set is frozen at build time and only the admin route
+// fires triggerCatalogueRebuild().
+const MEMBERS_BASE_URL = 'https://members.empowrcic.org';
+
 export const LINKS = {
   // Adults programmes
-  sk8Skool:          'https://empowrcic.wixsite.com/empowrcic/sk8-skool',
-  synkron8:          'https://empowrcic.wixsite.com/empowrcic/sk8-skool',
-  // No dedicated Wix service-page slug confirmed for this course — routes through
-  // the same Sk8 Skool booking hub as synkron8 (same precedent as above).
-  beginnersFoundations: 'https://empowrcic.wixsite.com/empowrcic/sk8-skool',
-  skateJam:          'https://empowrcic.wixsite.com/empowrcic/skate-jam',
-  allAges:           'https://empowrcic.wixsite.com/empowrcic/kidzspace',
-  rollerSkateEvents: 'https://empowrcic.wixsite.com/empowrcic/roller-skate-events',
+  synkron8:          `${MEMBERS_BASE_URL}/sessions/synkron8`,
+  // ⚠️ Key is PLURAL, slug is SINGULAR, and that mismatch is correct — not a
+  // typo to tidy. The key matches EELA's own /adults/sk8-skool/beginners-
+  // foundations route; Members renamed its offering to the singular on
+  // 2026-08-31. The old plural Members URL still 308s, but link to the
+  // canonical one rather than leaning on a redirect.
+  beginnersFoundations: `${MEMBERS_BASE_URL}/sessions/beginners-foundation`,
+  skateJam:          `${MEMBERS_BASE_URL}/sessions/skate-jam`,
+  rollerSkateEvents: `${MEMBERS_BASE_URL}/sessions/roller-skate-events`,
+
+  // Members platform — account entry points. The booking flow also funnels
+  // here on its own: a signed-out /book/<id> 307s to /login?next=..., and
+  // that page carries a "Create an account" link. These keys are the second
+  // front door (the /members page), not the only one.
+  membersSignup:     `${MEMBERS_BASE_URL}/signup`,
+  membersLogin:      `${MEMBERS_BASE_URL}/login`,
 
   // Children / family
   rollerQuadCampsHAF:     'https://app.holidayactivities.com/parent/providers/empowr-cic',
   kidzSpace:              'https://empowrcic.wixsite.com/empowrcic/kidzspace',
-  kidzMondayClasses:      'https://empowrcic.wixsite.com/empowrcic/service-page/sk8-skool-for-kidz-5-15-yrs?referral=service_list_widget',
-  kidzWednesdayClasses:   'https://empowrcic.wixsite.com/empowrcic/service-page/sk8-skool-for-kidz-5-15-yrs-1?referral=service_list_widget',
-  kidzSaturdaySkate:      'https://empowrcic.wixsite.com/empowrcic/service-page/sk8-skool-for-all-ages-5yrs-1?referral=service_list_widget',
-  kidzSummerCamps:        'https://empowrcic.wixsite.com/empowrcic/service-page/summer-roller-camp-coming-soon?referral=service_list_widget',
-  kidzRollerDisco:        'https://empowrcic.wixsite.com/empowrcic/service-page/all-ages-roller-disco-5yrs-1?referral=service_list_widget',
+  // Monday and Wednesday share one Members page — the offering is one
+  // offering with two weekly slots, and the page lists every date. The
+  // separate Wix service-pages they replace no longer have an equivalent.
+  kidzMondayClasses:      `${MEMBERS_BASE_URL}/sessions/sk8-skool-kidz`,
+  kidzWednesdayClasses:   `${MEMBERS_BASE_URL}/sessions/sk8-skool-kidz`,
+  kidzSaturdaySkate:      `${MEMBERS_BASE_URL}/sessions/sk8-skool-all-ages`,
+  // No dates scheduled yet — lands on the "Dates coming soon" state, which
+  // still shows the £45 price and venue. This is the PAID route;
+  // rollerQuadCampsHAF above is the separate benefit-eligible DfE-funded
+  // route and is NOT a substitute for it.
+  kidzSummerCamps:        `${MEMBERS_BASE_URL}/sessions/roller-quad-camp`,
+  // No dates scheduled yet — same "Dates coming soon" state as camps.
+  kidzRollerDisco:        `${MEMBERS_BASE_URL}/sessions/all-ages-roller-disco`,
 
   // Quiz — links to landing page quiz until a native quiz is built on this platform
   quiz:              'https://start.empowrcic.org/quiz?utm_source=empowr-eela&utm_medium=internal',

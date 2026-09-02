@@ -184,12 +184,12 @@ export default function Synkron8Page() {
                 Unlimited Mondays for the month. Cancel anytime.
               </p>
               <a
-                href={LINKS.synkron8}
+                href={`${LINKS.synkron8}#subscribe`}
                 target="_blank"
                 rel="noopener"
                 className="inline-block bg-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
               >
-                Book now &rsaquo;
+                Subscribe &rsaquo;
               </a>
             </div>
 
