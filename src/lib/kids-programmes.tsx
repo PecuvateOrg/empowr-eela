@@ -13,18 +13,6 @@ export const kidsProgrammes: Programme[] = [
     bookingUrl: '/kids-space/sk8-skool',
     buttonLabel: 'View options',
   },
-  /* Roller Disco for All Ages discontinued 2026-07-31 — slot repurposed for private bookings,
-     no public offering to advertise yet. Kept here in case the team reinstates it.
-  {
-    id: 'kidz-roller-disco',
-    tag: 'Sat · 5+ yrs',
-    tagColor: 'text-blue-dark',
-    title: 'Roller Disco for All Ages',
-    icon: <Icon icon="mdi:music-note" width={36} height={36} className="text-blue-dark" />,
-    bullets: ['Music & lights on wheels', 'Dance & skate together', 'Party atmosphere for all'],
-    bookingUrl: LINKS.kidzRollerDisco,
-  },
-  */
   {
     id: 'kidz-summer-camps',
     tag: 'Camp · 5+ yrs',
@@ -42,7 +30,9 @@ export const kidsProgrammes: Programme[] = [
     title: 'Roller Skate Events',
     icon: <Icon icon="mdi:calendar-star" width={36} height={36} className="text-blue-dark" />,
     bullets: ['Roller Discos', 'Roller Skate Challenges', 'Roller Games & Tournaments'],
-    bookingUrl: LINKS.rollerSkateEvents,
+    // The Kids Space "events" card IS the all-ages Roller Disco — the adults
+    // rollerSkateEvents offering is 15+ and was never what this card meant.
+    bookingUrl: LINKS.kidzRollerDisco,
   },
   {
     id: 'private-bookings',
