@@ -2,6 +2,8 @@
 
 ## Current Phase
 
+**GitHub state (2026-09-03):** the audited repository is public at `PecuvateOrg/empowr-eela`. `EmpowrCIC` has write access, and `main` is PR-only with zero required approvals so the owner can self-merge but cannot push directly.
+
 **✅ 2026-09-02 — THE WIX→MEMBERS CUTOVER IS MERGED AND LIVE. EELA is fully off Wix.** `feat/members-links-cutover` merged to `main` (`a707007`). Verified on production: 14 pages 200, **zero Wix links anywhere**, all 10 Members destinations 200, all four `#subscribe` anchors present. **This resolves every "cutover" item below — `feat/eela-booking-cutover` is DELETED (superseded; recoverable at `5e00806`), do not look for it.** Camps and Roller Disco now go to Members too, landing on its "Dates coming soon" state — possible because `roller-quad-camp` and `all-ages-roller-disco` were flipped `active = true` (admin UI) on 2026-09-02. That data flag, not code, was always the gate: `dynamicParams = false` makes an inactive slug a hard 404.
 
 **All Ages now has a route per space.** It was ONE page listed on BOTH Sk8 Skool hubs with one hardcoded back link, so it was wrong from one hub whichever value it held — the 08-29 "fix" below flipped the string and merely moved the bug. `Sk8SkoolAllAgesContent` takes a `backHref`; `/kids-space/sk8-skool/all-ages` mirrors `/adults/...` and carries `alternates.canonical` to it. See [[feedback_shared_destination_hardcoded_parent]].

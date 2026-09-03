@@ -1,5 +1,12 @@
 # EELA — DEVLOG
 
+## 2026-09-03 — Repository audited, made public, and transferred to PecuvateOrg
+
+- Scanned current files and full Git history before publication; no high-confidence credentials were found and the tracked `.env.example` contains no live secrets
+- Transferred the repository to `PecuvateOrg/empowr-eela`; local `origin` now uses the canonical organisation URL
+- `EmpowrCIC` retains write access; `main` requires a pull request with zero approvals, so `Pecuvate` can self-merge but cannot push directly
+- No application files changed and the live Netlify site remained current
+
 ## 2026-09-02 — The Wix→Members cutover is MERGED AND LIVE; All Ages given a route per space
 
 - **This supersedes yesterday's "NOT merged, by the user's call."** `feat/members-links-cutover` merged to `main` (`a707007`) and deployed. Verified on production, not just preview: all 14 EELA pages 200, **zero Wix links remain anywhere on the site**, all 10 Members destinations 200, and all four `#subscribe` anchors exist on their targets.
