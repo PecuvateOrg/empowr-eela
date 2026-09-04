@@ -91,7 +91,7 @@ Email is NOT stored anywhere (Phase 1 stub)
 | **empowrcic.org** | Static link in Footer | Outbound |
 | **hero.empowrcic.org** | Static link in Footer | Outbound |
 | **Netlify** | Hosting — receives git push, runs build, serves site | Infrastructure |
-| **GitHub (Pecuvate/empowr-eela)** | Source of truth — Netlify pulls on push to main | Infrastructure |
+| **GitHub (PecuvateOrg/empowr-eela)** | Source of truth — Netlify pulls on push to main | Infrastructure |
 
 No inbound webhooks, no API keys, no third-party SDK calls in Phase 1.
 
@@ -105,7 +105,7 @@ Local change
     git push origin main
     │
     ▼
-GitHub (Pecuvate/empowr-eela)
+GitHub (PecuvateOrg/empowr-eela)
     │  triggers Netlify deploy hook
     ▼
 Netlify build runner
