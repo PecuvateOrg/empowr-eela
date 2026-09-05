@@ -38,8 +38,6 @@ ops/                            Deployment config and scripts
 
 CLAUDE.md                       Project rules
 CONTEXT.md                      This file
-DEVLOG.md                       Running dev log — read before every session
-memory.md                       Persistent project memory
 agents.md                       Agent roles and boundaries
 skills.md                       Available skills and slash commands
 ```
@@ -53,7 +51,7 @@ skills.md                       Available skills and slash commands
 | `src/lib/links.ts` | ALL external URLs — never hardcode in components |
 | `src/app/globals.css` | Brand tokens (`@theme`) and base styles |
 | `src/app/layout.tsx` | Root layout — nav and footer |
-| `DEVLOG.md` | Session decisions and in-progress state |
+| `../workspace-docs/empowr-eela/DEVLOG.md` | Session decisions and in-progress state — in the private hub, not this repo |
 
 ---
 

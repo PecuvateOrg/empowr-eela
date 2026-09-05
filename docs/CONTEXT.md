@@ -21,7 +21,7 @@ This directory contains technical documentation for the Empowr EELA platform. Re
 - **Live URL:** [eela.empowrcic.org](https://eela.empowrcic.org)
 - **Stack:** Next.js 15 + TypeScript + Tailwind CSS 4
 - **Hosting:** Netlify (auto-deploy on push to `main`)
-- **Repo:** `Pecuvate/empowr-eela` (GitHub, private)
+- **Repo:** `PecuvateOrg/empowr-eela` (GitHub, public)
 
 ---
 
