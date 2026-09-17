@@ -157,7 +157,19 @@ export default function Synkron8Page() {
               </h2>
               <p className="text-2xl font-[900] text-red mb-3">£15 / session</p>
               <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
-                2 hours, book week to week. Non-refundable and non-transferable.
+                {/*
+                  Corrected 2026-09-17. This read "Non-refundable and
+                  non-transferable", which was the v1.1 default and is wrong
+                  for SYNKRON8 on both halves: the offering is refund_policy
+                  `standard` and transferable `true` in mem_offerings, so a
+                  member can cancel for a full refund and move the date once.
+                  Source: vaults/EMPOWR CIC/entities/sessions.md,
+                  "Cancellation & Refund Policy" (v1.2, 2026-09-02), which
+                  lists only Roller Quad Camp and All Ages Roller Disco as
+                  exceptions. Re-read the flags before changing this again.
+                */}
+                2 hours, book week to week. Cancel or move the date up to 48
+                hours before, from your account.
               </p>
               <a
                 href={LINKS.synkron8}
