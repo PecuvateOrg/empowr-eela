@@ -75,7 +75,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do I need to attend every week?',
     answer:
-      'Yes. Beginners Foundation is delivered as a progressive course, with each class building on the skills covered during the previous week. We therefore recommend attending every scheduled class. Missed classes cannot be transferred, refunded or replaced.',
+      'Yes. Beginners Foundation is delivered as a progressive course, with each class building on the skills covered during the previous week. We therefore recommend attending every scheduled class. Individual classes are sold as part of the block, so a missed class cannot be transferred, refunded or replaced. The course itself can be cancelled from your account up to 48 hours before it begins, for a full refund.',
   },
   {
     question: 'Do I need to complete both levels?',
@@ -224,9 +224,18 @@ export default function BeginnersFoundationsPage() {
           </div>
 
           <p className="text-sm text-mid text-center mt-6">
+            {/*
+              The missed-class rule below was already accurate — a course is
+              sold as a block (Programme Policies v1.2 §5). What was missing,
+              until 2026-09-17, is that the COURSE can be cancelled: up to 48
+              hours before it begins, not before a given class. The two read
+              alike and mean different things. Source: vaults/EMPOWR CIC/
+              entities/sessions.md, "Cancellation & Refund Policy".
+            */}
             Both levels run on Tuesdays at Honor Oak Community Centre and alternate between
             intakes, so only one level runs at a time. Missed classes cannot be transferred
-            or refunded.
+            or refunded, but you can cancel the whole course from your account up to 48
+            hours before it begins.
           </p>
         </section>
 
