@@ -4,20 +4,15 @@
 >
 > **Devlog and memory location:** `../workspace-docs/empowr-eela/`
 >
-> `DEVLOG.md` and `memory.md` are **not** kept in this repo — they hold operational
-> detail that must not be world-readable. Write session entries to the path above,
-> in the private Empowr CIC hub. Both filenames are gitignored here, so a copy created
-> in this directory is silently never committed.
->
-> Never put live identifiers, unremediated security findings, or commercial state
-> in any file tracked here. See `../CONTEXT.md` and
-> `_config/guides/public-repo-collaboration.md`.
+> `DEVLOG.md` and `memory.md` are not kept in this repo — write session entries to the path
+> above instead. See `NON-NEGOTIABLES.md` for what must never be committed here.
 
 ## Identity
 Empowr CIC's central session discovery and membership platform — home, kids, and adults programmes, with members and booking features planned.
 
 ## Self-Reference
-This file is the map. All workspace detail lives in workspace CONTEXT.md files.
+This file is Layer 0 — routing only. Read `NON-NEGOTIABLES.md` before doing anything; project
+detail lives in workspace CONTEXT.md files.
 
 ---
 
@@ -38,16 +33,6 @@ This file is the map. All workspace detail lives in workspace CONTEXT.md files.
 - **New page:** spec in `planning/spec/` → build in `src/` → verify in `ops/`
 - **New feature with tech decision:** log ADR in `planning/decisions/` → architecture note in `planning/architecture/` → build in `src/`
 - **Deploy:** confirm env vars in `ops/` → run build from `src/` → push to trigger Netlify
-
----
-
-## Naming Conventions
-
-- Components: PascalCase (`HeroSection.tsx`)
-- Pages: kebab-case route folders (`app/kids-space/page.tsx`)
-- Lib files: kebab-case (`links.ts`, `types.ts`)
-- Decision records: `YYYY-MM-DD-decision-title.md`
-- CSS classes / brand tokens: kebab-case in `globals.css`
 
 ---
 
