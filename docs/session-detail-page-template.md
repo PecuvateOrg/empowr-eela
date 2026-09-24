@@ -56,7 +56,7 @@ Some entry points aren't a single session — they're a small family of distinct
 - Session/offering name, age range, one-line description
 - Day/time (if fixed) or "varies" framing
 - Price(s) for each booking option
-- Venue + FAQ + travel directions — **pull from the KB**, don't re-key it: `F:\Projects\vaults\EMPOWR CIC\entities\session-faqs.md` (per-session) or `entities/private-bookings.md` (Private/Seasonal Bookings offerings) is the source of truth once populated. `entities/sessions.md` is authoritative for price/day/venue — check it before hardcoding a figure.
+- Venue + FAQ + travel directions — **pull from the KB**, don't re-key it: `~/projects/vaults/EMPOWR CIC\entities\session-faqs.md` (per-session) or `entities/private-bookings.md` (Private/Seasonal Bookings offerings) is the source of truth once populated. `entities/sessions.md` is authoritative for price/day/venue — check it before hardcoding a figure.
 - Genuine Trustpilot reviews mentioning that offering by name, if any exist (see rule in step 6 above)
 
 ## Conventions
