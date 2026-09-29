@@ -14,7 +14,10 @@
 // into a hard 404 — these two links break. Flip them from the Members ADMIN UI,
 // never raw SQL: the slug set is frozen at build time and only the admin route
 // fires triggerCatalogueRebuild().
-const MEMBERS_BASE_URL = 'https://members.empowrcic.org';
+// NEXT_PUBLIC_MEMBERS_BASE_URL exists ONLY for a local-network preview
+// pointed at a local Members (ops/lan-preview.sh there). Never set it on
+// Netlify: production must link to the real Members site.
+const MEMBERS_BASE_URL = process.env.NEXT_PUBLIC_MEMBERS_BASE_URL || 'https://members.empowrcic.org';
 
 export const LINKS = {
   // Adults programmes
@@ -40,6 +43,8 @@ export const LINKS = {
   privateOneToOne:   `${MEMBERS_BASE_URL}/private-bookings?type=one`,
   privateGroup:      `${MEMBERS_BASE_URL}/private-bookings?type=group`,
   privateBirthday:   `${MEMBERS_BASE_URL}/private-bookings?type=party`,
+  // Public read-only list of open dates, used by NextAvailableDates.
+  privateAvailability: `${MEMBERS_BASE_URL}/api/private-bookings/availability`,
 
   membersSignup:     `${MEMBERS_BASE_URL}/signup`,
   membersLogin:      `${MEMBERS_BASE_URL}/login`,

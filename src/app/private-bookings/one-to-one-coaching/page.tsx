@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { LINKS } from '@/lib/links';
-import AvailabilityCalendar from '@/components/AvailabilityCalendar';
+import PrivateBookNow from '@/components/PrivateBookNow';
+import NextAvailableDates from '@/components/NextAvailableDates';
 
 export const metadata: Metadata = {
   title: '1:1 Private Skate Coaching — Private Bookings',
@@ -95,7 +95,7 @@ export default function OneToOneCoachingPage() {
           </div>
         </section>
 
-        <AvailabilityCalendar />
+        <NextAvailableDates type="one" />
 
         {/* BOOKING */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
@@ -119,12 +119,7 @@ export default function OneToOneCoachingPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               Choose your date, length and equipment, see the price and pay online.
             </p>
-            <a
-              href={LINKS.privateOneToOne}
-              className="inline-block bg-warm-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
-            >
-              Book now &rsaquo;
-            </a>
+            <PrivateBookNow type="one" />
           </div>
         </section>
 

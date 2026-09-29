@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { LINKS } from '@/lib/links';
-import AvailabilityCalendar from '@/components/AvailabilityCalendar';
+import PrivateBookNow from '@/components/PrivateBookNow';
+import NextAvailableDates from '@/components/NextAvailableDates';
 
 export const metadata: Metadata = {
   title: 'Roller Disco Birthday Party — Private Bookings',
@@ -92,7 +92,7 @@ export default function BirthdayPartyPage() {
           </div>
         </section>
 
-        <AvailabilityCalendar />
+        <NextAvailableDates type="party" />
 
         {/* BOOKING */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
@@ -116,12 +116,7 @@ export default function BirthdayPartyPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               The birthday person&apos;s place is free. Non-skaters welcome in the seating area.
             </p>
-            <a
-              href={LINKS.privateBirthday}
-              className="inline-block bg-warm-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
-            >
-              Book now &rsaquo;
-            </a>
+            <PrivateBookNow type="party" />
           </div>
         </section>
 
