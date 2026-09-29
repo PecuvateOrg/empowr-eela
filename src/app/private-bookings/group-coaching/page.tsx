@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import EnquiryModal from '@/components/EnquiryModal';
+import { LINKS } from '@/lib/links';
 import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 export const metadata: Metadata = {
@@ -122,15 +122,14 @@ export default function GroupCoachingPage() {
             </h2>
             <p className="text-2xl font-[900] text-white mb-3">£20 / person / hr</p>
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
-              Get in touch with your group size and preferred date to book.
+              Choose your group size, date and equipment, see the price and pay online.
             </p>
-            <EnquiryModal
-              subject="Private Booking Enquiry — Group Coaching"
-              source="eela-group-coaching"
-              triggerLabel="Enquire to book"
-              partySizeLabel="Number of skaters"
-              partySizeMin={3}
-            />
+            <a
+              href={LINKS.privateGroup}
+              className="inline-block bg-warm-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
+            >
+              Book now &rsaquo;
+            </a>
           </div>
         </section>
 

@@ -32,6 +32,15 @@ export const LINKS = {
   // here on its own: a signed-out /book/<id> 307s to /login?next=..., and
   // that page carries a "Create an account" link. These keys are the second
   // front door (the /members page), not the only one.
+  // Private bookings: the Members booking form, with the type preselected.
+  // ⚠️ LIVE ONLY ONCE Members PR #81 is deployed AND the type is active in
+  // mem_private_booking_types — until then /private-bookings does not exist
+  // on members.empowrcic.org (or shows "opening soon"). Re-verify all three
+  // return 200 before merging this.
+  privateOneToOne:   `${MEMBERS_BASE_URL}/private-bookings?type=one`,
+  privateGroup:      `${MEMBERS_BASE_URL}/private-bookings?type=group`,
+  privateBirthday:   `${MEMBERS_BASE_URL}/private-bookings?type=party`,
+
   membersSignup:     `${MEMBERS_BASE_URL}/signup`,
   membersLogin:      `${MEMBERS_BASE_URL}/login`,
 

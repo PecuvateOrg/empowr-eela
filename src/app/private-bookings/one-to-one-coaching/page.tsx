@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import EnquiryModal from '@/components/EnquiryModal';
+import { LINKS } from '@/lib/links';
 import AvailabilityCalendar from '@/components/AvailabilityCalendar';
 
 export const metadata: Metadata = {
@@ -117,15 +117,14 @@ export default function OneToOneCoachingPage() {
             </h2>
             <p className="text-2xl font-[900] text-white mb-3">£40 / person / hr</p>
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
-              Get in touch with your preferred date to book.
+              Choose your date, length and equipment, see the price and pay online.
             </p>
-            <EnquiryModal
-              subject="Private Booking Enquiry — 1:1 Coaching"
-              source="eela-one-to-one-coaching"
-              triggerLabel="Enquire to book"
-              partySizeLabel="Number of people"
-              partySizeMin={1}
-            />
+            <a
+              href={LINKS.privateOneToOne}
+              className="inline-block bg-warm-white text-blue text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90"
+            >
+              Book now &rsaquo;
+            </a>
           </div>
         </section>
 
