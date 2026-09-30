@@ -20,7 +20,7 @@ const chips = [
 const goodToKnow = [
   'Book at least 2 weeks in advance — your session is only reserved once paid in full.',
   'Non-refundable and non-transferable once booked.',
-  'Under-18s must wear full protective gear (helmet, knee/elbow pads, wrist guards) — this is required, not optional.',
+  'Under-16s must wear full protective gear (helmet, knee/elbow pads, wrist guards) — this is required, not optional. For those aged 16 and over it is highly recommended.',
 ];
 
 export default function OneToOneCoachingPage() {
