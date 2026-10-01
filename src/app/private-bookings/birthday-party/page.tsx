@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import EnquiryModal from '@/components/EnquiryModal';
 import PrivateBookNow from '@/components/PrivateBookNow';
 import NextAvailableDates from '@/components/NextAvailableDates';
 
@@ -116,7 +117,18 @@ export default function BirthdayPartyPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               The birthday person&apos;s place is free. Non-skaters welcome in the seating area.
             </p>
-            <PrivateBookNow type="party" />
+            <PrivateBookNow
+              type="party"
+              whenClosed={
+                <EnquiryModal
+                  subject="Private Booking Enquiry — Birthday Party"
+                  source="eela-birthday-party"
+                  triggerLabel="Enquire to book"
+                  partySizeLabel="Number of skaters (excl. birthday person)"
+                  partySizeMin={10}
+                />
+              }
+            />
           </div>
         </section>
 

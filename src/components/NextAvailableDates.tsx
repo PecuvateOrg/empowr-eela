@@ -12,7 +12,7 @@
 // taken in the meantime simply arrives unselected.
 import { useEffect, useState } from 'react';
 import { LINKS } from '@/lib/links';
-import { announceDate, bookUrlFor, type PrivateType } from '@/lib/private-booking-choice';
+import { announceDate, announceOpen, bookUrlFor, type PrivateType } from '@/lib/private-booking-choice';
 
 type Time = { label: string; starts_at: string; hours: number };
 type DateRow = { date: string; label: string; times: Time[] };
@@ -29,9 +29,10 @@ export default function NextAvailableDates({ type }: { type: PrivateType }) {
     const controller = new AbortController();
     fetch(`${LINKS.privateAvailability}?type=${type}`, { signal: controller.signal })
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .then((body: { open: boolean; dates: DateRow[] }) =>
-        setState({ status: 'ready', open: body.open, dates: body.dates ?? [] })
-      )
+      .then((body: { open: boolean; dates: DateRow[] }) => {
+        setState({ status: 'ready', open: body.open, dates: body.dates ?? [] });
+        announceOpen(type, body.open);
+      })
       .catch(() => {
         if (!controller.signal.aborted) setState({ status: 'failed' });
       });

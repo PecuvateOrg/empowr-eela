@@ -33,3 +33,21 @@ export function onDateChosen(type: PrivateType, handler: (time: ChosenTime) => v
   window.addEventListener(EVENT, listener);
   return () => window.removeEventListener(EVENT, listener);
 }
+
+// Whether online booking is open for a type, as NextAvailableDates learns it
+// from Members. PrivateBookNow swaps to the enquiry button while it is not,
+// so a type Empowr has not switched on never shows a dead "Book now".
+const OPEN_EVENT = 'eela:private-open';
+
+export function announceOpen(type: PrivateType, open: boolean) {
+  window.dispatchEvent(new CustomEvent(OPEN_EVENT, { detail: { type, open } }));
+}
+
+export function onOpenKnown(type: PrivateType, handler: (open: boolean) => void): () => void {
+  const listener = (e: Event) => {
+    const detail = (e as CustomEvent<{ type: PrivateType; open: boolean }>).detail;
+    if (detail.type === type) handler(detail.open);
+  };
+  window.addEventListener(OPEN_EVENT, listener);
+  return () => window.removeEventListener(OPEN_EVENT, listener);
+}

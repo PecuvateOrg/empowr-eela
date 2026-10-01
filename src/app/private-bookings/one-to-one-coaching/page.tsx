@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import EnquiryModal from '@/components/EnquiryModal';
 import PrivateBookNow from '@/components/PrivateBookNow';
 import NextAvailableDates from '@/components/NextAvailableDates';
 
@@ -119,7 +120,18 @@ export default function OneToOneCoachingPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               Choose your date, length and equipment, see the price and pay online.
             </p>
-            <PrivateBookNow type="one" />
+            <PrivateBookNow
+              type="one"
+              whenClosed={
+                <EnquiryModal
+                  subject="Private Booking Enquiry — 1:1 Coaching"
+                  source="eela-one-to-one-coaching"
+                  triggerLabel="Enquire to book"
+                  partySizeLabel="Number of people"
+                  partySizeMin={1}
+                />
+              }
+            />
           </div>
         </section>
 

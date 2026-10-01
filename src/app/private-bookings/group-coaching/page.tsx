@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import EnquiryModal from '@/components/EnquiryModal';
 import PrivateBookNow from '@/components/PrivateBookNow';
 import NextAvailableDates from '@/components/NextAvailableDates';
 
@@ -124,7 +125,18 @@ export default function GroupCoachingPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               Choose your group size, date and equipment, see the price and pay online.
             </p>
-            <PrivateBookNow type="group" />
+            <PrivateBookNow
+              type="group"
+              whenClosed={
+                <EnquiryModal
+                  subject="Private Booking Enquiry — Group Coaching"
+                  source="eela-group-coaching"
+                  triggerLabel="Enquire to book"
+                  partySizeLabel="Number of skaters"
+                  partySizeMin={3}
+                />
+              }
+            />
           </div>
         </section>
 
