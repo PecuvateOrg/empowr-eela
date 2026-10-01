@@ -4,7 +4,8 @@ import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import EnquiryModal from '@/components/EnquiryModal';
-import AvailabilityCalendar from '@/components/AvailabilityCalendar';
+import PrivateBookNow from '@/components/PrivateBookNow';
+import NextAvailableDates from '@/components/NextAvailableDates';
 
 export const metadata: Metadata = {
   title: 'Roller Disco Birthday Party — Private Bookings',
@@ -92,7 +93,7 @@ export default function BirthdayPartyPage() {
           </div>
         </section>
 
-        <AvailabilityCalendar />
+        <NextAvailableDates type="party" />
 
         {/* BOOKING */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
@@ -116,12 +117,17 @@ export default function BirthdayPartyPage() {
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               The birthday person&apos;s place is free. Non-skaters welcome in the seating area.
             </p>
-            <EnquiryModal
-              subject="Private Booking Enquiry — Birthday Party"
-              source="eela-birthday-party"
-              triggerLabel="Enquire to book"
-              partySizeLabel="Number of skaters (excl. birthday person)"
-              partySizeMin={10}
+            <PrivateBookNow
+              type="party"
+              whenClosed={
+                <EnquiryModal
+                  subject="Private Booking Enquiry — Birthday Party"
+                  source="eela-birthday-party"
+                  triggerLabel="Enquire to book"
+                  partySizeLabel="Number of skaters (excl. birthday person)"
+                  partySizeMin={10}
+                />
+              }
             />
           </div>
         </section>
