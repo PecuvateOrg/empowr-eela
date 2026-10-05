@@ -46,6 +46,11 @@ export const LINKS = {
   // Public read-only list of open dates, used by NextAvailableDates.
   privateAvailability: `${MEMBERS_BASE_URL}/api/private-bookings/availability`,
 
+  // Session facts (price, ages, day/time, venue) — the Empowr KB's offering
+  // tables, served by PecuvateCRM. The KB owns these facts (owner 2026-10-05);
+  // read through lib/offerings.ts, never fetched directly.
+  offeringsFeed: 'https://crm.pecuvate.com/api/public/empowr-cic/offerings',
+
   membersSignup:     `${MEMBERS_BASE_URL}/signup`,
   membersLogin:      `${MEMBERS_BASE_URL}/login`,
 
