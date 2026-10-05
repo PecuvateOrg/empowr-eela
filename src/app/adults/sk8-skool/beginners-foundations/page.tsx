@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SessionJsonLd from '@/components/SessionJsonLd';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
@@ -8,6 +9,9 @@ import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
+
+// Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Beginners Foundation — Sk8 Skool',
@@ -93,6 +97,7 @@ export default function BeginnersFoundationsPage() {
   return (
     <>
       <Navbar />
+      <SessionJsonLd offering="beginners-foundation" path="/adults/sk8-skool/beginners-foundations" />
 
       <main>
         {/* HERO */}
