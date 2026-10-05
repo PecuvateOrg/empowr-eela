@@ -38,7 +38,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do I need to bring my own skates and protective equipment?',
     answer:
-      'Yes. All participants must bring their own quad roller skates and protective equipment. Inline skates are not permitted.\n\nAll children under 18 must wear full protective equipment throughout the class, including:\nA helmet\nWrist guards\nElbow pads\nKnee pads\n\nSkate and protective equipment hire are not available.',
+      'Yes. All participants must bring their own quad roller skates and protective equipment. Inline skates are not permitted.\n\nAll participants under 16 must wear full protective equipment throughout the class, including:\nA helmet\nWrist guards\nElbow pads\nKnee pads\n\nSkate and protective equipment hire are not available.',
   },
   {
     question: 'How many classes should I attend?',
