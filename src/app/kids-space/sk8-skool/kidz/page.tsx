@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import SessionJsonLd from '@/components/SessionJsonLd';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
@@ -6,6 +7,9 @@ import Footer from '@/components/Footer';
 import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
+
+// Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Sk8 Skool for Kidz — Sk8 Skool',
@@ -56,6 +60,7 @@ export default function Sk8SkoolKidzPage() {
   return (
     <>
       <Navbar />
+      <SessionJsonLd offering="sk8-skool-kidz" path="/kids-space/sk8-skool/kidz" />
 
       <main>
         {/* HERO */}

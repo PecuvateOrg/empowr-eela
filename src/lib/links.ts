@@ -51,6 +51,10 @@ export const LINKS = {
   // read through lib/offerings.ts, never fetched directly.
   offeringsFeed: 'https://crm.pecuvate.com/api/public/empowr-cic/offerings',
 
+  // Live state (next dates, places left, booking URLs) from Members — a
+  // backend, never a navigation destination. Read through lib/live-sessions.ts.
+  liveSessions: `${MEMBERS_BASE_URL}/api/public/live-sessions`,
+
   membersSignup:     `${MEMBERS_BASE_URL}/signup`,
   membersLogin:      `${MEMBERS_BASE_URL}/login`,
 

@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
+import SessionJsonLd from '@/components/SessionJsonLd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { LINKS } from '@/lib/links';
+
+// Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Roller Quad Camps — Kids Space',
@@ -22,6 +26,7 @@ export default function RollerQuadCampsPage() {
   return (
     <>
       <Navbar />
+      <SessionJsonLd offering="roller-quad-camp" path="/roller-quad-camps" />
 
       <main>
         {/* HERO */}

@@ -1,17 +1,19 @@
 import { SITE_PAGES, SITE_URL, type SitePage } from '@/lib/site-index'
 import { formatPence, getOfferings, type Offering } from '@/lib/offerings'
-import { checkOfferingPages, OFFERING_PAGES } from '@/lib/offering-pages'
+import { checkLiveJoin, checkOfferingPages, OFFERING_PAGES } from '@/lib/offering-pages'
+import { getLiveSessions } from '@/lib/live-sessions'
 
 // /llms.txt — the plain-text index AI tools read (llmstxt.org format).
 // The page list is generated from every page in app/ (lib/site-index); only
 // the intro below is written by hand. Facts in it come from the Empowr KB
 // (entities/sessions) — change them there first, then here.
 //
-// "Session facts" comes from the KB offerings feed (lib/offerings), re-read
-// daily. A feed failure throws: at build the build fails, at revalidation the
-// last good file keeps being served. Must equal OFFERINGS_REVALIDATE (Next
-// needs a literal here).
-export const revalidate = 86400
+// "Session facts" comes from the KB offerings feed (lib/offerings); the
+// KB ↔ Members join check reads Members live state (lib/live-sessions), so the
+// file refreshes hourly (LIVE_REVALIDATE — Next needs a literal here). A feed
+// failure throws: at build the build fails, at revalidation the last good file
+// keeps being served.
+export const revalidate = 3600
 
 const INTRO = `# EELA by Empowr
 
@@ -60,8 +62,10 @@ function factLine(o: Offering) {
 }
 
 export async function GET() {
-  const offerings = await getOfferings()
+  const [offerings, live] = await Promise.all([getOfferings(), getLiveSessions()])
   checkOfferingPages(offerings)
+  // Runs on every build: KB ↔ Members slug drift fails the build here.
+  checkLiveJoin(offerings, live)
 
   const placed = new Set<string>()
   const blocks = SECTIONS.map(({ title, match }) => {
@@ -73,7 +77,7 @@ export async function GET() {
   const rest = SITE_PAGES.filter((p) => !placed.has(p.path))
   blocks.push(`## About and membership\n\n${rest.map(line).join('\n')}`)
 
-  const facts = `## Session facts\n\nFrom Empowr's knowledge base, refreshed daily. Prices in GBP.\n\n${offerings.map(factLine).join('\n')}`
+  const facts = `## Session facts\n\nFrom Empowr's knowledge base. Prices in GBP.\n\n${offerings.map(factLine).join('\n')}`
 
   return new Response(`${INTRO}\n\n${facts}\n\n${blocks.join('\n\n')}\n`, {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
