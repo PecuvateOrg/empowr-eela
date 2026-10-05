@@ -32,3 +32,6 @@ Thumbs.db
 # tracked here. See ../CONTEXT.md and ../workspace-docs/empowr-eela/.
 DEVLOG.md
 memory.md
+
+# Generated on prebuild/predev by src/scripts/gen-site-index.mjs
+src/lib/site-index.generated.json
