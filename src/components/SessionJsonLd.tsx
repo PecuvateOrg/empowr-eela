@@ -1,8 +1,9 @@
-import { getOfferings } from '@/lib/offerings';
+import { getOfferings, SCHEMA_TYPE } from '@/lib/offerings';
 import { getLiveSessions } from '@/lib/live-sessions';
 import { SITE_URL } from '@/lib/site-index';
 
-// schema.org Event markup for one session's upcoming bookable dates, for
+// schema.org Event-subtype markup (EducationEvent for lessons, SportsEvent
+// for sessions, Event for camps and events — from the KB Type) for one session's upcoming bookable dates, for
 // search engines and AI answers. Facts (price) come from the KB feed; dates,
 // venue per date and the booking link from Members. Places left are left out
 // on purpose: an hour-old count would be a false claim in a search result.
@@ -27,7 +28,7 @@ export default async function SessionJsonLd({ offering, path }: { offering: stri
     .map((d) => {
       const [venueName, ...rest] = (d.venue ?? facts.venue).split(', ');
       return {
-        '@type': 'Event',
+        '@type': SCHEMA_TYPE[facts.type],
         name: d.label ? `${session.title} — ${d.label}` : session.title,
         url: SITE_URL + path,
         startDate: d.starts_at,

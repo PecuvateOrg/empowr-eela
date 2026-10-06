@@ -25,6 +25,9 @@ export interface LiveSession {
   title: string;
   bookable: boolean;
   session_url: string;
+  price_pence: number | null;
+  walk_in_price_pence: number | null;
+  early_bird_price_pence: number | null;
   dates: LiveDate[];
 }
 

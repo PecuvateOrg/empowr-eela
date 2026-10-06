@@ -64,7 +64,7 @@ function factLine(o: Offering) {
 export async function GET() {
   const [offerings, live] = await Promise.all([getOfferings(), getLiveSessions()])
   checkOfferingPages(offerings)
-  // Runs on every build: KB ↔ Members slug drift fails the build here.
+  // Runs on every build and revalidation: KB ↔ Members drift is logged, not fatal.
   checkLiveJoin(offerings, live)
 
   const placed = new Set<string>()
