@@ -37,3 +37,22 @@ body {
   background-color: var(--color-cream, #f8f7f4);
   color: var(--color-black, #1B1B1B);
 }
+
+/* Chat greeting on phones (components/ChatBubble.tsx): the greeting fades up,
+   the button wiggles once. Nothing moves for reduced-motion users. */
+@keyframes chat-teaser-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes chat-wiggle {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-12deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-6deg); }
+  80% { transform: rotate(3deg); }
+}
+.chat-teaser { animation: chat-teaser-in 300ms ease-out both; }
+.chat-wiggle { animation: chat-wiggle 700ms ease-in-out 1; }
+@media (prefers-reduced-motion: reduce) {
+  .chat-teaser, .chat-wiggle { animation: none; }
+}
