@@ -42,11 +42,13 @@ export function checkOfferingPages(offerings: Offering[]): void {
   if (problems.length) throw new Error(`offering → page map:\n- ${problems.join('\n- ')}`);
 }
 
-// KB facts and Members live state join by slug. A slug in only one source
-// throws — it would otherwise vanish from one side silently. "Live with no
-// upcoming dates" is NOT drift (Skate Jam off-season, camps between
-// holidays); that is a state to show, not a build failure.
-export function checkLiveJoin(kb: Offering[], live: LiveSession[]): void {
+// KB facts and Members live state join by slug and should agree on price.
+// Drift WARNS, never fails (owner 2026-10-06): activating a Members offering
+// before its KB row exists must not block an EELA deploy. The KB owns price
+// and is updated first, so a price mismatch means Members is out of date.
+// "Live with no upcoming dates" is NOT drift (Skate Jam off-season, camps
+// between holidays). Returns the warnings so callers and tests can see them.
+export function checkLiveJoin(kb: Offering[], live: LiveSession[]): string[] {
   const inMembers = new Set(live.map((l) => l.slug));
   const problems: string[] = [];
   for (const slug of inMembers) {
@@ -57,5 +59,19 @@ export function checkLiveJoin(kb: Offering[], live: LiveSession[]): void {
     if (!offPlatform && !inMembers.has(o.offering)) problems.push(`KB offering "${o.offering}" is not active in Members`);
     if (offPlatform && inMembers.has(o.offering)) problems.push(`KB says "${o.offering}" is off-platform but Members sells it`);
   }
-  if (problems.length) throw new Error(`KB ↔ Members join:\n- ${problems.join('\n- ')}`);
+  const prices: [string, keyof Offering, keyof LiveSession][] = [
+    ['online', 'onlinePence', 'price_pence'],
+    ['door', 'doorPence', 'walk_in_price_pence'],
+    ['early bird', 'earlyBirdPence', 'early_bird_price_pence'],
+  ];
+  for (const l of live) {
+    for (const [label, kbKey, liveKey] of prices) {
+      const kbValues = new Set(kb.filter((o) => o.offering === l.slug).map((o) => o[kbKey]));
+      if (kbValues.size && !kbValues.has(l[liveKey] as never)) {
+        problems.push(`"${l.slug}" ${label} price: KB ${[...kbValues].join('/')} vs Members ${l[liveKey]} (pence) — update Members`);
+      }
+    }
+  }
+  if (problems.length) console.warn(`KB ↔ Members drift (warning only):\n- ${problems.join('\n- ')}`);
+  return problems;
 }

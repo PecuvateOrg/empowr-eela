@@ -8,9 +8,22 @@ import { LINKS } from './links';
 
 // Re-read about once a day; the KB changes by hand, not by the minute.
 export const OFFERINGS_REVALIDATE = 86400;
+const FEED_SHAPE = '2';
 
 export const OFFERING_STATUSES = ['Live', 'Dates TBA', 'Off-platform'] as const;
 export type OfferingStatus = (typeof OFFERING_STATUSES)[number];
+
+// Owner labels 2026-10-06 (KB "Type" column). schema.org has no lesson, session
+// or camp type, so each maps to the closest Event subtype — any Event subtype
+// keeps the dates eligible for search results.
+export const OFFERING_TYPES = ['Lesson', 'Session', 'Camp', 'Event'] as const;
+export type OfferingType = (typeof OFFERING_TYPES)[number];
+export const SCHEMA_TYPE: Record<OfferingType, string> = {
+  Lesson: 'EducationEvent',
+  Session: 'SportsEvent',
+  Camp: 'Event',
+  Event: 'Event',
+};
 
 export interface Offering {
   offering: string;
@@ -28,6 +41,7 @@ export interface Offering {
   cancellation: string;
   dates: string;
   status: OfferingStatus;
+  type: OfferingType;
 }
 
 const STRING_FIELDS = ['offering', 'day', 'time', 'venue', 'ages', 'skates', 'cancellation', 'dates'] as const;
@@ -45,11 +59,20 @@ function check(row: unknown, i: number): Offering {
   // An unknown status must never render as bookable — a new KB value needs a
   // decision here first.
   if (!OFFERING_STATUSES.includes(o.status as OfferingStatus)) fail(`unknown status "${String(o.status)}"`);
+  // No default: a missing type would publish a guessed label to search engines.
+  if (!OFFERING_TYPES.includes(o.type as OfferingType)) fail(`unknown type "${String(o.type)}"`);
   return o as unknown as Offering;
 }
 
 export async function getOfferings(): Promise<Offering[]> {
-  const res = await fetch(LINKS.offeringsFeed, { next: { revalidate: OFFERINGS_REVALIDATE } });
+  // FEED_SHAPE is part of the request so Next's data cache (kept for up to a
+  // day, and restored between Netlify builds) can't hand back a copy from
+  // before a field this file requires. Bump it when check() starts requiring
+  // a new field — 2: `type` (2026-10-06).
+  const res = await fetch(LINKS.offeringsFeed, {
+    headers: { 'X-Feed-Shape': FEED_SHAPE },
+    next: { revalidate: OFFERINGS_REVALIDATE },
+  });
   if (!res.ok) throw new Error(`offerings feed: HTTP ${res.status}`);
   const body = await res.json();
   if (!Array.isArray(body?.offerings) || body.offerings.length === 0) {
