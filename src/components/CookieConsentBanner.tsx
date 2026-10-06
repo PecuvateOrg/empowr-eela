@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import posthog from 'posthog-js'
 import { Icon } from '@iconify/react'
 
-const CONSENT_KEY = 'eela_analytics_consent'
+export const CONSENT_KEY = 'eela_analytics_consent'
+export const CONSENT_DECIDED_EVENT = 'eela:consent-decided'
 
 export default function CookieConsentBanner() {
   const [visible, setVisible] = useState(false)
@@ -18,9 +19,14 @@ export default function CookieConsentBanner() {
     }
   }, [])
 
+  // Announced so things waiting for the banner to clear (the phone chat
+  // greeting in ChatBubble) can appear once it has slid away.
   const dismiss = () => {
     setMounted(false)
-    setTimeout(() => setVisible(false), 300)
+    setTimeout(() => {
+      setVisible(false)
+      window.dispatchEvent(new Event(CONSENT_DECIDED_EVENT))
+    }, 300)
   }
 
   const handleAccept = () => {
