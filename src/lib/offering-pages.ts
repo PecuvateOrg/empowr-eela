@@ -12,12 +12,12 @@ export const OFFERING_PAGES: Record<string, string[]> = {
   synkron8: ['/adults/sk8-skool/synkron8'],
   'beginners-foundation': ['/adults/sk8-skool/beginners-foundations'],
   'roller-quad-camp': ['/roller-quad-camps'],
+  'prep-to-street-skate': ['/adults/sk8-skool/prep-to-street-skate'],
 };
 
 // KB offerings with no EELA page yet (open since 2026-09-02). Listing one here
 // is a deliberate choice; an offering in neither list fails the build.
 export const OFFERINGS_WITHOUT_PAGE = [
-  'prep-to-street-skate',
   'beginner-street-skate',
   'all-ages-roller-disco',
   'roller-skate-events',
