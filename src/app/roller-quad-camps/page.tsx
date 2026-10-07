@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import SessionJsonLd from '@/components/SessionJsonLd';
-import CampBooking, { type CampDate } from '@/components/CampBooking';
-import { getLiveSessions } from '@/lib/live-sessions';
+import LiveBooking from '@/components/LiveBooking';
+import { liveDates } from '@/lib/live-sessions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
@@ -9,7 +9,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { LINKS } from '@/lib/links';
 
-// Hourly, for the live dates in SessionJsonLd and CampBooking (LIVE_REVALIDATE).
+// Hourly, for the live dates in SessionJsonLd and LiveBooking (LIVE_REVALIDATE).
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -24,16 +24,8 @@ const pillars = [
   { icon: 'mdi:gift',           label: 'HAF eligible' },
 ];
 
-const MAX_DATES = 4;
-
 export default async function RollerQuadCampsPage() {
-  // Same feed and filter as SessionJsonLd: upcoming, bookable dates only.
-  const live = (await getLiveSessions()).find((l) => l.slug === 'roller-quad-camp');
-  const now = Date.now();
-  const campDates: CampDate[] = (live?.dates ?? [])
-    .filter((d) => d.bookable && Date.parse(d.starts_at) > now)
-    .slice(0, MAX_DATES)
-    .map((d) => ({ startsAt: d.starts_at, bookUrl: d.book_url, placesLeft: d.places_left }));
+  const campDates = await liveDates('roller-quad-camp', 4);
 
   return (
     <>
@@ -132,7 +124,7 @@ export default async function RollerQuadCampsPage() {
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Empowr Camps
               </h2>
-              <p className="text-2xl font-[900] text-red mb-3">From £45</p>
+              <p className="text-2xl font-[900] text-red mb-3">From £35</p>
               <p className="text-xs font-[800] text-black mb-3">
                 Bookings are non-refundable and can&apos;t be moved to another date.
               </p>
@@ -140,7 +132,20 @@ export default async function RollerQuadCampsPage() {
                 Book your child&apos;s place directly. Multi-day skating adventure with expert
                 coaching, games, and activities.
               </p>
-              <CampBooking dates={campDates} sessionUrl={LINKS.kidzSummerCamps} />
+              <LiveBooking
+                programme="Roller Quad Camp"
+                source="camps_page"
+                dates={campDates}
+                sessionUrl={LINKS.kidzSummerCamps}
+                empty={
+                  <>
+                    New camp dates are coming soon — they&apos;re set for each school holiday.{' '}
+                    <Link href="/find-a-session?who=kids" className="font-[800] text-blue no-underline hover:opacity-80">
+                      See other kids&apos; sessions &rsaquo;
+                    </Link>
+                  </>
+                }
+              />
             </div>
 
             {/* HAF Spaces card — second */}

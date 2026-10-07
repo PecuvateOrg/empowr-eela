@@ -55,3 +55,19 @@ export async function getLiveSessions(): Promise<LiveSession[]> {
   }
   return body.offerings.map(check);
 }
+
+export type BookableDate = { startsAt: string; bookUrl: string; placesLeft: number | null };
+
+// Upcoming, bookable dates of one offering (same filter as SessionJsonLd),
+// optionally only one slot's (label prefix, e.g. "Level 1"). Throws if the
+// offering is missing, like every other live-sessions failure.
+export async function liveDates(slug: string, max: number, labelPrefix?: string): Promise<BookableDate[]> {
+  const session = (await getLiveSessions()).find((l) => l.slug === slug);
+  if (!session) throw new Error(`liveDates: "${slug}" missing from Members`);
+  const now = Date.now();
+  return session.dates
+    .filter((d) => d.bookable && Date.parse(d.starts_at) > now)
+    .filter((d) => !labelPrefix || (d.label ?? '').startsWith(labelPrefix))
+    .slice(0, max)
+    .map((d) => ({ startsAt: d.starts_at, bookUrl: d.book_url, placesLeft: d.places_left }));
+}

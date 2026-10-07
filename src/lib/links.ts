@@ -28,6 +28,7 @@ export const LINKS = {
   // 2026-08-31. The old plural Members URL still 308s, but link to the
   // canonical one rather than leaning on a redirect.
   beginnersFoundations: `${MEMBERS_BASE_URL}/sessions/beginners-foundation`,
+  prepToStreetSkate: `${MEMBERS_BASE_URL}/sessions/prep-to-street-skate`,
   skateJam:          `${MEMBERS_BASE_URL}/sessions/skate-jam`,
   rollerSkateEvents: `${MEMBERS_BASE_URL}/sessions/roller-skate-events`,
 
