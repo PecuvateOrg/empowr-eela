@@ -1,10 +1,19 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import posthog from 'posthog-js'
 import { CONSENT_DECIDED_EVENT, CONSENT_KEY } from '@/components/CookieConsentBanner'
 
-const WIDGET_URL = 'https://crm.pecuvate.com/widget'
+const WIDGET_ORIGIN = 'https://crm.pecuvate.com'
+const WIDGET_URL = `${WIDGET_ORIGIN}/widget`
+
+// The search box (SiteSearch) dispatches this with { text }: the panel opens
+// and the question goes to the widget as the visitor's message (owner,
+// 2026-10-07). The widget says "ready" when loaded and "asked" when it took
+// the question; with no "asked" in ASK_FALLBACK_MS the visitor goes to the
+// session finder instead, so the box never does nothing.
+export const ASK_EVENT = 'eela:ask'
+const ASK_FALLBACK_MS = 4000
 
 // Larger screens: the panel opens on its own shortly after the page settles,
 // so it reads as a proactive greeting rather than a cold empty bubble.
@@ -150,6 +159,55 @@ export default function ChatBubble({ orgSlug }: Props) {
     return () => clearTimeout(t)
   }, [teaser])
 
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const widgetReady = useRef(false)
+  const pendingAsk = useRef<string | null>(null)
+  const fallback = useRef<ReturnType<typeof setTimeout>>(undefined)
+
+  useEffect(() => {
+    // Target the widget's origin, never '*': the text can hold a child's name.
+    function flush() {
+      const text = pendingAsk.current
+      if (text === null || !widgetReady.current) return
+      pendingAsk.current = null
+      iframeRef.current?.contentWindow?.postMessage({ type: 'pecuvate-widget:ask', text }, WIDGET_ORIGIN)
+    }
+    function onWidget(event: MessageEvent) {
+      if (event.origin !== WIDGET_ORIGIN || event.source !== iframeRef.current?.contentWindow) return
+      const type = (event.data as { type?: unknown } | null)?.type
+      if (type === 'pecuvate-widget:ready') {
+        widgetReady.current = true
+        flush()
+      } else if (type === 'pecuvate-widget:asked') {
+        clearTimeout(fallback.current)
+      }
+    }
+    function onAsk(event: Event) {
+      const text = (event as CustomEvent<{ text: string }>).detail?.text?.trim()
+      if (!text) return
+      setTeaser(null)
+      set(KEY.stop)
+      setOpen(o => {
+        if (!o) posthog.capture('chat_open', { source: 'search' })
+        return true
+      })
+      pendingAsk.current = text
+      clearTimeout(fallback.current)
+      fallback.current = setTimeout(() => {
+        posthog.capture('site_search_fallback')
+        window.location.assign('/find-a-session')
+      }, ASK_FALLBACK_MS)
+      flush()
+    }
+    window.addEventListener('message', onWidget)
+    window.addEventListener(ASK_EVENT, onAsk)
+    return () => {
+      window.removeEventListener('message', onWidget)
+      window.removeEventListener(ASK_EVENT, onAsk)
+      clearTimeout(fallback.current)
+    }
+  }, [])
+
   function openChat(source: 'button' | 'teaser') {
     if (source === 'teaser') posthog.capture('chat_teaser_tapped', { kind: teaser })
     setTeaser(null)
@@ -176,6 +234,7 @@ export default function ChatBubble({ orgSlug }: Props) {
         }`}
       >
         <iframe
+          ref={iframeRef}
           src={`${WIDGET_URL}?org=${orgSlug}`}
           className="w-full h-full border-0"
           title="Chat with Empowr"
