@@ -32,9 +32,9 @@ const offerings: Programme[] = [
   {
     id: 'prep-to-street-skate',
     tag: 'Outdoor course',
-    tagColor: 'text-red',
+    tagColor: 'text-blue',
     title: 'Prep to Street Skate',
-    icon: <Icon icon="mdi:road-variant" width={36} height={36} className="text-red" />,
+    icon: <Icon icon="mdi:road-variant" width={36} height={36} className="text-blue" />,
     bullets: ['Two outdoor levels in the park', 'Gets you ready for street skating', 'Summer 2027 blocks, from 5 May'],
     bookingUrl: '/adults/sk8-skool/prep-to-street-skate',
     buttonLabel: 'View details',
