@@ -121,6 +121,9 @@ export default function RollerQuadCampsPage() {
                 Empowr Camps
               </h2>
               <p className="text-2xl font-[900] text-red mb-3">From £45</p>
+              <p className="text-xs font-[800] text-black mb-3">
+                Bookings are non-refundable and can&apos;t be moved to another date.
+              </p>
               <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
                 Book your child&apos;s place directly. Multi-day skating adventure with expert
                 coaching, games, and activities.
