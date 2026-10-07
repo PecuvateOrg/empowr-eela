@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import { LINKS } from '@/lib/links';
 import Footer from '@/components/Footer';
+import SiteSearch from '@/components/SiteSearch';
 
 export const metadata: Metadata = {
   title: 'EELA — Sessions for Everyone',
@@ -36,6 +37,7 @@ export default function HomePage() {
             At Empowr, we build wellbeing through hands-on experience. Whatever your age or
             ability, there&apos;s a session made for you.
           </p>
+          <SiteSearch />
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/adults"
