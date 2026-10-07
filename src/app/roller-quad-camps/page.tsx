@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import SessionJsonLd from '@/components/SessionJsonLd';
+import CampBooking, { type CampDate } from '@/components/CampBooking';
+import { getLiveSessions } from '@/lib/live-sessions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
@@ -7,7 +9,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { LINKS } from '@/lib/links';
 
-// Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
+// Hourly, for the live dates in SessionJsonLd and CampBooking (LIVE_REVALIDATE).
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -22,7 +24,17 @@ const pillars = [
   { icon: 'mdi:gift',           label: 'HAF eligible' },
 ];
 
-export default function RollerQuadCampsPage() {
+const MAX_DATES = 4;
+
+export default async function RollerQuadCampsPage() {
+  // Same feed and filter as SessionJsonLd: upcoming, bookable dates only.
+  const live = (await getLiveSessions()).find((l) => l.slug === 'roller-quad-camp');
+  const now = Date.now();
+  const campDates: CampDate[] = (live?.dates ?? [])
+    .filter((d) => d.bookable && Date.parse(d.starts_at) > now)
+    .slice(0, MAX_DATES)
+    .map((d) => ({ startsAt: d.starts_at, bookUrl: d.book_url, placesLeft: d.places_left }));
+
   return (
     <>
       <Navbar />
@@ -128,15 +140,7 @@ export default function RollerQuadCampsPage() {
                 Book your child&apos;s place directly. Multi-day skating adventure with expert
                 coaching, games, and activities.
               </p>
-              <a
-                href={LINKS.kidzSummerCamps}
-                target="_blank"
-                rel="noopener"
-                className="inline-block bg-blue text-warm-white text-sm font-[800] px-6 py-3 rounded-full no-underline text-center transition-opacity hover:opacity-90 self-start"
-                style={{ boxShadow: 'var(--shadow-blue)' }}
-              >
-                Book now &rsaquo;
-              </a>
+              <CampBooking dates={campDates} sessionUrl={LINKS.kidzSummerCamps} />
             </div>
 
             {/* HAF Spaces card — second */}
