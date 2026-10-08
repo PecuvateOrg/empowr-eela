@@ -5,6 +5,10 @@
 // direct links to the right page or date (owner, 2026-10-07). Analytics
 // record that a search happened, never what was typed — visitors write
 // children's names and ages; the text lives only in the CRM conversation.
+//
+// It says up front that the answer comes in the chat (chat icon, "Ask"
+// button, the line under the box) — the Stripe docs "Ask AI" pattern — so the
+// panel opening isn't a surprise to someone expecting a results page.
 import { useState } from 'react';
 import posthog from 'posthog-js';
 import { Icon } from '@iconify/react';
@@ -40,8 +44,8 @@ export default function SiteSearch() {
         className="flex items-center gap-2 rounded-full border border-border bg-card pl-5 pr-1.5 py-1.5 focus-within:border-blue"
         style={{ boxShadow: 'var(--shadow-sm)' }}
       >
-        <Icon icon="mdi:magnify" width={20} className="text-muted shrink-0" aria-hidden />
-        <label htmlFor="site-search" className="sr-only">Search sessions</label>
+        <Icon icon="mdi:chat-processing-outline" width={20} className="text-muted shrink-0" aria-hidden />
+        <label htmlFor="site-search" className="sr-only">Ask us a question — the answer opens in the chat</label>
         <input
           id="site-search"
           type="search"
@@ -55,9 +59,13 @@ export default function SiteSearch() {
           type="submit"
           className="shrink-0 bg-blue text-warm-white text-sm font-[800] px-5 py-2.5 rounded-full transition-opacity hover:opacity-90"
         >
-          Search
+          Ask
         </button>
       </form>
+      <p className="flex items-center justify-center gap-1.5 mt-2 text-xs text-muted">
+        <Icon icon="mdi:message-reply-text-outline" width={14} aria-hidden />
+        We&apos;ll answer in the chat, with links straight to the right page
+      </p>
       <div className="flex flex-wrap justify-center gap-2 mt-3">
         {EXAMPLES.map((q) => (
           <button

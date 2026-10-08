@@ -163,6 +163,9 @@ export default function ChatBubble({ orgSlug }: Props) {
   const widgetReady = useRef(false)
   const pendingAsk = useRef<string | null>(null)
   const fallback = useRef<ReturnType<typeof setTimeout>>(undefined)
+  // When the panel was opened by a search, for chat_close: a close within
+  // seconds of a search answer suggests the chat wasn't what they expected.
+  const searchOpenedAt = useRef<number | null>(null)
 
   useEffect(() => {
     // Target the widget's origin, never '*': the text can hold a child's name.
@@ -191,6 +194,7 @@ export default function ChatBubble({ orgSlug }: Props) {
         if (!o) posthog.capture('chat_open', { source: 'search' })
         return true
       })
+      searchOpenedAt.current = Date.now()
       pendingAsk.current = text
       clearTimeout(fallback.current)
       fallback.current = setTimeout(() => {
@@ -214,6 +218,14 @@ export default function ChatBubble({ orgSlug }: Props) {
     set(KEY.stop)
     setOpen(o => {
       if (!o) posthog.capture('chat_open', { source })
+      else {
+        const since = searchOpenedAt.current
+        posthog.capture('chat_close', {
+          after_search: since !== null,
+          seconds_since_search: since !== null ? Math.round((Date.now() - since) / 1000) : null,
+        })
+        searchOpenedAt.current = null
+      }
       return !o
     })
   }
