@@ -9,8 +9,9 @@ import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
+import { liveDates } from '@/lib/live-sessions';
 
-// Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
+// Hourly, for the live dates in SessionJsonLd and the next-intake labels (LIVE_REVALIDATE).
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -40,15 +41,26 @@ const chips = [
 // `beginners-foundation`). If these drift, Members is authoritative for what
 // is actually bookable and `vaults/EMPOWR CIC/entities/sessions.md` is
 // authoritative for what was agreed.
-const intakeBlocks: { dates: string; level: 1 | 2 }[] = [
-  { dates: '15 Sep – 6 Oct 2026', level: 2 },
-  { dates: '20 Oct – 10 Nov 2026', level: 1 },
-  { dates: '24 Nov – 15 Dec 2026', level: 2 },
-  { dates: '5 Jan – 26 Jan 2027', level: 1 },
-  { dates: '9 Feb – 2 Mar 2027', level: 2 },
-  { dates: '9 Mar – 30 Mar 2027', level: 1 },
-  { dates: '6 Apr – 27 Apr 2027', level: 2 },
+// `lastClass` drops a block from the list once it has finished (the page
+// revalidates hourly), so the list never opens on a past intake.
+const intakeBlocks: { dates: string; level: 1 | 2; lastClass: string }[] = [
+  { dates: '15 Sep – 6 Oct 2026', level: 2, lastClass: '2026-10-06' },
+  { dates: '20 Oct – 10 Nov 2026', level: 1, lastClass: '2026-11-10' },
+  { dates: '24 Nov – 15 Dec 2026', level: 2, lastClass: '2026-12-15' },
+  { dates: '5 Jan – 26 Jan 2027', level: 1, lastClass: '2027-01-26' },
+  { dates: '9 Feb – 2 Mar 2027', level: 2, lastClass: '2027-03-02' },
+  { dates: '9 Mar – 30 Mar 2027', level: 1, lastClass: '2027-03-30' },
+  { dates: '6 Apr – 27 Apr 2027', level: 2, lastClass: '2027-04-27' },
 ];
+
+// "Tue 20 Oct 2026" from Members' next bookable start for a level. These
+// labels were hardcoded and Level 2 kept showing 15 Sep after it had started.
+const intakeLabel = (iso: string | undefined) =>
+  iso
+    ? `Next intake: ${new Intl.DateTimeFormat('en-GB', {
+        weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/London',
+      }).format(new Date(iso)).replace(',', '')}`
+    : 'New dates coming soon';
 
 const faqs: FaqItem[] = [
   {
@@ -93,7 +105,14 @@ const faqs: FaqItem[] = [
   },
 ];
 
-export default function BeginnersFoundationsPage() {
+export default async function BeginnersFoundationsPage() {
+  const [[l1], [l2]] = await Promise.all([
+    liveDates('beginners-foundation', 1, 'Level 1'),
+    liveDates('beginners-foundation', 1, 'Level 2'),
+  ]);
+  // End of the block's last class, London time (23:59 BST/GMT is close enough for a list).
+  const upcomingBlocks = intakeBlocks.filter((b) => Date.parse(`${b.lastClass}T23:59:59Z`) > Date.now());
+
   return (
     <>
       <Navbar />
@@ -177,7 +196,7 @@ export default function BeginnersFoundationsPage() {
             >
               <Icon icon="mdi:numeric-1-circle" width={36} className="text-blue mb-4" />
               <span className="text-[10px] font-[800] uppercase tracking-[0.18em] text-muted mb-2">
-                Next intake: Tue 20 Oct 2026
+                {intakeLabel(l1?.startsAt)}
               </span>
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Level 1
@@ -205,7 +224,7 @@ export default function BeginnersFoundationsPage() {
             >
               <Icon icon="mdi:numeric-2-circle" width={36} className="text-white/80 mb-4" />
               <span className="text-[10px] font-[800] uppercase tracking-[0.18em] text-white/60 mb-2">
-                Next intake: Tue 15 Sep 2026
+                {intakeLabel(l2?.startsAt)}
               </span>
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
                 Level 2
@@ -255,7 +274,7 @@ export default function BeginnersFoundationsPage() {
           </div>
 
           <ul className="rounded-[20px] bg-card border border-border overflow-hidden">
-            {intakeBlocks.map(({ dates, level }, i) => (
+            {upcomingBlocks.map(({ dates, level }, i) => (
               <li
                 key={dates}
                 className={`flex flex-wrap items-center justify-between gap-3 px-5 py-4 sm:px-7 ${
