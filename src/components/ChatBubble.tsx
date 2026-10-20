@@ -183,6 +183,22 @@ export default function ChatBubble({ orgSlug }: Props) {
         flush()
       } else if (type === 'pecuvate-widget:asked') {
         clearTimeout(fallback.current)
+      } else if (type === 'pecuvate-widget:link') {
+        // The visitor followed an answer link — the measure of whether the
+        // chat (and the search box feeding it) got them somewhere. The page
+        // is about to navigate, so send now rather than in the next batch.
+        const path = (event.data as { path?: unknown }).path
+        if (typeof path !== 'string') return
+        const since = searchOpenedAt.current
+        posthog.capture(
+          'chat_link_click',
+          {
+            path,
+            after_search: since !== null,
+            seconds_since_search: since !== null ? Math.round((Date.now() - since) / 1000) : null,
+          },
+          { send_instantly: true, transport: 'sendBeacon' },
+        )
       }
     }
     function onAsk(event: Event) {
