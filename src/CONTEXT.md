@@ -37,7 +37,7 @@ public/                 Static assets (images, icons)
 
 ## Brand Tokens
 
-Register in `app/globals.css` using `@theme`. Source of truth: `~/projects/Empowr CIC/brand-identity.md`.
+Register in `app/globals.css` using `@theme`. Source of truth: `~/projects/Empowr CIC/company/identity/brand-guide.md`.
 
 ```css
 @import "tailwindcss";
