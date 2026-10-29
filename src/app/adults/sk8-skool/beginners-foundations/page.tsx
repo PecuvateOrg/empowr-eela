@@ -10,7 +10,7 @@ import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices, sessionAges, courseBlocks } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, courseBlocks, sessionSlot, type SessionSlot } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and the next-intake labels (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -27,8 +27,8 @@ const pillars = [
   { icon: 'mdi:account-group', label: 'Small, progressive classes' },
 ];
 
-const chips = [
-  { icon: 'mdi:calendar-clock', label: 'Every Tuesday · 7:30–9:30 PM' },
+const chips = (slot: SessionSlot) => [
+  { icon: 'mdi:calendar-clock', label: `Every ${slot.day} · ${slot.time}` },
   { icon: 'mdi:swap-horizontal', label: 'Levels alternate each intake' },
   { icon: 'mdi:account-group', label: 'Complete beginners' },
 ];
@@ -91,9 +91,10 @@ export default async function BeginnersFoundationsPage() {
     liveDates('beginners-foundation', 1, 'Level 2'),
     sessionPrices('beginners-foundation'),
   ]);
-  const [ages, upcomingBlocks] = await Promise.all([
+  const [ages, upcomingBlocks, slot] = await Promise.all([
     sessionAges('beginners-foundation'),
     courseBlocks('beginners-foundation'),
+    sessionSlot('beginners-foundation', { day: 'Tuesday', time: '7:30–9:30 PM' }),
   ]);
   // End of the block's last class, London time (23:59 BST/GMT is close enough for a list).
 
@@ -149,7 +150,7 @@ export default async function BeginnersFoundationsPage() {
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips.map(({ icon, label }) => (
+            {chips(slot).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
@@ -240,7 +241,7 @@ export default async function BeginnersFoundationsPage() {
               alike and mean different things. Source: vaults/EMPOWR CIC/
               entities/sessions.md, "Cancellation & Refund Policy".
             */}
-            Both levels run on Tuesdays at Honor Oak Community Centre and alternate between
+            Both levels run on {slot.day}s at Honor Oak Community Centre and alternate between
             intakes, so only one level runs at a time. Missed classes cannot be transferred
             or refunded, but you can cancel the whole course from your account up to 48
             hours before it begins.
@@ -281,7 +282,7 @@ export default async function BeginnersFoundationsPage() {
           </ul>
 
           <p className="text-sm text-mid text-center mt-6">
-            Every block is four weeks, Tuesdays 7:30–9:30 PM. Taking both levels means
+            Every block is four weeks, {slot.day}s {slot.time}. Taking both levels means
             two blocks: a Level 1 block, then a later Level 2 block from the list above.
           </p>
         </section>

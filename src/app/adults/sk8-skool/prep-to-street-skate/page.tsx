@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices, sessionAges, courseBlocks, dayMonth, yearOf } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, courseBlocks, sessionSlot, dayMonth, yearOf } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and LiveBooking (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -30,22 +30,20 @@ const pillars = [
   { icon: 'mdi:road-variant', label: 'Ready for street skating' },
 ];
 
-const chips = (season: string, ages: string) => [
+const chips = (season: string, ages: string, time: string) => [
   { icon: 'mdi:calendar-range', label: season },
-  { icon: 'mdi:clock-outline', label: 'Evenings · 7–9 PM' },
+  { icon: 'mdi:clock-outline', label: `Evenings · ${time}` },
   { icon: 'mdi:account', label: `Ages ${ages}` },
 ];
 
 const levels = [
   {
     level: 1 as const,
-    day: 'Thursdays',
     park: 'Southwark Park, Southwark Park Road, London SE16',
     text: 'Your first step outdoors: take the skills you built indoors onto park paths, with a coach alongside you.',
   },
   {
     level: 2 as const,
-    day: 'Wednesdays',
     park: 'Dulwich Park, College Road, London SE21 7EB',
     text: 'For skaters who have done Level 1 or are already comfortable outdoors — more distance, more confidence, closer to the street.',
   },
@@ -90,9 +88,11 @@ export default async function PrepToStreetSkatePage() {
     liveDates('prep-to-street-skate', 3, 'Level 2'),
     sessionPrices('prep-to-street-skate'),
   ]);
-  const [ages, blocks] = await Promise.all([
+  const [ages, blocks, slot1, slot2] = await Promise.all([
     sessionAges('prep-to-street-skate'),
     courseBlocks('prep-to-street-skate'),
+    sessionSlot('prep-to-street-skate', { day: 'Thursday', time: '7–9 PM' }, { label: 'Level 1' }),
+    sessionSlot('prep-to-street-skate', { day: 'Wednesday', time: '7–9 PM' }, { label: 'Level 2' }),
   ]);
   // "Summer 2027 · from 5 May" from the first block Members sells.
   const season = blocks.length
@@ -153,7 +153,7 @@ export default async function PrepToStreetSkatePage() {
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips(season, ages).map(({ icon, label }) => (
+            {chips(season, ages, slot1.time).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
@@ -176,7 +176,8 @@ export default async function PrepToStreetSkatePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {levels.map(({ level, day, park, text }) => {
+            {levels.map(({ level, park, text }) => {
+              const slot = level === 1 ? slot1 : slot2;
               const dark = level === 2;
               const levelBlocks = blocks.filter((b) => b.level === level).map((b) => b.dates);
               return (
@@ -191,7 +192,7 @@ export default async function PrepToStreetSkatePage() {
                     className={`mb-4 ${dark ? 'text-white/80' : 'text-blue'}`}
                   />
                   <span className={`text-[10px] font-[800] uppercase tracking-[0.18em] mb-2 ${dark ? 'text-white/60' : 'text-muted'}`}>
-                    {day} · 7–9 PM
+                    {slot.day}s · {slot.time}
                   </span>
                   <h2 className={`text-[1.25rem] font-[900] leading-[1.15] mb-1 ${dark ? 'text-white' : 'text-black'}`}>
                     Level {level}

@@ -148,3 +148,40 @@ export async function courseBlocks(slug: string): Promise<CourseBlock[]> {
 export const monthYear = (iso: string) => londonDate(iso, { month: 'short', year: 'numeric' });
 export const yearOf = (iso: string) => londonDate(iso, { year: 'numeric' });
 export const dayMonth = (iso: string) => londonDate(iso, { day: 'numeric', month: 'long' });
+
+export interface SessionSlot {
+  day: string; // "Thursday"
+  time: string; // "8:45–10:45 PM"
+}
+
+// Weekday and class time of an offering's next upcoming date, from Members
+// (owner 2026-10-29: page times must follow the admin; wording stays).
+// `weekday` or `label` picks one of several weekly slots (Kidz Mon/Wed,
+// Prep Level 1/2).
+// No upcoming date → the page's own wording, so a page never goes blank.
+// `spaced` and `zeros` copy each page's existing style ("8:45 – 10:45 PM",
+// "2:00–3:00 PM") so nothing on the page looks different.
+export async function sessionSlot(
+  slug: string,
+  fallback: SessionSlot,
+  opts: { weekday?: string; label?: string; spaced?: boolean; zeros?: boolean } = {},
+): Promise<SessionSlot> {
+  const now = Date.now();
+  const next = (await session(slug)).dates
+    .filter((d) => Date.parse(d.ends_at ?? d.starts_at) > now)
+    .filter((d) => !opts.label || (d.label ?? '').startsWith(opts.label))
+    .filter((d) => !opts.weekday || londonDate(d.starts_at, { weekday: 'long' }) === opts.weekday)
+    .sort((a, b) => a.starts_at.localeCompare(b.starts_at))[0];
+  if (!next) return fallback;
+  const clock = (iso: string) => {
+    const [hm, ampm] = londonDate(iso, { hour: 'numeric', minute: '2-digit', hour12: true }).split(' ');
+    return { hm: opts.zeros ? hm : hm.replace(':00', ''), ampm: ampm.toUpperCase() };
+  };
+  const start = clock(next.starts_at);
+  const day = londonDate(next.starts_at, { weekday: 'long' });
+  if (!next.ends_at) return { day, time: `${start.hm} ${start.ampm}` };
+  const end = clock(next.ends_at);
+  const dash = opts.spaced ? ' – ' : '–';
+  const from = start.ampm === end.ampm ? start.hm : `${start.hm} ${start.ampm}`;
+  return { day, time: `${from}${dash}${end.hm} ${end.ampm}` };
+}

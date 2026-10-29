@@ -8,7 +8,7 @@ import AdultsReviewsCarousel from '@/components/AdultsReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, sessionAges } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, sessionSlot } from '@/lib/live-sessions';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     'Our weekly roller-dance class with Empowr CIC — routines, flow, and line-dance-style skating for all levels, every Monday evening.',
 };
 
-const chips = [
-  { icon: 'mdi:clock-outline', label: '8:30–10:30 PM' },
+const chips = (time: string) => [
+  { icon: 'mdi:clock-outline', label: time },
   { icon: 'mdi:account-group', label: 'All levels' },
 ];
 
@@ -64,7 +64,12 @@ const faqs: FaqItem[] = [
 ];
 
 export default async function Synkron8Page() {
-  const [price, ages] = await Promise.all([sessionPrices('synkron8'), sessionAges('synkron8')]);
+  const [price, ages, slot, heroSlot] = await Promise.all([
+    sessionPrices('synkron8'),
+    sessionAges('synkron8'),
+    sessionSlot('synkron8', { day: 'Monday', time: '8:30–10:30 PM' }),
+    sessionSlot('synkron8', { day: 'Monday', time: '8:30 – 10:30 PM' }, { spaced: true }),
+  ]);
   return (
     <>
       <Navbar />
@@ -114,10 +119,10 @@ export default async function Synkron8Page() {
             />
             <Icon icon="mdi:clock-outline" width={40} className="text-white/85 mb-3 relative" />
             <p className="relative text-white font-[900] text-xl sm:text-2xl tracking-[0.02em] leading-tight">
-              Every Monday
+              Every {heroSlot.day}
             </p>
             <p className="relative text-white/90 font-[800] text-lg sm:text-xl mt-1">
-              8:30 – 10:30 PM
+              {heroSlot.time}
             </p>
           </div>
         </section>
@@ -125,7 +130,7 @@ export default async function Synkron8Page() {
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips.map(({ icon, label }) => (
+            {chips(slot.time).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
@@ -136,7 +141,7 @@ export default async function Synkron8Page() {
             ))}
             <span className="inline-flex items-center gap-2 rounded-full bg-red text-warm-white px-4 py-2 text-sm font-[800]">
               <Icon icon="mdi:calendar-week" width={16} className="shrink-0" />
-              Every Monday
+              Every {heroSlot.day}
             </span>
           </div>
         </section>

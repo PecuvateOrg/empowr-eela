@@ -8,7 +8,7 @@ import SkateJamReviewsCarousel from '@/components/SkateJamReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, sessionAges } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, sessionSlot } from '@/lib/live-sessions';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     'Our weekly open skate session with Empowr CIC — music, games, and floor time for all levels, every Thursday evening.',
 };
 
-const chips = [
+const chips = (time: string) => [
   { icon: 'mdi:calendar-range', label: 'Sept 3 – Mar 25' },
-  { icon: 'mdi:clock-outline', label: '8:45–10:45 PM' },
+  { icon: 'mdi:clock-outline', label: time },
   { icon: 'mdi:account-group', label: 'All levels' },
 ];
 
@@ -60,7 +60,12 @@ const faqs: FaqItem[] = [
 ];
 
 export default async function SkateJamPage() {
-  const [price, ages] = await Promise.all([sessionPrices('skate-jam'), sessionAges('skate-jam')]);
+  const [price, ages, slot, heroSlot] = await Promise.all([
+    sessionPrices('skate-jam'),
+    sessionAges('skate-jam'),
+    sessionSlot('skate-jam', { day: 'Thursday', time: '8:45–10:45 PM' }),
+    sessionSlot('skate-jam', { day: 'Thursday', time: '8:45 – 10:45 PM' }, { spaced: true }),
+  ]);
   return (
     <>
       <Navbar />
@@ -110,10 +115,10 @@ export default async function SkateJamPage() {
             />
             <Icon icon="mdi:clock-outline" width={40} className="text-white/85 mb-3 relative" />
             <p className="relative text-white font-[900] text-xl sm:text-2xl tracking-[0.02em] leading-tight">
-              Every Thursday
+              Every {heroSlot.day}
             </p>
             <p className="relative text-white/90 font-[800] text-lg sm:text-xl mt-1">
-              8:45 – 10:45 PM
+              {heroSlot.time}
             </p>
           </div>
         </section>
@@ -121,7 +126,7 @@ export default async function SkateJamPage() {
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips.map(({ icon, label }) => (
+            {chips(slot.time).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
@@ -132,7 +137,7 @@ export default async function SkateJamPage() {
             ))}
             <span className="inline-flex items-center gap-2 rounded-full bg-red text-warm-white px-4 py-2 text-sm font-[800]">
               <Icon icon="mdi:calendar-week" width={16} className="shrink-0" />
-              Every Thursday
+              Every {heroSlot.day}
             </span>
           </div>
         </section>
