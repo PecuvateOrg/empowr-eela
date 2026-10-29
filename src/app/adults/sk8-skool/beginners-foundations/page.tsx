@@ -10,7 +10,7 @@ import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, courseBlocks } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and the next-intake labels (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -31,27 +31,6 @@ const chips = [
   { icon: 'mdi:calendar-clock', label: 'Every Tuesday · 7:30–9:30 PM' },
   { icon: 'mdi:swap-horizontal', label: 'Levels alternate each intake' },
   { icon: 'mdi:account-group', label: 'Complete beginners' },
-];
-
-// Both levels share the one Tuesday slot and alternate across the intake
-// blocks, so a level only runs every other block. This list IS the schedule
-// members plan around — without it "Level 1" is unbookable information,
-// because the next Level 1 is five weeks after the next Level 2.
-//
-// Mirrors mem_course_runs in the Members platform (offering
-// `beginners-foundation`). If these drift, Members is authoritative for what
-// is actually bookable and `vaults/EMPOWR CIC/entities/sessions.md` is
-// authoritative for what was agreed.
-// `lastClass` drops a block from the list once it has finished (the page
-// revalidates hourly), so the list never opens on a past intake.
-const intakeBlocks: { dates: string; level: 1 | 2; lastClass: string }[] = [
-  { dates: '15 Sep – 6 Oct 2026', level: 2, lastClass: '2026-10-06' },
-  { dates: '20 Oct – 10 Nov 2026', level: 1, lastClass: '2026-11-10' },
-  { dates: '24 Nov – 15 Dec 2026', level: 2, lastClass: '2026-12-15' },
-  { dates: '5 Jan – 26 Jan 2027', level: 1, lastClass: '2027-01-26' },
-  { dates: '9 Feb – 2 Mar 2027', level: 2, lastClass: '2027-03-02' },
-  { dates: '9 Mar – 30 Mar 2027', level: 1, lastClass: '2027-03-30' },
-  { dates: '6 Apr – 27 Apr 2027', level: 2, lastClass: '2027-04-27' },
 ];
 
 // "Tue 20 Oct 2026" from Members' next bookable start for a level. These
@@ -112,8 +91,11 @@ export default async function BeginnersFoundationsPage() {
     liveDates('beginners-foundation', 1, 'Level 2'),
     sessionPrices('beginners-foundation'),
   ]);
+  const [ages, upcomingBlocks] = await Promise.all([
+    sessionAges('beginners-foundation'),
+    courseBlocks('beginners-foundation'),
+  ]);
   // End of the block's last class, London time (23:59 BST/GMT is close enough for a list).
-  const upcomingBlocks = intakeBlocks.filter((b) => Date.parse(`${b.lastClass}T23:59:59Z`) > Date.now());
 
   return (
     <>
@@ -131,7 +113,7 @@ export default async function BeginnersFoundationsPage() {
           </Link>
 
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-            Indoor Course · Ages 15+
+            Indoor Course · Ages {ages}
           </p>
           <h1
             className="font-[900] text-black leading-[1.08] mb-4"
@@ -270,12 +252,15 @@ export default async function BeginnersFoundationsPage() {
           <div className="flex items-center gap-3 mb-6">
             <div className="flex-1 h-px bg-border" />
             <p className="text-[11px] font-[800] uppercase tracking-[0.15em] text-muted whitespace-nowrap">
-              📅 2026/27 intake dates
+              📅 Upcoming intake dates
             </p>
             <div className="flex-1 h-px bg-border" />
           </div>
 
           <ul className="rounded-[20px] bg-card border border-border overflow-hidden">
+            {upcomingBlocks.length === 0 && (
+              <li className="px-5 py-4 sm:px-7 text-sm font-[700] text-mid">New dates coming soon</li>
+            )}
             {upcomingBlocks.map(({ dates, level }, i) => (
               <li
                 key={dates}
@@ -297,7 +282,7 @@ export default async function BeginnersFoundationsPage() {
 
           <p className="text-sm text-mid text-center mt-6">
             Every block is four weeks, Tuesdays 7:30–9:30 PM. Taking both levels means
-            two blocks — for example Level 1 from 20 October, then Level 2 from 24 November.
+            two blocks: a Level 1 block, then a later Level 2 block from the list above.
           </p>
         </section>
 

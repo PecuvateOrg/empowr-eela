@@ -8,7 +8,7 @@ import AdultsReviewsCarousel from '@/components/AdultsReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges } from '@/lib/live-sessions';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
 ];
 
 export default async function Synkron8Page() {
-  const price = await sessionPrices('synkron8');
+  const [price, ages] = await Promise.all([sessionPrices('synkron8'), sessionAges('synkron8')]);
   return (
     <>
       <Navbar />
@@ -81,7 +81,7 @@ export default async function Synkron8Page() {
           </Link>
 
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-            Weekly Session · Ages 15+
+            Weekly Session · Ages {ages}
           </p>
           <h1
             className="font-[900] text-black leading-[1.08] mb-4"

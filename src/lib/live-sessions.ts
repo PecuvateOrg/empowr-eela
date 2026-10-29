@@ -30,6 +30,8 @@ export interface LiveSession {
   walk_in_price_pence: number | null;
   early_bird_price_pence: number | null;
   monthly_price_pence: number | null;
+  age_min: number | null;
+  age_max: number | null;
   dates: LiveDate[];
 }
 
@@ -42,7 +44,7 @@ function check(row: unknown, i: number): LiveSession {
   if (typeof o.bookable !== 'boolean') fail('bad bookable');
   if (!Array.isArray(o.dates)) fail('bad dates');
   if (!Number.isInteger(o.price_pence)) fail('bad price_pence');
-  for (const f of ['walk_in_price_pence', 'early_bird_price_pence', 'monthly_price_pence']) {
+  for (const f of ['walk_in_price_pence', 'early_bird_price_pence', 'monthly_price_pence', 'age_min', 'age_max']) {
     if (o[f] !== null && !Number.isInteger(o[f])) fail(`bad ${f}`);
   }
   for (const d of o.dates as Record<string, unknown>[]) {
@@ -90,8 +92,7 @@ export interface SessionPrices {
 // last saved, within LIVE_REVALIDATE. Hard-coded prices drifted before
 // (Beginners Foundation). Throws if the slug is missing, like liveDates().
 export async function sessionPrices(slug: string): Promise<SessionPrices> {
-  const s = (await getLiveSessions()).find((l) => l.slug === slug);
-  if (!s) throw new Error(`sessionPrices: "${slug}" missing from Members`);
+  const s = await session(slug);
   const fmt = (p: number | null) => (p === null ? null : formatPence(p));
   return {
     online: formatPence(s.price_pence as number),
@@ -100,3 +101,50 @@ export async function sessionPrices(slug: string): Promise<SessionPrices> {
     monthly: fmt(s.monthly_price_pence),
   };
 }
+
+async function session(slug: string): Promise<LiveSession> {
+  const s = (await getLiveSessions()).find((l) => l.slug === slug);
+  if (!s) throw new Error(`"${slug}" missing from Members`);
+  return s;
+}
+
+// "15+" or "5–12", from the Members offering's age limits.
+export async function sessionAges(slug: string): Promise<string> {
+  const { age_min: min, age_max: max } = await session(slug);
+  if (min === null) throw new Error(`sessionAges: "${slug}" has no minimum age`);
+  return max === null ? `${min}+` : `${min}–${max}`;
+}
+
+const londonDate = (iso: string, opts: Intl.DateTimeFormatOptions) =>
+  new Intl.DateTimeFormat('en-GB', { ...opts, timeZone: 'Europe/London' }).format(new Date(iso));
+
+export interface CourseBlock {
+  level: number | null; // from the run label, "Level 2 - Tuesdays"
+  dates: string; // "20 Oct – 10 Nov 2026"
+  startsAt: string;
+}
+
+// Every course block Members still sells (Members drops a run once its last
+// day has passed; late joining is allowed until then). Replaces block lists
+// that were typed into the pages and drifted — Beginners Foundation's
+// December block moved on 2026-10-28 and the page kept the old dates.
+export async function courseBlocks(slug: string): Promise<CourseBlock[]> {
+  return (await session(slug)).dates
+    .map((d) => {
+      const end = d.ends_at ?? d.starts_at;
+      const sameYear = londonDate(d.starts_at, { year: 'numeric' }) === londonDate(end, { year: 'numeric' });
+      const from = londonDate(d.starts_at, sameYear ? { day: 'numeric', month: 'short' } : { day: 'numeric', month: 'short', year: 'numeric' });
+      const level = /Level (\d+)/.exec(d.label ?? '')?.[1];
+      return {
+        level: level ? Number(level) : null,
+        dates: `${from} – ${londonDate(end, { day: 'numeric', month: 'short', year: 'numeric' })}`,
+        startsAt: d.starts_at,
+      };
+    })
+    .sort((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt));
+}
+
+// Labels for summary cards: "Oct 2026", "5 May", "2027".
+export const monthYear = (iso: string) => londonDate(iso, { month: 'short', year: 'numeric' });
+export const yearOf = (iso: string) => londonDate(iso, { year: 'numeric' });
+export const dayMonth = (iso: string) => londonDate(iso, { day: 'numeric', month: 'long' });

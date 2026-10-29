@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, courseBlocks, dayMonth, yearOf } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and LiveBooking (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -30,10 +30,10 @@ const pillars = [
   { icon: 'mdi:road-variant', label: 'Ready for street skating' },
 ];
 
-const chips = [
-  { icon: 'mdi:calendar-range', label: 'Summer 2027 · May to August' },
+const chips = (season: string, ages: string) => [
+  { icon: 'mdi:calendar-range', label: season },
   { icon: 'mdi:clock-outline', label: 'Evenings · 7–9 PM' },
-  { icon: 'mdi:account', label: 'Ages 15+' },
+  { icon: 'mdi:account', label: `Ages ${ages}` },
 ];
 
 const levels = [
@@ -41,14 +41,12 @@ const levels = [
     level: 1 as const,
     day: 'Thursdays',
     park: 'Southwark Park, Southwark Park Road, London SE16',
-    blocks: ['6 – 27 May 2027', '10 Jun – 1 Jul 2027', '15 Jul – 5 Aug 2027'],
     text: 'Your first step outdoors: take the skills you built indoors onto park paths, with a coach alongside you.',
   },
   {
     level: 2 as const,
     day: 'Wednesdays',
     park: 'Dulwich Park, College Road, London SE21 7EB',
-    blocks: ['5 – 26 May 2027', '9 – 30 Jun 2027', '14 Jul – 4 Aug 2027'],
     text: 'For skaters who have done Level 1 or are already comfortable outdoors — more distance, more confidence, closer to the street.',
   },
 ];
@@ -62,7 +60,7 @@ const faqs: FaqItem[] = [
   {
     question: 'When does it run?',
     answer:
-      'It is a summer course. In 2027 each level runs three four-week blocks between May and August, 7–9 PM: Level 1 on Thursdays in Southwark Park and Level 2 on Wednesdays in Dulwich Park. You can book a block now.',
+      'It is a summer course. Each level runs four-week blocks over the summer, 7–9 PM: Level 1 on Thursdays in Southwark Park and Level 2 on Wednesdays in Dulwich Park. The block dates are listed on this page.',
   },
   {
     question: 'Do I need to be able to skate already?',
@@ -92,6 +90,14 @@ export default async function PrepToStreetSkatePage() {
     liveDates('prep-to-street-skate', 3, 'Level 2'),
     sessionPrices('prep-to-street-skate'),
   ]);
+  const [ages, blocks] = await Promise.all([
+    sessionAges('prep-to-street-skate'),
+    courseBlocks('prep-to-street-skate'),
+  ]);
+  // "Summer 2027 · from 5 May" from the first block Members sells.
+  const season = blocks.length
+    ? `Summer ${yearOf(blocks[0].startsAt)} · from ${dayMonth(blocks[0].startsAt)}`
+    : 'Summer · dates coming soon';
   const dates = { 1: l1, 2: l2 };
 
   return (
@@ -110,7 +116,7 @@ export default async function PrepToStreetSkatePage() {
           </Link>
 
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-            Outdoor Course · Ages 15+
+            Outdoor Course · Ages {ages}
           </p>
           <h1
             className="font-[900] text-black leading-[1.08] mb-4"
@@ -125,8 +131,8 @@ export default async function PrepToStreetSkatePage() {
           >
             Ready to take your skating outside? Prep to Street Skate is our summer outdoor
             course: two coached levels in South London parks that build the preparation,
-            confidence and experience you need for street skating. The 2027 blocks run from
-            May to August — and you can book now.
+            confidence and experience you need for street skating. It runs in four-week
+            blocks over the summer — the dates are below.
           </p>
         </section>
 
@@ -147,7 +153,7 @@ export default async function PrepToStreetSkatePage() {
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips.map(({ icon, label }) => (
+            {chips(season, ages).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
@@ -170,8 +176,9 @@ export default async function PrepToStreetSkatePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {levels.map(({ level, day, park, blocks, text }) => {
+            {levels.map(({ level, day, park, text }) => {
               const dark = level === 2;
+              const levelBlocks = blocks.filter((b) => b.level === level).map((b) => b.dates);
               return (
                 <div
                   key={level}
@@ -196,7 +203,7 @@ export default async function PrepToStreetSkatePage() {
                     {park}
                   </p>
                   <p className={`text-xs leading-[1.6] mb-5 flex-1 ${dark ? 'text-white/80' : 'text-mid'}`}>
-                    2027 blocks: {blocks.join(' · ')}
+                    {levelBlocks.length ? `Blocks: ${levelBlocks.join(' · ')}` : 'Block dates coming soon'}
                   </p>
                   <LiveBooking
                     programme={`Prep to Street Skate Level ${level}`}

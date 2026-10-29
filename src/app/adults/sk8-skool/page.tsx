@@ -5,6 +5,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import type { Programme } from '@/lib/types';
+import { courseBlocks, sessionAges, monthYear, dayMonth, yearOf } from '@/lib/live-sessions';
+
+// Card copy reads Members' live course dates and ages (same literal as LIVE_REVALIDATE).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Sk8 Skool — Adults',
@@ -18,14 +22,16 @@ const pillars = [
   { icon: 'mdi:shield-check',  label: 'Trusted by thousands' },
 ];
 
-const offerings: Programme[] = [
+type CardFacts = { bfIntake: string; p2sFrom: string; allAges: string };
+
+const offerings = ({ bfIntake, p2sFrom, allAges }: CardFacts): Programme[] => [
   {
     id: 'beginners-foundations',
     tag: 'Course',
     tagColor: 'text-blue',
     title: 'Beginners Foundation',
     icon: <Icon icon="mdi:seed-outline" width={36} height={36} className="text-blue" />,
-    bullets: ['From first steps on skates', 'Progressive, coach-led course', 'Indoors, next intake Sept 2026'],
+    bullets: ['From first steps on skates', 'Progressive, coach-led course', bfIntake],
     bookingUrl: '/adults/sk8-skool/beginners-foundations',
     buttonLabel: 'View details',
   },
@@ -35,7 +41,7 @@ const offerings: Programme[] = [
     tagColor: 'text-blue',
     title: 'Prep to Street Skate',
     icon: <Icon icon="mdi:road-variant" width={36} height={36} className="text-blue" />,
-    bullets: ['Two outdoor levels in the park', 'Gets you ready for street skating', 'Summer 2027 blocks, from 5 May'],
+    bullets: ['Two outdoor levels in the park', 'Gets you ready for street skating', p2sFrom],
     bookingUrl: '/adults/sk8-skool/prep-to-street-skate',
     buttonLabel: 'View details',
   },
@@ -55,13 +61,26 @@ const offerings: Programme[] = [
     tagColor: 'text-blue-light',
     title: 'Sk8 Skool for All Ages',
     icon: <Icon icon="mdi:human-male-female-child" width={36} height={36} className="text-blue-light" />,
-    bullets: ['Open to all ages from 5+', 'Same coached structure as Sk8 Skool for Kidz', 'For beginners'],
+    bullets: [`Open to all ages from ${allAges}`, 'Same coached structure as Sk8 Skool for Kidz', 'For beginners'],
     bookingUrl: '/adults/sk8-skool/all-ages',
     buttonLabel: 'View details',
   },
 ];
 
-export default function Sk8SkoolPage() {
+export default async function Sk8SkoolPage() {
+  const [bf, p2s, allAges] = await Promise.all([
+    courseBlocks('beginners-foundation'),
+    courseBlocks('prep-to-street-skate'),
+    sessionAges('sk8-skool-all-ages'),
+  ]);
+  // Next block not yet started; a block under way can still be joined, but
+  // the card advertises the next intake.
+  const nextBf = bf.find((b) => Date.parse(b.startsAt) > Date.now());
+  const facts: CardFacts = {
+    bfIntake: nextBf ? `Indoors, next intake ${monthYear(nextBf.startsAt)}` : 'Indoors, new dates coming soon',
+    p2sFrom: p2s.length ? `Summer ${yearOf(p2s[0].startsAt)} blocks, from ${dayMonth(p2s[0].startsAt)}` : 'Summer blocks, dates coming soon',
+    allAges,
+  };
   return (
     <>
       <Navbar />
@@ -120,7 +139,7 @@ export default function Sk8SkoolPage() {
           </div>
 
           <div className="flex flex-col gap-4 max-w-[660px] mx-auto">
-            {offerings.map((offering) => (
+            {offerings(facts).map((offering) => (
               <ProgrammeCard key={offering.id} {...offering} />
             ))}
           </div>

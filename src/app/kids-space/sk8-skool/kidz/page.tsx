@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, type SessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, type SessionPrices } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -18,17 +18,17 @@ export const metadata: Metadata = {
     'Weekly roller skating classes for children aged 5-12 with Empowr CIC, taught by ECCP Certified coaches — Monday and Wednesday sessions.',
 };
 
-const pillars = [
-  { icon: 'mdi:school',        label: 'Ages 5–12' },
+const pillars = (ages: string) => [
+  { icon: 'mdi:school',        label: `Ages ${ages}` },
   { icon: 'mdi:account-group', label: 'ECCP Certified coaches' },
   { icon: 'mdi:shield-check',  label: 'Quad skates only' },
 ];
 
-const faqs = (price: SessionPrices): FaqItem[] => [
+const faqs = (price: SessionPrices, ages: string): FaqItem[] => [
   {
     question: 'What age is Sk8 Skool for Kidz suitable for?',
     answer:
-      'Sk8 Skool for Kidz is designed for children aged 5 to 12, and welcomes complete beginners.',
+      `Sk8 Skool for Kidz is designed for children aged ${ages.replace('–', ' to ')}, and welcomes complete beginners.`,
   },
   {
     question: 'Is coaching included?',
@@ -58,7 +58,7 @@ const faqs = (price: SessionPrices): FaqItem[] => [
 ];
 
 export default async function Sk8SkoolKidzPage() {
-  const price = await sessionPrices('sk8-skool-kidz');
+  const [price, ages] = await Promise.all([sessionPrices('sk8-skool-kidz'), sessionAges('sk8-skool-kidz')]);
   return (
     <>
       <Navbar />
@@ -75,7 +75,7 @@ export default async function Sk8SkoolKidzPage() {
           </Link>
 
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-            Weekly Classes · Ages 5–12
+            Weekly Classes · Ages {ages}
           </p>
           <h1
             className="font-[900] text-black leading-[1.08] mb-4"
@@ -97,7 +97,7 @@ export default async function Sk8SkoolKidzPage() {
         {/* PILLARS */}
         <div className="border-y border-border bg-blue-pale/60 py-4 px-5 mb-10">
           <div className="max-w-[880px] mx-auto grid grid-cols-3 gap-2 sm:gap-6 text-center">
-            {pillars.map(({ icon, label }) => (
+            {pillars(ages).map(({ icon, label }) => (
               <div key={label} className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2">
                 <Icon icon={icon} width={16} className="text-blue shrink-0" />
                 <span className="text-[10px] sm:text-xs font-[800] uppercase tracking-[0.1em] text-mid leading-tight">
@@ -200,7 +200,7 @@ export default async function Sk8SkoolKidzPage() {
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-4">
             FAQ
           </p>
-          <FaqAccordion items={faqs(price)} />
+          <FaqAccordion items={faqs(price, ages)} />
         </section>
 
       </main>

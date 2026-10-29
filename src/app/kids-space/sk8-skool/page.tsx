@@ -5,6 +5,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import type { Programme } from '@/lib/types';
+import { sessionAges } from '@/lib/live-sessions';
+
+// Card ages read Members live (same literal as LIVE_REVALIDATE).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Sk8 Skool — Kids Space',
@@ -18,10 +22,10 @@ const pillars = [
   { icon: 'mdi:star-circle',   label: 'Fun guaranteed' },
 ];
 
-const offerings: Programme[] = [
+const offerings = (kidzAges: string, allAges: string): Programme[] => [
   {
     id: 'kidz',
-    tag: 'Ages 5–12',
+    tag: `Ages ${kidzAges}`,
     tagColor: 'text-blue',
     title: 'Sk8 Skool for Kidz',
     icon: <Icon icon="mdi:school" width={36} height={36} className="text-blue" />,
@@ -35,13 +39,14 @@ const offerings: Programme[] = [
     tagColor: 'text-blue-light',
     title: 'Sk8 Skool for All Ages',
     icon: <Icon icon="mdi:human-male-female-child" width={36} height={36} className="text-blue-light" />,
-    bullets: ['Open to all ages from 5+', 'Same coached structure as Sk8 Skool for Kidz', 'For beginners'],
+    bullets: [`Open to all ages from ${allAges}`, 'Same coached structure as Sk8 Skool for Kidz', 'For beginners'],
     bookingUrl: '/kids-space/sk8-skool/all-ages',
     buttonLabel: 'View details',
   },
 ];
 
-export default function KidsSk8SkoolPage() {
+export default async function KidsSk8SkoolPage() {
+  const [kidzAges, allAges] = await Promise.all([sessionAges('sk8-skool-kidz'), sessionAges('sk8-skool-all-ages')]);
   return (
     <>
       <Navbar />
@@ -99,7 +104,7 @@ export default function KidsSk8SkoolPage() {
           </div>
 
           <div className="flex flex-col gap-4 max-w-[660px] mx-auto">
-            {offerings.map((offering) => (
+            {offerings(kidzAges, allAges).map((offering) => (
               <ProgrammeCard key={offering.id} {...offering} />
             ))}
           </div>
