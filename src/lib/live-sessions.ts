@@ -54,14 +54,47 @@ function check(row: unknown, i: number): LiveSession {
   return o as unknown as LiveSession;
 }
 
-export async function getLiveSessions(): Promise<LiveSession[]> {
+// One fetch per revalidate window, shared by every reader (Next dedupes it).
+async function getLiveFeed(): Promise<Record<string, unknown>> {
   const res = await fetch(LINKS.liveSessions, { next: { revalidate: LIVE_REVALIDATE } });
   if (!res.ok) throw new Error(`live-sessions: HTTP ${res.status}`);
-  const body = await res.json();
+  return res.json();
+}
+
+export async function getLiveSessions(): Promise<LiveSession[]> {
+  const body = await getLiveFeed();
   if (!Array.isArray(body?.offerings) || body.offerings.length === 0) {
     throw new Error('live-sessions: no offerings');
   }
   return body.offerings.map(check);
+}
+
+export type PrivateKind = 'birthday' | 'coaching_one' | 'coaching_group';
+
+export interface PrivatePrices {
+  price: string; // "£40"
+  hire: string | null; // equipment hire add-on, "£5"
+  min: number; // minimum skaters
+}
+
+// Private booking prices and minimums, from Members (owner 2026-10-29:
+// Members owns these too; edited on its Private bookings admin page).
+export async function privatePrices(kind: PrivateKind): Promise<PrivatePrices> {
+  const body = await getLiveFeed();
+  const rows = body?.private_bookings;
+  if (!Array.isArray(rows)) throw new Error('live-sessions: no private_bookings');
+  const t = rows.find((r) => r?.kind === kind) as Record<string, unknown> | undefined;
+  if (!t || !Number.isInteger(t.price_pence) || !Number.isInteger(t.min_places)) {
+    throw new Error(`live-sessions: bad private booking ${kind}`);
+  }
+  if (t.hire_price_pence !== null && !Number.isInteger(t.hire_price_pence)) {
+    throw new Error(`live-sessions: bad hire_price_pence on ${kind}`);
+  }
+  return {
+    price: formatPence(t.price_pence as number),
+    hire: t.hire_price_pence === null ? null : formatPence(t.hire_price_pence as number),
+    min: t.min_places as number,
+  };
 }
 
 export type BookableDate = { startsAt: string; bookUrl: string; placesLeft: number | null };

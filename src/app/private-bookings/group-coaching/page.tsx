@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import EnquiryModal from '@/components/EnquiryModal';
 import PrivateBookNow from '@/components/PrivateBookNow';
 import NextAvailableDates from '@/components/NextAvailableDates';
+import { privatePrices } from '@/lib/live-sessions';
 
 export const metadata: Metadata = {
   title: 'Private Group Skate Coaching — Private Bookings',
@@ -13,19 +14,22 @@ export const metadata: Metadata = {
     'Dedicated group skate coaching with Empowr CIC at The Ladywell Centre — for friends, families or small groups, tailored to your level and goals.',
 };
 
-const chips = [
+export const revalidate = 3600;
+
+const chips = (hire: string | null) => [
   { icon: 'mdi:map-marker', label: 'The Ladywell Centre (indoors)' },
-  { icon: 'mdi:tshirt-crew', label: 'Skate hire add-on: £5/person' },
+  ...(hire ? [{ icon: 'mdi:tshirt-crew', label: `Skate hire add-on: ${hire}/person` }] : []),
 ];
 
-const goodToKnow = [
-  'Minimum group size: 3 skaters.',
+const goodToKnow = (min: number) => [
+  `Minimum group size: ${min} skaters.`,
   'Book at least 2 weeks in advance — your session is only reserved once paid in full.',
   'Non-refundable and non-transferable once booked.',
   'Under-16s must wear full protective gear (helmet, knee/elbow pads, wrist guards) — this is required, not optional. For those aged 16 and over it is highly recommended.',
 ];
 
-export default function GroupCoachingPage() {
+export default async function GroupCoachingPage() {
+  const price = await privatePrices('coaching_group');
   return (
     <>
       <Navbar />
@@ -85,7 +89,7 @@ export default function GroupCoachingPage() {
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips.map(({ icon, label }) => (
+            {chips(price.hire).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
@@ -96,7 +100,7 @@ export default function GroupCoachingPage() {
             ))}
             <span className="inline-flex items-center gap-2 rounded-full bg-red text-warm-white px-4 py-2 text-sm font-[800]">
               <Icon icon="mdi:account-multiple" width={16} className="shrink-0" />
-              Minimum 3 skaters
+              Minimum {price.min} skaters
             </span>
           </div>
         </section>
@@ -121,7 +125,7 @@ export default function GroupCoachingPage() {
             <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
               Group Coaching
             </h2>
-            <p className="text-2xl font-[900] text-white mb-3">£20 / person / hr</p>
+            <p className="text-2xl font-[900] text-white mb-3">{price.price} / person / hr</p>
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               Choose your group size, date and equipment, see the price and pay online.
             </p>
@@ -150,7 +154,7 @@ export default function GroupCoachingPage() {
             style={{ boxShadow: 'var(--shadow-sm)' }}
           >
             <ul className="space-y-3">
-              {goodToKnow.map((line) => (
+              {goodToKnow(price.min).map((line) => (
                 <li key={line} className="flex items-start gap-3 text-sm text-mid leading-[1.7]">
                   <span className="inline-flex items-center justify-center w-[18px] h-[18px] rounded-full bg-red text-warm-white text-[9px] font-[900] shrink-0 mt-0.5">
                     ✓

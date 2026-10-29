@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProgrammeCard from '@/components/ProgrammeCard';
 import type { Programme } from '@/lib/types';
+import { privatePrices, type PrivatePrices } from '@/lib/live-sessions';
 
 export const metadata: Metadata = {
   title: 'Private Bookings',
@@ -12,16 +13,19 @@ export const metadata: Metadata = {
     'Tailored, private roller-skating experiences with Empowr CIC — 1:1 coaching, group coaching, birthday parties and custom events at The Ladywell Centre.',
 };
 
+// Prices from Members' live feed; must match LIVE_REVALIDATE (lib/live-sessions).
+export const revalidate = 3600;
+
 const pillars = [
   { icon: 'mdi:account-heart',  label: 'Tailored to you' },
   { icon: 'mdi:human-male-female-child', label: 'All ages, 5+/15+' },
   { icon: 'mdi:map-marker',     label: 'The Ladywell Centre' },
 ];
 
-const offerings: Programme[] = [
+const offerings = (one: PrivatePrices, group: PrivatePrices, party: PrivatePrices): Programme[] => [
   {
     id: 'one-to-one-coaching',
-    tag: 'From £40/hr',
+    tag: `From ${one.price}/hr`,
     tagColor: 'text-blue',
     title: '1:1 Private Skate Coaching',
     icon: <Icon icon="mdi:account-tie" width={36} height={36} className="text-blue" />,
@@ -31,21 +35,21 @@ const offerings: Programme[] = [
   },
   {
     id: 'group-coaching',
-    tag: 'From £20/person/hr',
+    tag: `From ${group.price}/person/hr`,
     tagColor: 'text-blue-dark',
     title: 'Private Group Coaching',
     icon: <Icon icon="mdi:account-group" width={36} height={36} className="text-blue-dark" />,
-    bullets: ['Minimum 3 skaters', 'Saturdays 3–5 PM', 'For friends, families & small groups'],
+    bullets: [`Minimum ${group.min} skaters`, 'Saturdays 3–5 PM', 'For friends, families & small groups'],
     bookingUrl: '/private-bookings/group-coaching',
     buttonLabel: 'View details',
   },
   {
     id: 'birthday-party',
-    tag: '£20/person',
+    tag: `${party.price}/person`,
     tagColor: 'text-blue-light',
     title: 'Roller Disco Birthday Party',
     icon: <Icon icon="mdi:cake-variant" width={36} height={36} className="text-blue-light" />,
-    bullets: ['2-hour private session', 'Minimum 10 skaters', 'Birthday person goes free'],
+    bullets: ['2-hour private session', `Minimum ${party.min} skaters`, 'Birthday person goes free'],
     bookingUrl: '/private-bookings/birthday-party',
     buttonLabel: 'View details',
   },
@@ -61,7 +65,12 @@ const offerings: Programme[] = [
   },
 ];
 
-export default function PrivateBookingsPage() {
+export default async function PrivateBookingsPage() {
+  const [one, group, party] = await Promise.all([
+    privatePrices('coaching_one'),
+    privatePrices('coaching_group'),
+    privatePrices('birthday'),
+  ]);
   return (
     <>
       <Navbar />
@@ -123,7 +132,7 @@ export default function PrivateBookingsPage() {
           </div>
 
           <div className="flex flex-col gap-4 max-w-[660px] mx-auto">
-            {offerings.map((offering) => (
+            {offerings(one, group, party).map((offering) => (
               <ProgrammeCard key={offering.id} {...offering} />
             ))}
           </div>
