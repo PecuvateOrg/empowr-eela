@@ -152,7 +152,15 @@ export const dayMonth = (iso: string) => londonDate(iso, { day: 'numeric', month
 export interface SessionSlot {
   day: string; // "Thursday"
   time: string; // "8:45–10:45 PM"
+  venue: string; // "Honor Oak Community Centre, 50 Turnham Road, London, SE4 2JD"
 }
+
+// Venue address pieces in the pages' existing style.
+const venueParts = (venue: string) => venue.split(',').map((p) => p.trim()).filter(Boolean);
+// "Honor Oak Community Centre"; with n, the first n parts: "Goldsmiths Community Centre, Castillon Road"
+export const venueName = (venue: string, n = 1) => venueParts(venue).slice(0, n).join(', ');
+// "Dulwich Park, College Road, London SE21 7EB" (no comma before the postcode)
+export const venueAddress = (venue: string) => venueParts(venue).join(', ').replace(/, ([A-Z]{1,2}\d[\dA-Z]?(?: \d[A-Z]{2})?)$/, ' $1');
 
 // Weekday and class time of an offering's next upcoming date, from Members
 // (owner 2026-10-29: page times must follow the admin; wording stays).
@@ -179,9 +187,10 @@ export async function sessionSlot(
   };
   const start = clock(next.starts_at);
   const day = londonDate(next.starts_at, { weekday: 'long' });
-  if (!next.ends_at) return { day, time: `${start.hm} ${start.ampm}` };
+  const venue = next.venue ?? fallback.venue;
+  if (!next.ends_at) return { day, venue, time: `${start.hm} ${start.ampm}` };
   const end = clock(next.ends_at);
   const dash = opts.spaced ? ' – ' : '–';
   const from = start.ampm === end.ampm ? start.hm : `${start.hm} ${start.ampm}`;
-  return { day, time: `${from}${dash}${end.hm} ${end.ampm}` };
+  return { day, venue, time: `${from}${dash}${end.hm} ${end.ampm}` };
 }

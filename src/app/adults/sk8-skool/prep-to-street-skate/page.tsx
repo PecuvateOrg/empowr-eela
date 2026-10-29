@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices, sessionAges, courseBlocks, sessionSlot, dayMonth, yearOf } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, courseBlocks, sessionSlot, venueAddress, dayMonth, yearOf } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and LiveBooking (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -39,12 +39,10 @@ const chips = (season: string, ages: string, time: string) => [
 const levels = [
   {
     level: 1 as const,
-    park: 'Southwark Park, Southwark Park Road, London SE16',
     text: 'Your first step outdoors: take the skills you built indoors onto park paths, with a coach alongside you.',
   },
   {
     level: 2 as const,
-    park: 'Dulwich Park, College Road, London SE21 7EB',
     text: 'For skaters who have done Level 1 or are already comfortable outdoors — more distance, more confidence, closer to the street.',
   },
 ];
@@ -91,8 +89,8 @@ export default async function PrepToStreetSkatePage() {
   const [ages, blocks, slot1, slot2] = await Promise.all([
     sessionAges('prep-to-street-skate'),
     courseBlocks('prep-to-street-skate'),
-    sessionSlot('prep-to-street-skate', { day: 'Thursday', time: '7–9 PM' }, { label: 'Level 1' }),
-    sessionSlot('prep-to-street-skate', { day: 'Wednesday', time: '7–9 PM' }, { label: 'Level 2' }),
+    sessionSlot('prep-to-street-skate', { day: 'Thursday', time: '7–9 PM', venue: 'Southwark Park, Southwark Park Road, London, SE16' }, { label: 'Level 1' }),
+    sessionSlot('prep-to-street-skate', { day: 'Wednesday', time: '7–9 PM', venue: 'Dulwich Park, College Road, London, SE21 7EB' }, { label: 'Level 2' }),
   ]);
   // "Summer 2027 · from 5 May" from the first block Members sells.
   const season = blocks.length
@@ -176,8 +174,9 @@ export default async function PrepToStreetSkatePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {levels.map(({ level, park, text }) => {
+            {levels.map(({ level, text }) => {
               const slot = level === 1 ? slot1 : slot2;
+              const park = venueAddress(slot.venue);
               const dark = level === 2;
               const levelBlocks = blocks.filter((b) => b.level === level).map((b) => b.dates);
               return (

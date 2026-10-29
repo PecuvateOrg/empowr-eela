@@ -63,8 +63,8 @@ export default async function SkateJamPage() {
   const [price, ages, slot, heroSlot] = await Promise.all([
     sessionPrices('skate-jam'),
     sessionAges('skate-jam'),
-    sessionSlot('skate-jam', { day: 'Thursday', time: '8:45–10:45 PM' }),
-    sessionSlot('skate-jam', { day: 'Thursday', time: '8:45 – 10:45 PM' }, { spaced: true }),
+    sessionSlot('skate-jam', { day: 'Thursday', venue: 'Honor Oak Community Centre, 50 Turnham Road, London, SE4 2JD', time: '8:45–10:45 PM' }),
+    sessionSlot('skate-jam', { day: 'Thursday', venue: 'Honor Oak Community Centre, 50 Turnham Road, London, SE4 2JD', time: '8:45 – 10:45 PM' }, { spaced: true }),
   ]);
   return (
     <>

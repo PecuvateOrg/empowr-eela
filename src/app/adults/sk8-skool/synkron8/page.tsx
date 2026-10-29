@@ -67,8 +67,8 @@ export default async function Synkron8Page() {
   const [price, ages, slot, heroSlot] = await Promise.all([
     sessionPrices('synkron8'),
     sessionAges('synkron8'),
-    sessionSlot('synkron8', { day: 'Monday', time: '8:30–10:30 PM' }),
-    sessionSlot('synkron8', { day: 'Monday', time: '8:30 – 10:30 PM' }, { spaced: true }),
+    sessionSlot('synkron8', { day: 'Monday', venue: 'Honor Oak Community Centre, 50 Turnham Road, London, SE4 2JD', time: '8:30–10:30 PM' }),
+    sessionSlot('synkron8', { day: 'Monday', venue: 'Honor Oak Community Centre, 50 Turnham Road, London, SE4 2JD', time: '8:30 – 10:30 PM' }, { spaced: true }),
   ]);
   return (
     <>

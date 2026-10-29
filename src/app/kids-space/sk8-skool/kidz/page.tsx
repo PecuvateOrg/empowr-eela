@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, sessionAges, sessionSlot, type SessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, sessionSlot, venueName, type SessionPrices } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -61,8 +61,8 @@ export default async function Sk8SkoolKidzPage() {
   const [price, ages, monday, wednesday] = await Promise.all([
     sessionPrices('sk8-skool-kidz'),
     sessionAges('sk8-skool-kidz'),
-    sessionSlot('sk8-skool-kidz', { day: 'Monday', time: '4–5 PM' }, { weekday: 'Monday' }),
-    sessionSlot('sk8-skool-kidz', { day: 'Wednesday', time: '5–6 PM' }, { weekday: 'Wednesday' }),
+    sessionSlot('sk8-skool-kidz', { day: 'Monday', time: '4–5 PM', venue: 'Goldsmiths Community Centre, Castillon Road, London, SE6 1PH' }, { weekday: 'Monday' }),
+    sessionSlot('sk8-skool-kidz', { day: 'Wednesday', time: '5–6 PM', venue: 'Honor Oak Community Centre, 50 Turnham Road, London, SE4 2JD' }, { weekday: 'Wednesday' }),
   ]);
   return (
     <>
@@ -142,7 +142,7 @@ export default async function Sk8SkoolKidzPage() {
                 <a href={`${LINKS.kidzMondayClasses}#subscribe`} target="_blank" rel="noopener" className="text-blue underline">{price.monthly}/mo unlimited Mondays</a>{' '}
                 — cancel anytime</p>
               <p className="text-sm text-mid leading-[1.7] mb-2 flex-1">
-                Indoors, all weather. Goldsmiths Community Centre, Castillon Road.
+                Indoors, all weather. {venueName(monday.venue, 2)}.
               </p>
               <a
                 href={LINKS.kidzMondayClasses}
