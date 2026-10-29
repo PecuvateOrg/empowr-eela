@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices } from '@/lib/offerings';
+import { sessionPrices } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and LiveBooking (LIVE_REVALIDATE).
 export const revalidate = 3600;

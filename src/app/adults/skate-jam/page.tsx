@@ -8,7 +8,7 @@ import SkateJamReviewsCarousel from '@/components/SkateJamReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices } from '@/lib/offerings';
+import { sessionPrices } from '@/lib/live-sessions';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).

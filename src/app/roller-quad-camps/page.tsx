@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import SessionJsonLd from '@/components/SessionJsonLd';
 import LiveBooking from '@/components/LiveBooking';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices } from '@/lib/offerings';
+import { sessionPrices } from '@/lib/live-sessions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
