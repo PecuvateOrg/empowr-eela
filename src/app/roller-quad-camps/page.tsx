@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import SessionJsonLd from '@/components/SessionJsonLd';
 import LiveBooking from '@/components/LiveBooking';
 import { liveDates } from '@/lib/live-sessions';
+import { sessionPrices } from '@/lib/offerings';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
@@ -25,7 +26,10 @@ const pillars = [
 ];
 
 export default async function RollerQuadCampsPage() {
-  const campDates = await liveDates('roller-quad-camp', 4);
+  const [campDates, price] = await Promise.all([
+    liveDates('roller-quad-camp', 4),
+    sessionPrices('roller-quad-camp'),
+  ]);
 
   return (
     <>
@@ -124,7 +128,7 @@ export default async function RollerQuadCampsPage() {
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Empowr Camps
               </h2>
-              <p className="text-2xl font-[900] text-red mb-3">From £35</p>
+              <p className="text-2xl font-[900] text-red mb-3">From {price.earlyBird ?? price.online}</p>
               <p className="text-xs font-[800] text-black mb-3">
                 Bookings are non-refundable and can&apos;t be moved to another date.
               </p>

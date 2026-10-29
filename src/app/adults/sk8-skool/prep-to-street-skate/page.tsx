@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
 import { liveDates } from '@/lib/live-sessions';
+import { sessionPrices } from '@/lib/offerings';
 
 // Hourly, for the live dates in SessionJsonLd and LiveBooking (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -86,9 +87,10 @@ const faqs: FaqItem[] = [
 ];
 
 export default async function PrepToStreetSkatePage() {
-  const [l1, l2] = await Promise.all([
+  const [l1, l2, price] = await Promise.all([
     liveDates('prep-to-street-skate', 3, 'Level 1'),
     liveDates('prep-to-street-skate', 3, 'Level 2'),
+    sessionPrices('prep-to-street-skate'),
   ]);
   const dates = { 1: l1, 2: l2 };
 
@@ -187,7 +189,7 @@ export default async function PrepToStreetSkatePage() {
                   <h2 className={`text-[1.25rem] font-[900] leading-[1.15] mb-1 ${dark ? 'text-white' : 'text-black'}`}>
                     Level {level}
                   </h2>
-                  <p className={`text-2xl font-[900] mb-3 ${dark ? 'text-white' : 'text-red'}`}>£55 / 4-week block</p>
+                  <p className={`text-2xl font-[900] mb-3 ${dark ? 'text-white' : 'text-red'}`}>{price.online} / 4-week block</p>
                   <p className={`text-sm leading-[1.7] mb-3 ${dark ? 'text-white/80' : 'text-mid'}`}>{text}</p>
                   <p className={`text-xs font-[700] leading-[1.6] mb-2 ${dark ? 'text-white/80' : 'text-mid'}`}>
                     <Icon icon="mdi:map-marker" width={14} className="inline -mt-0.5 mr-1" />

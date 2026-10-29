@@ -8,6 +8,7 @@ import SkateJamReviewsCarousel from '@/components/SkateJamReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
+import { sessionPrices } from '@/lib/offerings';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
@@ -58,7 +59,8 @@ const faqs: FaqItem[] = [
   },
 ];
 
-export default function SkateJamPage() {
+export default async function SkateJamPage() {
+  const price = await sessionPrices('skate-jam');
   return (
     <>
       <Navbar />
@@ -156,8 +158,8 @@ export default function SkateJamPage() {
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Pay As You Go
               </h2>
-              <p className="text-2xl font-[900] text-red mb-1">£7 online</p>
-              <p className="text-xs text-mid font-[700] mb-3">£10 on the door</p>
+              <p className="text-2xl font-[900] text-red mb-1">{price.online} online</p>
+              <p className="text-xs text-mid font-[700] mb-3">{price.door} on the door</p>
               <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
                 Single session, book week to week. No commitment.
               </p>
@@ -181,7 +183,7 @@ export default function SkateJamPage() {
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
                 Skate Jam Membership
               </h2>
-              <p className="text-2xl font-[900] text-white mb-3">£25/mo</p>
+              <p className="text-2xl font-[900] text-white mb-3">{price.monthly}/mo</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
                 Unlimited Thursdays for the month. Cancel anytime.
               </p>

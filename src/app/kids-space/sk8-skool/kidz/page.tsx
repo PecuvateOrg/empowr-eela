@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
+import { sessionPrices, type SessionPrices } from '@/lib/offerings';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -23,7 +24,7 @@ const pillars = [
   { icon: 'mdi:shield-check',  label: 'Quad skates only' },
 ];
 
-const faqs: FaqItem[] = [
+const faqs = (price: SessionPrices): FaqItem[] => [
   {
     question: 'What age is Sk8 Skool for Kidz suitable for?',
     answer:
@@ -42,7 +43,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Is there a membership option?',
     answer:
-      'Yes. Alongside paying £10 per session, you can subscribe for £30/month for ongoing access to Sk8 Skool for Kidz without booking each date individually.',
+      `Yes. Alongside paying ${price.online} per session, you can subscribe for ${price.monthly}/month for ongoing access to Sk8 Skool for Kidz without booking each date individually.`,
   },
   {
     question: 'Do I need to bring my own skates and protective equipment?',
@@ -56,7 +57,8 @@ const faqs: FaqItem[] = [
   },
 ];
 
-export default function Sk8SkoolKidzPage() {
+export default async function Sk8SkoolKidzPage() {
+  const price = await sessionPrices('sk8-skool-kidz');
   return (
     <>
       <Navbar />
@@ -130,9 +132,9 @@ export default function Sk8SkoolKidzPage() {
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Monday Class
               </h2>
-              <p className="text-2xl font-[900] text-red mb-1">£10 / session</p>
+              <p className="text-2xl font-[900] text-red mb-1">{price.online} / session</p>
               <p className="text-xs font-[700] text-mid mb-3">or{' '}
-                <a href={`${LINKS.kidzMondayClasses}#subscribe`} target="_blank" rel="noopener" className="text-blue underline">£30/mo unlimited Mondays</a>{' '}
+                <a href={`${LINKS.kidzMondayClasses}#subscribe`} target="_blank" rel="noopener" className="text-blue underline">{price.monthly}/mo unlimited Mondays</a>{' '}
                 — cancel anytime</p>
               <p className="text-sm text-mid leading-[1.7] mb-2 flex-1">
                 Indoors, all weather. Goldsmiths Community Centre, Castillon Road.
@@ -160,9 +162,9 @@ export default function Sk8SkoolKidzPage() {
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
                 Wednesday Class
               </h2>
-              <p className="text-2xl font-[900] text-white mb-1">£10 / session</p>
+              <p className="text-2xl font-[900] text-white mb-1">{price.online} / session</p>
               <p className="text-xs font-[700] text-white/70 mb-3">or{' '}
-                <a href={`${LINKS.kidzWednesdayClasses}#subscribe`} target="_blank" rel="noopener" className="text-white underline">£30/mo unlimited Wednesdays</a>{' '}
+                <a href={`${LINKS.kidzWednesdayClasses}#subscribe`} target="_blank" rel="noopener" className="text-white underline">{price.monthly}/mo unlimited Wednesdays</a>{' '}
                 — cancel anytime</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-2 flex-1">
                 Outdoors, Sports Field SE4 2HU, April–August. Moves indoors to Honor Oak
@@ -198,7 +200,7 @@ export default function Sk8SkoolKidzPage() {
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-4">
             FAQ
           </p>
-          <FaqAccordion items={faqs} />
+          <FaqAccordion items={faqs(price)} />
         </section>
 
       </main>

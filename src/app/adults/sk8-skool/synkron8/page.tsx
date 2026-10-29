@@ -8,6 +8,7 @@ import AdultsReviewsCarousel from '@/components/AdultsReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
+import { sessionPrices } from '@/lib/offerings';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
@@ -62,7 +63,8 @@ const faqs: FaqItem[] = [
   },
 ];
 
-export default function Synkron8Page() {
+export default async function Synkron8Page() {
+  const price = await sessionPrices('synkron8');
   return (
     <>
       <Navbar />
@@ -160,7 +162,7 @@ export default function Synkron8Page() {
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Pay As You Go
               </h2>
-              <p className="text-2xl font-[900] text-red mb-3">£15 / session</p>
+              <p className="text-2xl font-[900] text-red mb-3">{price.online} / session</p>
               <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
                 {/*
                   Corrected 2026-09-17. This read "Non-refundable and
@@ -196,7 +198,7 @@ export default function Synkron8Page() {
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
                 Synkron8 Membership
               </h2>
-              <p className="text-2xl font-[900] text-white mb-3">£45/mo</p>
+              <p className="text-2xl font-[900] text-white mb-3">{price.monthly}/mo</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
                 Unlimited Mondays for the month. Cancel anytime.
               </p>
