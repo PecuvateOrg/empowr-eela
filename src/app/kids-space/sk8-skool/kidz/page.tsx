@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, type SessionPrices } from '@/lib/offerings';
+import { sessionPrices, type SessionPrices } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
 export const revalidate = 3600;

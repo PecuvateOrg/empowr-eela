@@ -10,7 +10,7 @@ import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices } from '@/lib/offerings';
+import { sessionPrices } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and the next-intake labels (LIVE_REVALIDATE).
 export const revalidate = 3600;

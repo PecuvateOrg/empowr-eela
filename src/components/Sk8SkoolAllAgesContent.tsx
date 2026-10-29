@@ -6,7 +6,7 @@ import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarou
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, type SessionPrices } from '@/lib/offerings';
+import { sessionPrices, type SessionPrices } from '@/lib/live-sessions';
 import { LADYWELL_ROUTE } from '@/lib/route-data';
 
 const chips = [

@@ -44,8 +44,8 @@ export function checkOfferingPages(offerings: Offering[]): void {
 
 // KB facts and Members live state join by slug and should agree on price.
 // Drift WARNS, never fails (owner 2026-10-06): activating a Members offering
-// before its KB row exists must not block an EELA deploy. The KB owns price
-// and is updated first, so a price mismatch means Members is out of date.
+// before its KB row exists must not block an EELA deploy. Members owns price
+// (owner 2026-10-29), so a price mismatch means the KB is out of date.
 // "Live with no upcoming dates" is NOT drift (Skate Jam off-season, camps
 // between holidays). Returns the warnings so callers and tests can see them.
 export function checkLiveJoin(kb: Offering[], live: LiveSession[]): string[] {
@@ -68,7 +68,7 @@ export function checkLiveJoin(kb: Offering[], live: LiveSession[]): string[] {
     for (const [label, kbKey, liveKey] of prices) {
       const kbValues = new Set(kb.filter((o) => o.offering === l.slug).map((o) => o[kbKey]));
       if (kbValues.size && !kbValues.has(l[liveKey] as never)) {
-        problems.push(`"${l.slug}" ${label} price: KB ${[...kbValues].join('/')} vs Members ${l[liveKey]} (pence) — update Members`);
+        problems.push(`"${l.slug}" ${label} price: KB ${[...kbValues].join('/')} vs Members ${l[liveKey]} (pence) — update the KB`);
       }
     }
   }
