@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import EnquiryModal from '@/components/EnquiryModal';
 import PrivateBookNow from '@/components/PrivateBookNow';
 import NextAvailableDates from '@/components/NextAvailableDates';
+import { privatePrices } from '@/lib/live-sessions';
 
 export const metadata: Metadata = {
   title: '1:1 Private Skate Coaching — Private Bookings',
@@ -13,9 +14,11 @@ export const metadata: Metadata = {
     'Personalised 1:1 skate coaching with Empowr CIC at The Ladywell Centre — build confidence, improve technique, and work towards your own goals.',
 };
 
-const chips = [
+export const revalidate = 3600;
+
+const chips = (hire: string | null) => [
   { icon: 'mdi:map-marker', label: 'The Ladywell Centre (indoors)' },
-  { icon: 'mdi:tshirt-crew', label: 'Skate hire add-on: £5/person' },
+  ...(hire ? [{ icon: 'mdi:tshirt-crew', label: `Skate hire add-on: ${hire}/person` }] : []),
 ];
 
 const goodToKnow = [
@@ -24,7 +27,8 @@ const goodToKnow = [
   'Under-16s must wear full protective gear (helmet, knee/elbow pads, wrist guards) — this is required, not optional. For those aged 16 and over it is highly recommended.',
 ];
 
-export default function OneToOneCoachingPage() {
+export default async function OneToOneCoachingPage() {
+  const price = await privatePrices('coaching_one');
   return (
     <>
       <Navbar />
@@ -84,7 +88,7 @@ export default function OneToOneCoachingPage() {
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips.map(({ icon, label }) => (
+            {chips(price.hire).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
@@ -116,7 +120,7 @@ export default function OneToOneCoachingPage() {
             <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
               1:1 Coaching
             </h2>
-            <p className="text-2xl font-[900] text-white mb-3">£40 / person / hr</p>
+            <p className="text-2xl font-[900] text-white mb-3">{price.price} / person / hr</p>
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               Choose your date, length and equipment, see the price and pay online.
             </p>

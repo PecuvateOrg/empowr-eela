@@ -6,12 +6,15 @@ import Footer from '@/components/Footer';
 import EnquiryModal from '@/components/EnquiryModal';
 import PrivateBookNow from '@/components/PrivateBookNow';
 import NextAvailableDates from '@/components/NextAvailableDates';
+import { privatePrices } from '@/lib/live-sessions';
 
 export const metadata: Metadata = {
   title: 'Roller Disco Birthday Party — Private Bookings',
   description:
     'A private 2-hour Roller Disco birthday party with Empowr CIC — skating, music, games and dancing, with a dedicated birthday space.',
 };
+
+export const revalidate = 3600;
 
 const includes = [
   '2-hour private session',
@@ -33,15 +36,16 @@ const bring = [
 
 const notPermitted = ['Hot food', 'Alcohol', 'Confetti', 'Open cups or drink containers'];
 
-const steps = [
+const steps = (min: number) => [
   'Confirm your skater count (excluding the birthday person)',
-  'Book at least 2 weeks ahead — minimum 10 skaters',
+  `Book at least 2 weeks ahead — minimum ${min} skaters`,
   'Pay via payment link to secure your date (not reserved until paid)',
   'Bring your cake, decorations and refreshments',
   'Celebrate!',
 ];
 
-export default function BirthdayPartyPage() {
+export default async function BirthdayPartyPage() {
+  const price = await privatePrices('birthday');
   return (
     <>
       <Navbar />
@@ -88,7 +92,7 @@ export default function BirthdayPartyPage() {
             </span>
             <span className="inline-flex items-center gap-2 rounded-full bg-red text-warm-white px-4 py-2 text-sm font-[800]">
               <Icon icon="mdi:account-multiple" width={16} className="shrink-0" />
-              Minimum 10 skaters
+              Minimum {price.min} skaters
             </span>
           </div>
         </section>
@@ -113,7 +117,7 @@ export default function BirthdayPartyPage() {
             <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
               Birthday Party
             </h2>
-            <p className="text-2xl font-[900] text-white mb-3">£20 / person</p>
+            <p className="text-2xl font-[900] text-white mb-3">{price.price} / person</p>
             <p className="text-sm text-white/80 leading-[1.7] mb-6">
               The birthday person&apos;s place is free. Non-skaters welcome in the seating area.
             </p>
@@ -177,7 +181,7 @@ export default function BirthdayPartyPage() {
           </p>
           <div className="rounded-[20px] bg-card border border-border p-6 sm:p-8" style={{ boxShadow: 'var(--shadow-sm)' }}>
             <ol className="space-y-3">
-              {steps.map((step, i) => (
+              {steps(price.min).map((step, i) => (
                 <li key={step} className="flex items-start gap-3 text-sm text-mid leading-[1.7]">
                   <span className="inline-flex items-center justify-center w-[22px] h-[22px] rounded-full bg-blue text-warm-white text-[11px] font-[900] shrink-0">
                     {i + 1}
