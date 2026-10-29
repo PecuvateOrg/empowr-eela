@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, sessionAges, type SessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, sessionSlot, type SessionPrices } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -58,7 +58,12 @@ const faqs = (price: SessionPrices, ages: string): FaqItem[] => [
 ];
 
 export default async function Sk8SkoolKidzPage() {
-  const [price, ages] = await Promise.all([sessionPrices('sk8-skool-kidz'), sessionAges('sk8-skool-kidz')]);
+  const [price, ages, monday, wednesday] = await Promise.all([
+    sessionPrices('sk8-skool-kidz'),
+    sessionAges('sk8-skool-kidz'),
+    sessionSlot('sk8-skool-kidz', { day: 'Monday', time: '4–5 PM' }, { weekday: 'Monday' }),
+    sessionSlot('sk8-skool-kidz', { day: 'Wednesday', time: '5–6 PM' }, { weekday: 'Wednesday' }),
+  ]);
   return (
     <>
       <Navbar />
@@ -127,7 +132,7 @@ export default async function Sk8SkoolKidzPage() {
             >
               <Icon icon="mdi:calendar-week" width={36} className="text-blue mb-4" />
               <span className="text-[10px] font-[800] uppercase tracking-[0.18em] text-muted mb-2">
-                Every Monday · 4–5 PM
+                Every Monday · {monday.time}
               </span>
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Monday Class
@@ -157,7 +162,7 @@ export default async function Sk8SkoolKidzPage() {
             >
               <Icon icon="mdi:calendar-week" width={36} className="text-white/80 mb-4" />
               <span className="text-[10px] font-[800] uppercase tracking-[0.18em] text-white/60 mb-2">
-                Every Wednesday · 5–6 PM
+                Every Wednesday · {wednesday.time}
               </span>
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
                 Wednesday Class

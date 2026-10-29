@@ -6,11 +6,11 @@ import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarou
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, sessionAges, type SessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, sessionSlot, type SessionPrices } from '@/lib/live-sessions';
 import { LADYWELL_ROUTE } from '@/lib/route-data';
 
-const chips = (ages: string) => [
-  { icon: 'mdi:clock-outline', label: '2:00–3:00 PM' },
+const chips = (ages: string, time: string) => [
+  { icon: 'mdi:clock-outline', label: time },
   { icon: 'mdi:map-marker', label: 'The Ladywell Centre (indoors)' },
   { icon: 'mdi:account-group', label: `All ages, ${ages}` },
 ];
@@ -69,7 +69,12 @@ interface Sk8SkoolAllAgesContentProps {
 }
 
 export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAgesContentProps) {
-  const [price, ages] = await Promise.all([sessionPrices('sk8-skool-all-ages'), sessionAges('sk8-skool-all-ages')]);
+  const [price, ages, slot, heroSlot] = await Promise.all([
+    sessionPrices('sk8-skool-all-ages'),
+    sessionAges('sk8-skool-all-ages'),
+    sessionSlot('sk8-skool-all-ages', { day: 'Saturday', time: '2:00–3:00 PM' }, { zeros: true }),
+    sessionSlot('sk8-skool-all-ages', { day: 'Saturday', time: '2:00 – 3:00 PM' }, { zeros: true, spaced: true }),
+  ]);
   return (
     <>
       <Navbar />
@@ -119,10 +124,10 @@ export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAg
             />
             <Icon icon="mdi:clock-outline" width={40} className="text-white/85 mb-3 relative" />
             <p className="relative text-white font-[900] text-xl sm:text-2xl tracking-[0.02em] leading-tight">
-              Every Saturday
+              Every {heroSlot.day}
             </p>
             <p className="relative text-white/90 font-[800] text-lg sm:text-xl mt-1">
-              2:00 – 3:00 PM
+              {heroSlot.time}
             </p>
           </div>
         </section>
@@ -130,7 +135,7 @@ export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAg
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips(ages).map(({ icon, label }) => (
+            {chips(ages, slot.time).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
