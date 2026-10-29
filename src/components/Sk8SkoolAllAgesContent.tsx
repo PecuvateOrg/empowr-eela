@@ -6,6 +6,7 @@ import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarou
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
+import { sessionPrices, type SessionPrices } from '@/lib/offerings';
 import { LADYWELL_ROUTE } from '@/lib/route-data';
 
 const chips = [
@@ -14,7 +15,7 @@ const chips = [
   { icon: 'mdi:account-group', label: 'All ages, 5+' },
 ];
 
-const faqs: FaqItem[] = [
+const faqs = (price: SessionPrices): FaqItem[] => [
   {
     question: 'Who is Sk8 Skool for?',
     answer:
@@ -53,7 +54,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Is there a membership option?',
     answer:
-      'Yes. Alongside paying £12.50 per class, you can subscribe for £40/month for ongoing weekly access to Sk8 Skool for All Ages without booking each date individually.',
+      `Yes. Alongside paying ${price.online} per class, you can subscribe for ${price.monthly}/month for ongoing weekly access to Sk8 Skool for All Ages without booking each date individually.`,
   },
 ];
 
@@ -67,7 +68,8 @@ interface Sk8SkoolAllAgesContentProps {
   backHref: string;
 }
 
-export default function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAgesContentProps) {
+export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAgesContentProps) {
+  const price = await sessionPrices('sk8-skool-all-ages');
   return (
     <>
       <Navbar />
@@ -161,7 +163,7 @@ export default function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAgesCont
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Pay As You Go
               </h2>
-              <p className="text-2xl font-[900] text-red mb-3">£12.50 / hour</p>
+              <p className="text-2xl font-[900] text-red mb-3">{price.online} / hour</p>
               <p className="text-sm text-mid leading-[1.7] mb-6 flex-1">
                 Single class, book week to week. No commitment.
               </p>
@@ -185,7 +187,7 @@ export default function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAgesCont
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
                 Sk8 Skool Membership
               </h2>
-              <p className="text-2xl font-[900] text-white mb-3">£40/mo</p>
+              <p className="text-2xl font-[900] text-white mb-3">{price.monthly}/mo</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
                 Unlimited Saturdays for the month. Cancel anytime.
               </p>
@@ -219,7 +221,7 @@ export default function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAgesCont
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-4">
             FAQ
           </p>
-          <FaqAccordion items={faqs} />
+          <FaqAccordion items={faqs(price)} />
         </section>
 
         {/* PLAN YOUR ROUTE */}

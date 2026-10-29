@@ -10,6 +10,7 @@ import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 import { liveDates } from '@/lib/live-sessions';
+import { sessionPrices } from '@/lib/offerings';
 
 // Hourly, for the live dates in SessionJsonLd and the next-intake labels (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -106,9 +107,10 @@ const faqs: FaqItem[] = [
 ];
 
 export default async function BeginnersFoundationsPage() {
-  const [[l1], [l2]] = await Promise.all([
+  const [[l1], [l2], price] = await Promise.all([
     liveDates('beginners-foundation', 1, 'Level 1'),
     liveDates('beginners-foundation', 1, 'Level 2'),
+    sessionPrices('beginners-foundation'),
   ]);
   // End of the block's last class, London time (23:59 BST/GMT is close enough for a list).
   const upcomingBlocks = intakeBlocks.filter((b) => Date.parse(`${b.lastClass}T23:59:59Z`) > Date.now());
@@ -201,7 +203,7 @@ export default async function BeginnersFoundationsPage() {
               <h2 className="text-[1.25rem] font-[900] text-black leading-[1.15] mb-1">
                 Level 1
               </h2>
-              <p className="text-2xl font-[900] text-red mb-3">£55 / course</p>
+              <p className="text-2xl font-[900] text-red mb-3">{price.online} / course</p>
               <p className="text-sm text-mid leading-[1.7] mb-2 flex-1">
                 Suitable for complete beginners or improvers who are learning and developing
                 the basic foundations of roller skating.
@@ -229,7 +231,7 @@ export default async function BeginnersFoundationsPage() {
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
                 Level 2
               </h2>
-              <p className="text-2xl font-[900] text-white mb-3">£55 / course</p>
+              <p className="text-2xl font-[900] text-white mb-3">{price.online} / course</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-2 flex-1">
                 Suitable for advanced beginners or those who have completed Level 1. This level
                 focuses on combining your foundations and developing them into more controlled

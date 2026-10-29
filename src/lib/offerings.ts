@@ -83,3 +83,31 @@ export async function getOfferings(): Promise<Offering[]> {
 
 export const formatPence = (p: number) =>
   `£${(p / 100).toFixed(p % 100 === 0 ? 0 : 2)}`;
+
+export interface SessionPrices {
+  online: string;
+  earlyBird: string | null;
+  door: string | null;
+  monthly: string | null;
+}
+
+// One offering's KB prices, formatted for page copy. Session pages read their
+// price here rather than hard-coding it, so a KB price change reaches the page
+// on the next revalidation (Beginners Foundation drifted that way). Throws if
+// the slug is missing or its slots disagree — a page must not pick one.
+export async function sessionPrices(slug: string): Promise<SessionPrices> {
+  const rows = (await getOfferings()).filter((o) => o.offering === slug);
+  if (rows.length === 0) throw new Error(`sessionPrices: "${slug}" missing from the KB`);
+  const key = (o: Offering) =>
+    [o.onlinePence, o.earlyBirdPence, o.doorPence, o.subscriptionMonthlyPence].join('/');
+  if (new Set(rows.map(key)).size > 1) throw new Error(`sessionPrices: "${slug}" slots disagree on price`);
+  const [o] = rows;
+  if (o.onlinePence === null) throw new Error(`sessionPrices: "${slug}" has no online price`);
+  const fmt = (p: number | null) => (p === null ? null : formatPence(p));
+  return {
+    online: formatPence(o.onlinePence),
+    earlyBird: fmt(o.earlyBirdPence),
+    door: fmt(o.doorPence),
+    monthly: fmt(o.subscriptionMonthlyPence),
+  };
+}
