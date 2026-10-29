@@ -8,7 +8,7 @@ import SkateJamReviewsCarousel from '@/components/SkateJamReviewsCarousel';
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges } from '@/lib/live-sessions';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 
 // Hourly, for the live dates in SessionJsonLd (LIVE_REVALIDATE).
@@ -60,7 +60,7 @@ const faqs: FaqItem[] = [
 ];
 
 export default async function SkateJamPage() {
-  const price = await sessionPrices('skate-jam');
+  const [price, ages] = await Promise.all([sessionPrices('skate-jam'), sessionAges('skate-jam')]);
   return (
     <>
       <Navbar />
@@ -77,7 +77,7 @@ export default async function SkateJamPage() {
           </Link>
 
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-            Weekly Session · Ages 15+
+            Weekly Session · Ages {ages}
           </p>
           <h1
             className="font-[900] text-black leading-[1.08] mb-4"

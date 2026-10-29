@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import SessionJsonLd from '@/components/SessionJsonLd';
 import LiveBooking from '@/components/LiveBooking';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges } from '@/lib/live-sessions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
@@ -30,6 +30,7 @@ export default async function RollerQuadCampsPage() {
     liveDates('roller-quad-camp', 4),
     sessionPrices('roller-quad-camp'),
   ]);
+  const ages = await sessionAges('roller-quad-camp');
 
   return (
     <>
@@ -49,7 +50,7 @@ export default async function RollerQuadCampsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
             <div>
               <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-                Camp · 5–15 yrs
+                Camp · {ages} yrs
               </p>
               <h1
                 className="font-[900] text-black leading-[1.08] mb-4"
@@ -62,7 +63,7 @@ export default async function RollerQuadCampsPage() {
                 className="text-mid leading-[1.8]"
                 style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1rem)' }}
               >
-                Multi-day skating adventures for children aged 5–15. Games, activities, new friends
+                Multi-day skating adventures for children aged {ages}. Games, activities, new friends
                 and memories — all on wheels. Choose the booking option that works for your family.
               </p>
             </div>
@@ -81,7 +82,7 @@ export default async function RollerQuadCampsPage() {
                 style={{ fontSize: '10px' }}
               >
                 Kidz Space<br />
-                <span className="text-xl leading-[1.1] block">5–15</span>
+                <span className="text-xl leading-[1.1] block">{ages}</span>
               </div>
             </div>
           </div>

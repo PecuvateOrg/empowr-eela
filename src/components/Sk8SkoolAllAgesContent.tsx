@@ -6,13 +6,13 @@ import Sk8SkoolClassReviewsCarousel from '@/components/Sk8SkoolClassReviewsCarou
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion';
 import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
-import { sessionPrices, type SessionPrices } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, type SessionPrices } from '@/lib/live-sessions';
 import { LADYWELL_ROUTE } from '@/lib/route-data';
 
-const chips = [
+const chips = (ages: string) => [
   { icon: 'mdi:clock-outline', label: '2:00–3:00 PM' },
   { icon: 'mdi:map-marker', label: 'The Ladywell Centre (indoors)' },
-  { icon: 'mdi:account-group', label: 'All ages, 5+' },
+  { icon: 'mdi:account-group', label: `All ages, ${ages}` },
 ];
 
 const faqs = (price: SessionPrices): FaqItem[] => [
@@ -69,7 +69,7 @@ interface Sk8SkoolAllAgesContentProps {
 }
 
 export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAgesContentProps) {
-  const price = await sessionPrices('sk8-skool-all-ages');
+  const [price, ages] = await Promise.all([sessionPrices('sk8-skool-all-ages'), sessionAges('sk8-skool-all-ages')]);
   return (
     <>
       <Navbar />
@@ -85,7 +85,7 @@ export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAg
           </Link>
 
           <p className="text-[11px] font-[800] uppercase tracking-[0.18em] text-red mb-3">
-            Weekly Session · All Ages 5+
+            Weekly Session · All Ages {ages}
           </p>
           <h1
             className="font-[900] text-black leading-[1.08] mb-4"
@@ -130,7 +130,7 @@ export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAg
         {/* INFO CHIPS */}
         <section className="max-w-[880px] mx-auto px-5 pb-10">
           <div className="flex flex-wrap gap-3">
-            {chips.map(({ icon, label }) => (
+            {chips(ages).map(({ icon, label }) => (
               <span
                 key={label}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-[700] text-mid"
