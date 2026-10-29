@@ -10,7 +10,7 @@ import RouteInfo from '@/components/RouteInfo';
 import { LINKS } from '@/lib/links';
 import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 import { liveDates } from '@/lib/live-sessions';
-import { sessionPrices, sessionAges, courseBlocks, sessionSlot, type SessionSlot } from '@/lib/live-sessions';
+import { sessionPrices, sessionAges, courseBlocks, sessionSlot, venueName, type SessionSlot } from '@/lib/live-sessions';
 
 // Hourly, for the live dates in SessionJsonLd and the next-intake labels (LIVE_REVALIDATE).
 export const revalidate = 3600;
@@ -94,7 +94,7 @@ export default async function BeginnersFoundationsPage() {
   const [ages, upcomingBlocks, slot] = await Promise.all([
     sessionAges('beginners-foundation'),
     courseBlocks('beginners-foundation'),
-    sessionSlot('beginners-foundation', { day: 'Tuesday', time: '7:30–9:30 PM' }),
+    sessionSlot('beginners-foundation', { day: 'Tuesday', time: '7:30–9:30 PM', venue: 'Honor Oak Community Centre, 50 Turnham Road, London, SE4 2JD' }),
   ]);
   // End of the block's last class, London time (23:59 BST/GMT is close enough for a list).
 
@@ -241,7 +241,7 @@ export default async function BeginnersFoundationsPage() {
               alike and mean different things. Source: vaults/EMPOWR CIC/
               entities/sessions.md, "Cancellation & Refund Policy".
             */}
-            Both levels run on {slot.day}s at Honor Oak Community Centre and alternate between
+            Both levels run on {slot.day}s at {venueName(slot.venue)} and alternate between
             intakes, so only one level runs at a time. Missed classes cannot be transferred
             or refunded, but you can cancel the whole course from your account up to 48
             hours before it begins.
