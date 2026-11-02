@@ -40,7 +40,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do I need to bring my own skates and protective equipment?',
     answer:
-      'Yes, please bring your own skates. Protective equipment is strongly recommended, particularly for beginners. Skate hire is not currently available at Skate Jam.',
+      'Free skate hire is available for online pay-as-you-go Skate Jam bookings, subject to size availability (UK 3-10). Select your skate size when booking. Hire is not available with subscriptions or for walk-ins. You are welcome to bring your own skates. Protective equipment is strongly recommended, particularly for beginners.',
   },
   {
     question: 'Do I need to book in advance, or can I pay at the door?',

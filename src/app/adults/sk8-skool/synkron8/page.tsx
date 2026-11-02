@@ -44,7 +44,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do I need to bring my own skates and protective equipment?',
     answer:
-      'Yes, please bring your own roller skates. Protective equipment is strongly recommended, particularly for beginners. Skate hire is not currently available unless otherwise stated on the booking page.',
+      'Free skate hire is available for online pay-as-you-go Synkron8 bookings, subject to size availability (UK 3-10). Select your skate size when booking. Hire is not available with subscriptions or for walk-ins. You are welcome to bring your own roller skates. Protective equipment is strongly recommended, particularly for beginners.',
   },
   {
     question: 'What is the age requirement?',
