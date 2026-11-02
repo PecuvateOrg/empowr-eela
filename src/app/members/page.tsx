@@ -5,9 +5,9 @@ import Footer from '@/components/Footer';
 import { LINKS } from '@/lib/links';
 
 export const metadata: Metadata = {
-  title: 'Membership — EELA by Empowr',
+  title: 'Your free account — EELA by Empowr',
   description:
-    'Create a free Empowr membership to book skating sessions, manage your household, and check in with a digital ticket. Membership is always free.',
+    'Create a free Empowr Member account to book skating sessions, manage your household, and check in with a digital ticket. Your account is always free.',
 };
 
 // Every claim below is something the Members platform actually does today.
@@ -54,7 +54,7 @@ export default function MembersPage() {
             style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
           >
             Your Empowr<br />
-            <span className="text-blue">membership.</span>
+            <span className="text-blue">account.</span>
           </h1>
           <p
             className="text-mid leading-[1.8] mb-10 max-w-[500px] mx-auto"
@@ -81,7 +81,7 @@ export default function MembersPage() {
           </div>
 
           <p className="text-muted text-[12px] mt-4">
-            Membership is always free. Card details are only needed when you book a session.
+            Your account is always free. Card details are only needed when you book a session.
           </p>
         </section>
 

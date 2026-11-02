@@ -75,7 +75,7 @@ export async function GET() {
   })
   // Anything no section claims still gets listed, so a new page is never dropped.
   const rest = SITE_PAGES.filter((p) => !placed.has(p.path))
-  blocks.push(`## About and membership\n\n${rest.map(line).join('\n')}`)
+  blocks.push(`## About and your account\n\n${rest.map(line).join('\n')}`)
 
   const facts = `## Session facts\n\nFrom Empowr's knowledge base. Prices in GBP.\n\n${offerings.map(factLine).join('\n')}`
 

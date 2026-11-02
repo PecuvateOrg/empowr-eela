@@ -54,7 +54,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do I need to book in advance?',
     answer:
-      'Yes, we recommend booking in advance because spaces are limited. You can attend using a Synkron8 membership or purchase a pay-as-you-go session, subject to availability.',
+      'Yes, we recommend booking in advance because spaces are limited. You can attend using a Synkron8 subscription or purchase a pay-as-you-go session, subject to availability.',
   },
   {
     question: 'Can friends or family come to watch?',
@@ -194,14 +194,14 @@ export default async function Synkron8Page() {
               </a>
             </div>
 
-            {/* Synkron8 Membership */}
+            {/* Synkron8 Subscription */}
             <div
               className="rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col"
               style={{ boxShadow: 'var(--shadow-blue)' }}
             >
               <Icon icon="mdi:star-circle" width={36} className="text-white/80 mb-4" />
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
-                Synkron8 Membership
+                Synkron8 Subscription
               </h2>
               <p className="text-2xl font-[900] text-white mb-3">{price.monthly}/mo</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">

@@ -64,7 +64,7 @@ const jsonLd = [
     "@type": "WebSite",
     "name": "EELA by Empowr",
     "url": "https://eela.empowrcic.org",
-    "description": "EELA is a session discovery and membership platform connecting people with learning and development opportunities run by Empowr CIC."
+    "description": "EELA is a session discovery and booking platform connecting people with learning and development opportunities run by Empowr CIC."
   }
 ];
 
