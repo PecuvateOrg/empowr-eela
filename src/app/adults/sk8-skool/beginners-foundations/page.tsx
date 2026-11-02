@@ -61,7 +61,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do I need to bring my own skates and protective equipment?',
     answer:
-      'Yes, please bring your own roller skates. We strongly recommend wearing a helmet, wrist guards, elbow pads and knee pads, particularly while learning. Skate hire is not currently available unless otherwise stated on the booking page.',
+      'Free skate hire is available for Beginners Foundation Level 1 only, when booking the full paid course, subject to size availability (UK 3-10). Select your skate size once when booking for the whole course. Skate hire is not available for Level 2, subscriptions or walk-ins; please bring your own roller skates for these. We strongly recommend wearing a helmet, wrist guards, elbow pads and knee pads, particularly while learning.',
   },
   {
     question: 'What is the age requirement?',
