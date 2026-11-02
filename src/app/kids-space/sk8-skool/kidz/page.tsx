@@ -41,7 +41,7 @@ const faqs = (price: SessionPrices, ages: string): FaqItem[] => [
       'Both cover the same Sk8 Skool for Kidz programme. Monday runs indoors at Goldsmiths Community Centre year-round. Wednesday runs outdoors at the Sports Field from April to August, then moves indoors to Honor Oak Community Centre for the rest of the year.',
   },
   {
-    question: 'Is there a membership option?',
+    question: 'Is there a subscription option?',
     answer:
       `Yes. Alongside paying ${price.online} per session, you can subscribe for ${price.monthly}/month for ongoing access to Sk8 Skool for Kidz without booking each date individually.`,
   },

@@ -179,14 +179,14 @@ export default async function SkateJamPage() {
               </a>
             </div>
 
-            {/* Skate Jam Membership */}
+            {/* Skate Jam Subscription */}
             <div
               className="rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col"
               style={{ boxShadow: 'var(--shadow-blue)' }}
             >
               <Icon icon="mdi:star-circle" width={36} className="text-white/80 mb-4" />
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
-                Skate Jam Membership
+                Skate Jam Subscription
               </h2>
               <p className="text-2xl font-[900] text-white mb-3">{price.monthly}/mo</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">

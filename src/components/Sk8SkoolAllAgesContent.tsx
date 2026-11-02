@@ -52,7 +52,7 @@ const faqs = (price: SessionPrices): FaqItem[] => [
       'Yes. There is a small seating area where parents or guardians can remain and watch the session. However, parents are not required to stay. Children can be left with our team and collected when the class has finished. Please note that seating is limited.',
   },
   {
-    question: 'Is there a membership option?',
+    question: 'Is there a subscription option?',
     answer:
       `Yes. Alongside paying ${price.online} per class, you can subscribe for ${price.monthly}/month for ongoing weekly access to Sk8 Skool for All Ages without booking each date individually.`,
   },
@@ -183,14 +183,14 @@ export default async function Sk8SkoolAllAgesContent({ backHref }: Sk8SkoolAllAg
               </a>
             </div>
 
-            {/* Sk8 Skool Membership */}
+            {/* Sk8 Skool Subscription */}
             <div
               className="rounded-[20px] bg-blue p-6 sm:p-8 flex flex-col"
               style={{ boxShadow: 'var(--shadow-blue)' }}
             >
               <Icon icon="mdi:star-circle" width={36} className="text-white/80 mb-4" />
               <h2 className="text-[1.25rem] font-[900] text-white leading-[1.15] mb-1">
-                Sk8 Skool Membership
+                Sk8 Skool Subscription
               </h2>
               <p className="text-2xl font-[900] text-white mb-3">{price.monthly}/mo</p>
               <p className="text-sm text-white/80 leading-[1.7] mb-6 flex-1">
