@@ -76,7 +76,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do I need to complete both levels?',
     answer:
-      "We recommend completing both Level 1 and Level 2 before attending Skate Jam, our open skate session — Skate Jam is the equivalent next step, and its pace and environment may feel overwhelming without these foundation skills in place first.\n\nBoth levels run on Tuesdays and alternate between intakes, so you take them one after the other rather than at the same time. Level 1 runs in one block and Level 2 in the next — see the intake dates above.",
+      "We recommend completing both Level 1 and Level 2 before attending Skate Jam with Coaching, our coached open skate session — Skate Jam is the equivalent next step, and its pace and environment may feel overwhelming without these foundation skills in place first.\n\nBoth levels run on Tuesdays and alternate between intakes, so you take them one after the other rather than at the same time. Level 1 runs in one block and Level 2 in the next — see the intake dates above.",
   },
   {
     question: 'Can friends or family come to watch?',
