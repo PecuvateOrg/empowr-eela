@@ -31,9 +31,9 @@ const programmes: Programme[] = [
     id: 'skate-jam',
     tag: 'Practise (15+)',
     tagColor: 'text-blue-light',
-    title: 'Skate Jam',
+    title: 'Skate Jam with Coaching',
     icon: <Icon icon="mdi:roller-skate" width={36} height={36} className="text-blue-light" />,
-    bullets: ['Open skate time', 'Community led', 'For all levels'],
+    bullets: ['Coaching & open skate time', 'Free skate hire available', 'Quad skates only'],
     bookingUrl: '/adults/skate-jam',
   },
   {
