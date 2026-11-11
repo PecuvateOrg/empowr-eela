@@ -81,7 +81,7 @@ export const LINKS = {
 
   // Community
   whatsapp:          'https://chat.whatsapp.com/BuKlBkfDxHs2jdPyRzXwza',
-  shop:              'https://empowrcic.wixsite.com/empowrcic/shop',
+  shop:              'https://shop.empowrcic.org',
   donatingSkates:    'https://empowrcic.wixsite.com/empowrcic/b4e',
   heroes:            'https://hero.empowrcic.org/?utm_source=empowr-eela&utm_medium=internal',
   trustpilot:        'https://www.trustpilot.com/review/empowrcic.org',
