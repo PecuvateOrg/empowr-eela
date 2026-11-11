@@ -38,7 +38,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Is coaching included in the session?',
     answer:
-      'Yes! Our on-site coaches and Champions are happy to answer any questions you may have. There’s also one mini coaching taster during the session, giving you a chance to learn something new and put it into practice.',
+      'Yes! Our on-site coaches and Champions are happy to answer any questions you may have. There’s also one mini coaching taster during the session, giving you a chance to learn something new and put it into practice. Taking part is optional. If you prefer, you can continue skating at your own pace around the outside of the coaching area while the mini coaching experience takes place.',
   },
   {
     question: 'Do I need to bring my own skates and protective equipment?',
