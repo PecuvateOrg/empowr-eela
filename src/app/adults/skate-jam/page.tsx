@@ -15,32 +15,35 @@ import { HONOR_OAK_ROUTE } from '@/lib/route-data';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Skate Jam — Adults',
+  title: 'Skate Jam with Coaching — Adults',
   description:
-    'Our weekly open skate session with Empowr CIC — music, games, and floor time for all levels, every Thursday evening.',
+    'Skate Jam with Coaching every Thursday with Empowr CIC. Build confidence, practise and enjoy the music. Free skate hire available. Quad skates only.',
 };
 
 const chips = (time: string) => [
   { icon: 'mdi:calendar-range', label: 'Sept 3 – Mar 25' },
   { icon: 'mdi:clock-outline', label: time },
   { icon: 'mdi:account-group', label: 'All levels' },
+  { icon: 'mdi:school', label: 'Coaching included' },
+  { icon: 'mdi:roller-skate', label: 'Free skate hire available' },
+  { icon: 'mdi:check-circle-outline', label: 'Quad skates only' },
 ];
 
 const faqs: FaqItem[] = [
   {
     question: 'Is Skate Jam suitable for complete beginners?',
     answer:
-      "Yes! Skate Jam welcomes all skating levels, including complete beginners. However, we recommend completing our Beginners Foundation course first to help you build confidence in the basics.",
+      "Yes! Skate Jam welcomes all skating levels, including complete beginners. It’s a relaxed session with mini coaching experiences to help you build confidence and practise at your own pace. If you’re looking for more structured coaching to really level up your skating, our Beginners Foundations course is the best place for you.",
   },
   {
     question: 'Is coaching included in the session?',
     answer:
-      'Skate Jam is an open practice session rather than a structured skating lesson. However, our volunteers are available to offer quick guidance and support throughout the session.',
+      'Yes! Our on-site coaches and Champions are happy to answer any questions you may have. There’s also one mini coaching taster during the session, giving you a chance to learn something new and put it into practice.',
   },
   {
     question: 'Do I need to bring my own skates and protective equipment?',
     answer:
-      'Free skate hire is available for online pay-as-you-go Skate Jam bookings, subject to size availability (UK 3-10). Select your skate size when booking. Hire is not available with subscriptions or for walk-ins. You are welcome to bring your own skates. Protective equipment is strongly recommended, particularly for beginners.',
+      'Free skate hire is available for online pay-as-you-go Skate Jam bookings, subject to size availability (UK 3-10). Select your skate size when booking. Hire is not available with subscriptions or for walk-ins. You are welcome to bring your own quad skates. This session is for quad skates only; inline skates are not permitted. Protective equipment is strongly recommended, particularly for beginners.',
   },
   {
     question: 'Do I need to book in advance, or can I pay at the door?',
@@ -88,15 +91,17 @@ export default async function SkateJamPage() {
             className="font-[900] text-black leading-[1.08] mb-4"
             style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
           >
-            Skate Jam.
+            Skate Jam with Coaching.
           </h1>
           <p
             className="text-mid leading-[1.8] max-w-[560px]"
             style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1rem)' }}
           >
-            Our weekly open skate session — music, games, and floor time for all levels.
-            Turn up every Thursday evening from September through to March, whether you&apos;re
-            dropping in once or skating all season.
+            Join us every Thursday for skating, music and coaching in a welcoming community.
+            Whether you&apos;re a beginner or an improver, get support to build your confidence
+            and develop your skills, with time to practise and find your own flow.
+            Free skate hire is available when booking online, subject to size availability.
+            Quad skates only; inline skates are not permitted.
           </p>
         </section>
 
