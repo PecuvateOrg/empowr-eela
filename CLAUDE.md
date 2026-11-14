@@ -20,6 +20,7 @@ detail lives in workspace CONTEXT.md files.
 
 | Task | Go to | Read first | Skills |
 |---|---|---|---|
+| **Design: look, colours, components** | `design-system/` | `design-system/MASTER.md` (then the Empowr brand kit it names) | — |
 | Feature spec, MVP scope, acceptance criteria | `planning/spec/` | `planning/CONTEXT.md` → `planning/spec/CONTEXT.md` | — |
 | Architecture, system design, tech decisions | `planning/architecture/` | `planning/CONTEXT.md` → `planning/architecture/CONTEXT.md` | — |
 | Decision records | `planning/decisions/` | `planning/decisions/CONTEXT.md` | — |
