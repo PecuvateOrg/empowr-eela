@@ -20,6 +20,12 @@
 const MEMBERS_BASE_URL = process.env.NEXT_PUBLIC_MEMBERS_BASE_URL || 'https://members.empowrcic.org';
 
 export const LINKS = {
+  // Suggested products; product pages own prices and availability.
+  rookieArtistic: 'https://s1wadc-5h.myshopify.com/products/rookie-artistic-roller-skates',
+  rioFlow: 'https://s1wadc-5h.myshopify.com/products/rio-roller-flow-hockey-skate-quad-skates',
+  rookieBackpack: 'https://s1wadc-5h.myshopify.com/products/rookie-skatepack-classic-78-skatepack',
+  sk8famTee: 'https://s1wadc-5h.myshopify.com/products/empowr-sk8fam-t-shirt-built-through-community',
+
   // Adults programmes
   synkron8:          `${MEMBERS_BASE_URL}/sessions/synkron8`,
   // ⚠️ Key is PLURAL, slug is SINGULAR, and that mismatch is correct — not a
