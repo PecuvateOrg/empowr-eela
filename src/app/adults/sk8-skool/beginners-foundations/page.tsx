@@ -134,7 +134,7 @@ export default async function BeginnersFoundationsPage() {
       <Navbar />
       <SessionJsonLd offering="beginners-foundation" path="/adults/sk8-skool/beginners-foundations" />
 
-      <main>
+      <main className="min-w-0">
         {/* HERO */}
         <section className="max-w-[880px] mx-auto px-5 pt-10 pb-8 sm:pt-14 sm:pb-10">
           <Link
@@ -280,14 +280,14 @@ export default async function BeginnersFoundationsPage() {
         </section>
 
         {/* SUGGESTED PRODUCTS */}
-        <section className="max-w-[880px] mx-auto px-5 pb-14" aria-labelledby="suggested-products-heading">
+        <section className="w-full min-w-0 max-w-[880px] mx-auto px-5 pb-14" aria-labelledby="suggested-products-heading">
           <p className="text-sm font-[800] uppercase tracking-[0.15em] text-blue-dark mb-3">The Empowr Shop</p>
           <h2 id="suggested-products-heading" className="text-2xl sm:text-3xl font-[900] text-black mb-3">Get ready for your skating journey.</h2>
           <p className="text-base text-mid leading-relaxed mb-6">Thinking about your own kit? Explore our recommended skates, a backpack for your sessions and a little Empowr pride. These are optional purchases; see the course information above for skate hire details.</p>
           <p id="suggested-products-help" className="text-sm text-mid mb-3">Swipe or scroll to explore all four products. You can also tab through the links.</p>
-          <div className="flex gap-4 overflow-x-auto snap-x snap-proximity pb-4" tabIndex={0} role="region" aria-label="Suggested products" aria-describedby="suggested-products-help">
+          <div className="flex w-full min-w-0 max-w-full gap-4 overflow-x-auto overscroll-x-contain snap-x snap-proximity pb-4" tabIndex={0} role="region" aria-label="Suggested products" aria-describedby="suggested-products-help">
             {suggestedProducts.map((product) => (
-              <a key={product.href} href={product.href} className="group w-64 shrink-0 snap-start rounded-[20px] border border-border bg-card overflow-hidden no-underline flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-dark hover:border-blue-dark transition-colors">
+              <a key={product.href} href={product.href} className="group w-64 max-w-full shrink-0 snap-start rounded-[20px] border border-border bg-card overflow-hidden no-underline flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-dark hover:border-blue-dark transition-colors">
                 <div className="h-40 bg-white p-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={product.image} alt={product.name} width={600} height={450} loading="lazy" className="w-full h-full object-contain" />
