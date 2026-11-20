@@ -21,6 +21,37 @@ export const metadata: Metadata = {
     'Our indoor beginners course with Empowr CIC — build balance, control and confidence from your first steps on skates.',
 };
 
+const suggestedProducts = [
+  {
+    name: "Rookie Artistic Roller Skates",
+    href: LINKS.rookieArtistic,
+    image: "/images/shop/rookie-artistic.jpg",
+    label: "Our beginner recommendation",
+    description: "A supportive boot for building your balance, control and confidence.",
+  },
+  {
+    name: "Rio Roller Flow Hockey Skate Quad Skates",
+    href: LINKS.rioFlow,
+    image: "/images/shop/rio-flow.jpg",
+    label: "Find your flow",
+    description: "Our street skate pick, with a hockey-inspired boot for your next roll.",
+  },
+  {
+    name: "Rookie Classic 78 Backpack",
+    href: LINKS.rookieBackpack,
+    image: "/images/shop/rookie-backpack.jpg",
+    label: "Carry your kit",
+    description: "Keep your skates together and make getting to sessions easier.",
+  },
+  {
+    name: "Empowr Sk8fam Tee",
+    href: LINKS.sk8famTee,
+    image: "/images/shop/empowr-sk8fam-tee.jpg",
+    label: "Empowr merch",
+    description: "Wear your connection to the Empowr Sk8fam, on and off your skates.",
+  },
+] as const;
+
 const pillars = [
   { icon: 'mdi:seed-outline', label: 'Entry level' },
   { icon: 'mdi:home-outline', label: 'Indoors, all weather' },
@@ -246,6 +277,31 @@ export default async function BeginnersFoundationsPage() {
             or refunded, but you can cancel the whole course from your account up to 48
             hours before it begins.
           </p>
+        </section>
+
+        {/* SUGGESTED PRODUCTS */}
+        <section className="max-w-[880px] mx-auto px-5 pb-14" aria-labelledby="suggested-products-heading">
+          <p className="text-sm font-[800] uppercase tracking-[0.15em] text-blue-dark mb-3">The Empowr Shop</p>
+          <h2 id="suggested-products-heading" className="text-2xl sm:text-3xl font-[900] text-black mb-3">Get ready for your skating journey.</h2>
+          <p className="text-base text-mid leading-relaxed mb-6">Thinking about your own kit? Explore our recommended skates, a backpack for your sessions and a little Empowr pride. These are optional purchases; see the course information above for skate hire details.</p>
+          <p id="suggested-products-help" className="text-sm text-mid mb-3">Swipe or scroll to explore all four products. You can also tab through the links.</p>
+          <div className="flex gap-4 overflow-x-auto snap-x snap-proximity pb-4" tabIndex={0} role="region" aria-label="Suggested products" aria-describedby="suggested-products-help">
+            {suggestedProducts.map((product) => (
+              <a key={product.href} href={product.href} className="group w-64 shrink-0 snap-start rounded-[20px] border border-border bg-card overflow-hidden no-underline flex flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-dark hover:border-blue-dark transition-colors">
+                <div className="h-40 bg-white p-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={product.image} alt={product.name} width={600} height={450} loading="lazy" className="w-full h-full object-contain" />
+                </div>
+                <div className="p-5 flex flex-col flex-1">
+                  <p className="text-sm font-[800] text-blue-dark mb-2">{product.label}</p>
+                  <h3 className="text-lg font-[900] text-black mb-2">{product.name}</h3>
+                  <p className="text-base text-mid leading-relaxed mb-4 flex-1">{product.description}</p>
+                  <span className="text-base font-[800] text-blue-dark underline underline-offset-4 group-hover:decoration-2">View product<span className="sr-only">: {product.name}</span></span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <p className="text-sm text-mid mt-4">Current sizes, colours, prices and availability are shown on each product page.</p>
         </section>
 
         {/* INTAKE DATES */}
