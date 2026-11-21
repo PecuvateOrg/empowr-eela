@@ -62,7 +62,37 @@ async function findProblems(): Promise<string[]> {
   return problems;
 }
 
+// Agent OS alerts log first (2026-11-21, owner): the Pecuvate Dashboard /alerts page + its phone
+// notification. ntfy only when the log can't take it or answers 'direct' (relay down). The token
+// (OPS_ALERT_TOKEN, env) can only add alerts for source "eela"; the address and publishable key
+// below are public by design. Guide: _config/guides/ops-alerts.md (workspace).
+const ALERTS_URL = 'https://pmllrikyemlnjcddnizh.supabase.co/rest/v1/rpc/ops_alert_ingest';
+const ALERTS_KEY = 'sb_publishable_ICXp32XqLGQWpivsewotkw_KeZCespP';
+const ALERT_TITLE = 'EELA: site problem';
+
+async function toAlertsLog(kind: 'problem' | 'recovered', body: string): Promise<boolean> {
+  const token = process.env.OPS_ALERT_TOKEN;
+  if (!token) return false;
+  try {
+    const res = await fetch(ALERTS_URL, {
+      method: 'POST',
+      headers: { apikey: ALERTS_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_source: 'eela', p_token: token, p_title: ALERT_TITLE, p_body: body.slice(0, 2000),
+        p_severity: kind === 'problem' ? 'alert' : 'resolved' }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    const answer = res.ok ? await res.json() : null;
+    if (!res.ok) console.error('[eela-watch] alerts log returned', res.status);
+    return answer === 'queued' || answer === 'held' || answer === 'resolved';
+  } catch (e) {
+    console.error('[eela-watch] alerts log request failed:', firstLine(e));
+    return false;
+  }
+}
+
 export async function send(kind: 'problem' | 'recovered', problems: string[]): Promise<boolean> {
+  const logBody = problems.map((p) => `• ${p}`).join('\n');
+  if (await toAlertsLog(kind, kind === 'problem' ? logBody : `Resolved:\n${logBody}`)) return true;
   const topic = process.env.NTFY_TOPIC;
   if (!topic) {
     console.error('[eela-watch] NTFY_TOPIC unset — alert not sent');
