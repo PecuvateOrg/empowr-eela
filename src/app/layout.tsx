@@ -5,6 +5,11 @@ import CookieConsentBanner from '@/components/CookieConsentBanner';
 import ChatBubble from '@/components/ChatBubble';
 import './globals.css';
 
+
+// Installable-app standard (2026-11-23): the service worker (public/sw.js) controls every page, so the
+// offline page works everywhere. Registered in the page head, before React, so it never waits on hydration.
+const SW_REGISTER = `if("serviceWorker"in navigator){navigator.serviceWorker.register("/sw.js",{updateViaCache:"none"}).catch(function(){})}`;
+
 const nunito = Nunito({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800', '900'],
@@ -76,6 +81,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunito.variable}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: SW_REGISTER }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
