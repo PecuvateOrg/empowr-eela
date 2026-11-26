@@ -1,9 +1,5 @@
 # EELA by Empowr — Context
 
-Read this after `CLAUDE.md` to orient within the project.
-
----
-
 ## What This Is
 
 EELA by Empowr is Empowr CIC's session discovery and membership platform — the central hub for home education programmes across kids, adults, and family audiences.
@@ -36,7 +32,6 @@ planning/
 
 ops/                            Deployment config and scripts
 
-CLAUDE.md                       Project rules
 CONTEXT.md                      This file
 agents.md                       Agent roles and boundaries
 skills.md                       Available skills and slash commands
