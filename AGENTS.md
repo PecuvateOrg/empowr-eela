@@ -1,7 +1,5 @@
 # EELA by Empowr
 
-> Workspace rules: this project sits inside `~/projects`. Before working, read `~/projects/NON-NEGOTIABLES.md` and the hub's `NON-NEGOTIABLES.md` if there is one. Tools that stop at the repository root (Antigravity) won't load them by themselves.
-
 > **This repository is PUBLIC** (`PecuvateOrg/empowr-eela`).
 >
 > **Devlog and memory location:** `../workspace-docs/empowr-eela/`
@@ -9,14 +7,9 @@
 > `DEVLOG.md` and `memory.md` are not kept in this repo — write session entries to the path
 > above instead. See `NON-NEGOTIABLES.md` for what must never be committed here.
 
-## Identity
-Empowr CIC's central session discovery and membership platform — home, kids, and adults programmes, with members and booking features planned.
+@NON-NEGOTIABLES.md
 
-## Self-Reference
-This file (`AGENTS.md`, imported by `CLAUDE.md`) is Layer 0 — routing only. Read `NON-NEGOTIABLES.md` before doing anything; project
-detail lives in workspace CONTEXT.md files.
-
----
+Other tools: read `NON-NEGOTIABLES.md` first, then `~/projects/NON-NEGOTIABLES.md`.
 
 ## Routing
 
@@ -29,25 +22,11 @@ detail lives in workspace CONTEXT.md files.
 | Pages, components, app code | `src/` | `src/CONTEXT.md` | webapp-testing |
 | Deployment, env vars, build config | `ops/` | `ops/CONTEXT.md` | netlify-deploy |
 
----
-
-## Shared Memory
-
-Adopts `Frameworks/MWP Framework/spec/session-memory.md` (2026-10-05). This repo is public, so
-all of these live in the **private** hub at `../workspace-docs/empowr-eela/`, never here:
-
-- Session bridge (read at start, rewrite in place at close, ≤1,000 words): `memory.md`
-- Decisions: `decisions.md`
-- Traps and "do not" rules — read before touching the area: `gotchas.md`
-- Session history: `DEVLOG.md`; pre-bridge memory, search only: `archive/memory-history-to-2026-10-05.md`
-
 ## Cross-Workspace Flows
 
 - **New page:** spec in `planning/spec/` → build in `src/` → verify in `ops/`
 - **New feature with tech decision:** log ADR in `planning/decisions/` → architecture note in `planning/architecture/` → build in `src/`
 - **Deploy:** confirm env vars in `ops/` → run build from `src/` → push to trigger Netlify
-
----
 
 ## File Placement
 
@@ -57,33 +36,9 @@ all of these live in the **private** hub at `../workspace-docs/empowr-eela/`, ne
 - Static assets → `src/public/`
 - Netlify functions → `src/netlify/functions/`
 
----
-
-## Token Management
-
-- Do not load `planning/architecture/CONTEXT.md` unless the task involves a system design decision
-- Do not load `planning/decisions/CONTEXT.md` unless logging or reviewing an ADR
-- Do not load `ops/CONTEXT.md` unless the task involves deployment or environment variables
-- Do not read `src/` files in bulk — read only the file relevant to the current task
-
----
-
 ## Deployment
 
 - Platform: Netlify
 - Domain: eela.empowrcic.org
 - Branch: main
 - Base directory: src/
-
----
-
-## Skills and Tools Available
-
-| Tool / Skill | Trigger | Purpose |
-|---|---|---|
-| `/netlify-deploy` | deploying to Netlify | Deploy to Netlify and configure `eela.empowrcic.org` |
-| `/netlify-supabase-check` | before go-live, once Supabase is added (Phase 2) | Audit Netlify + Supabase integration failure points |
-| `/pre-build-check` | before any deploy | Validate build structure and frontend quality |
-| `/pre-deploy-security` | before any deploy | Security hygiene scan — FAILs block the deploy |
-| `/webapp-testing` | after frontend changes | Playwright browser preview and screenshot capture |
-| `/simplify` | after a feature is built | Review changed code for reuse, quality, and efficiency |
